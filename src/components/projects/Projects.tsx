@@ -12,7 +12,7 @@ export default function Projects() {
             My Projects
           </h1>
           <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-            Here are some of the projects I've worked on
+            Here are some of the projects I&apos;ve worked on
           </p>
         </div>
 
