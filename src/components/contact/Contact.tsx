@@ -35,7 +35,7 @@ export default function Contact() {
         } else {
           throw new Error('Failed to send message');
         }
-      } catch (_error) {
+      } catch {
         alert('Failed to send message. Please try again later.');
       } finally {
         setSubmitting(false);
