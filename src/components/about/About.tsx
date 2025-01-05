@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { personalInfo } from '@/data/personalInfo';
