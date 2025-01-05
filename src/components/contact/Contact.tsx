@@ -37,7 +37,7 @@ export default function Contact() {
         } else {
           throw new Error('Failed to send message');
         }
-      } catch (error) {
+      } catch {
         alert('Failed to send message. Please try again later.');
       } finally {
         setSubmitting(false);
@@ -67,7 +67,6 @@ export default function Contact() {
                 <div className="mt-1">
                   <input
                     id="name"
-                    name="name"
                     type="text"
                     {...formik.getFieldProps('name')}
                     className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -85,7 +84,6 @@ export default function Contact() {
                 <div className="mt-1">
                   <input
                     id="email"
-                    name="email"
                     type="email"
                     {...formik.getFieldProps('email')}
                     className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -103,7 +101,6 @@ export default function Contact() {
                 <div className="mt-1">
                   <textarea
                     id="message"
-                    name="message"
                     rows={4}
                     {...formik.getFieldProps('message')}
                     className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
