@@ -6,7 +6,7 @@ export const NEXT_SEO_DEFAULT: NextSeoProps = {
   openGraph: {
     type: 'website',
     locale: 'en_IE',
-    url: 'https://your-domain.com/',
+    url: 'https://NivBuskila.engineer/',
     siteName: 'Niv Buskila Portfolio',
     title: 'Niv Buskila - Software Developer',
     description: 'Personal portfolio of Niv Buskila, a software developer specializing in web development and modern technologies.',
