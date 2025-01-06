@@ -64,12 +64,11 @@ interface Experience {
     experience: [
       {
         title: 'Software Developer',
-        company: 'Your Company',
-        duration: '2023 - Present',
+        company: '',
+        duration: '',
         description: [
-          'Developed and maintained various web applications using React and Node.js',
-          'Collaborated with cross-functional teams to deliver high-quality software solutions',
-          'Implemented new features and optimized existing ones for better performance',
+            '',
+            '',
         ],
       },
      
