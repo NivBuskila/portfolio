@@ -4,11 +4,19 @@ export interface Experience {
     duration: string;
     description: string[];
   }
+
+  export interface Education {
+    degree: string;
+    school: string;
+    duration: string;
+  }
   
   export interface Skills {
     frontend: string[];
     backend: string[];
     tools: string[];
+    languages: string[];
+    frameworks: string[];
   }
   
   export interface SocialLinks {
@@ -20,56 +28,67 @@ export interface Experience {
     name: string;
     title: string;
     email: string;
-    location: string;
+    phone: string;
     about: string;
     socialLinks: SocialLinks;
     skills: Skills;
     experience: Experience[];
+    education: Education[];
   }
   
   export const personalInfo: PersonalInfo = {
     name: 'Niv Buskila',
-    title: 'Software Developer',
+    title: 'Computer Science Student & Junior Software Developer',
     email: 'nivbuskila@icloud.com',
-    location: 'Israel',
-    about: `I am a passionate software developer focused on creating elegant solutions to complex problems. I enjoy building efficient, scalable applications and learning new technologies.`,
+    phone: '+972-54-3597115',
+    about: `Motivated Computer Science student with hands-on experience in Java, C, and JavaScript, seeking a Junior Software Developer role to contribute to impactful projects and expand my technical expertise. Quick learner passionate about solving complex problems and embracing new challenges in software development.`,
     socialLinks: {
       github: 'https://github.com/NivBuskila',
-      linkedin: 'https://linkedin.com/in/nivbuskila' 
+      linkedin: 'https://www.linkedin.com/in/nivbuskila/'
     },
     skills: {
       frontend: [
-        'React',
-        'TypeScript',
-        'Next.js',
-        'HTML5',
-        'CSS3',
-        'Tailwind CSS'
+        'React'
       ],
       backend: [
         'Node.js',
-        'Express',
-        'MongoDB',
-        'RESTful APIs'
+        'Firebase'
+      ],
+      languages: [
+        'Java',
+        'C',
+        'JavaScript'
+      ],
+      frameworks: [
+        'React',
+        'Node.js',
+        'Firebase',
+        'Android SDK'
       ],
       tools: [
         'Git',
-        'GitHub',
-        'VS Code',
-        'Docker',
-        'CI/CD'
+        'Linux',
+        'Google Maps API'
       ]
     },
     experience: [
       {
-        title: 'Software Developer',
-        company: 'Your Company',
-        duration: '2023 - Present',
+        title: 'Security Team Coordinator',
+        company: 'Amazon Security Team',
+        duration: '2021 - Present',
         description: [
-          'Developed and maintained various web applications using React and Node.js',
-          'Collaborated with cross-functional teams to deliver high-quality software solutions',
-          'Implemented new features and optimized existing ones for better performance'
+          'Provided excellent customer service to Amazon employees and visitors',
+          'Monitored security systems, investigated incidents, and prepared detailed reports',
+          'Managed emergency response procedures and trained in advanced protocols',
+          'Developed teamwork and leadership skills by effectively managing the team in the manager\'s absence'
         ]
+      }
+    ],
+    education: [
+      {
+        degree: 'B.Sc. in Computer Science',
+        school: 'Afeka College of Engineering',
+        duration: '2022 - 2025'
       }
     ]
   };
