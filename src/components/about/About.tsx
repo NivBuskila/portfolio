@@ -1,172 +1,176 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
 
 export default function About() {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="space-y-16"
+    <div
+      className="
+        relative
+        min-h-screen
+        bg-gradient-to-b
+        from-blue-50
+        to-purple-50
+        overflow-hidden
+        py-16
+      "
+    >
+      <motion.div
+        className="
+          absolute
+          w-80
+          h-80
+          bg-purple-200
+          rounded-full
+          mix-blend-multiply
+          filter
+          blur-3xl
+          opacity-50
+          top-[-5rem]
+          left-[-5rem]
+        "
+        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+        transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse' }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.h1
+          className="text-5xl font-extrabold text-gray-800 mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          {/* About Section */}
-          <motion.section variants={item} className="relative">
-            <div className="absolute inset-0 -z-10">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob" />
-              <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-2000" />
-            </div>
-            
-            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">
-              About Me
-            </h2>
-            <p className="mt-6 text-xl text-gray-600 dark:text-gray-300">
-              {personalInfo.about}
-            </p>
-          </motion.section>
+          About Me
+        </motion.h1>
 
-          {/* Skills Section */}
-          <motion.section variants={item}>
-            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">
-              Skills
-            </h2>
-            <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Languages */}
-              <motion.div
-                className="relative group"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
-                <div className="relative p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Languages</h3>
-                  <ul className="mt-4 space-y-3">
-                    {personalInfo.skills.languages.map((skill) => (
-                      <li key={skill} className="text-gray-600 dark:text-gray-300 flex items-center">
-                        <span className="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-500 rounded-full mr-3" />
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
+        <motion.p
+          className="max-w-3xl text-xl text-gray-700 leading-relaxed mb-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
+          {personalInfo.about}
+        </motion.p>
 
-              {/* Frameworks */}
-              <motion.div
-                className="relative group"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
-                <div className="relative p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Frameworks</h3>
-                  <ul className="mt-4 space-y-3">
-                    {personalInfo.skills.frameworks.map((skill) => (
-                      <li key={skill} className="text-gray-600 dark:text-gray-300 flex items-center">
-                        <span className="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-500 rounded-full mr-3" />
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
+        <SectionBlock title="Skills">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <GlassCard title="Languages" items={personalInfo.skills.languages} />
+            <GlassCard title="Frameworks" items={personalInfo.skills.frameworks} />
+            <GlassCard title="Tools" items={personalInfo.skills.tools} />
+          </div>
+        </SectionBlock>
 
-              {/* Tools */}
-              <motion.div
-                className="relative group"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
-                <div className="relative p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Tools</h3>
-                  <ul className="mt-4 space-y-3">
-                    {personalInfo.skills.tools.map((skill) => (
-                      <li key={skill} className="text-gray-600 dark:text-gray-300 flex items-center">
-                        <span className="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-500 rounded-full mr-3" />
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            </div>
-          </motion.section>
+        <SectionBlock title="Education">
+          <div className="space-y-6">
+            {personalInfo.education.map((edu, idx) => (
+              <GlassDetail
+                key={idx}
+                main={edu.degree}
+                sub={edu.school}
+                duration={edu.duration}
+              />
+            ))}
+          </div>
+        </SectionBlock>
 
-          {/* Education Section */}
-          <motion.section variants={item}>
-            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">
-              Education
-            </h2>
-            <div className="mt-8">
-              {personalInfo.education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  className="relative group mb-8 last:mb-0"
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
-                  <div className="relative p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{edu.degree}</h3>
-                    <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">{edu.school}</p>
-                    <p className="text-purple-600 dark:text-purple-400">{edu.duration}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
-
-          {/* Experience Section */}
-          <motion.section variants={item}>
-            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">
-              Experience
-            </h2>
-            <div className="mt-8">
-              {personalInfo.experience.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  className="relative group mb-8 last:mb-0"
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
-                  <div className="relative p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{exp.title}</h3>
-                    <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">{exp.company}</p>
-                    <p className="text-purple-600 dark:text-purple-400">{exp.duration}</p>
-                    <ul className="mt-4 space-y-2">
-                      {exp.description.map((item, i) => (
-                        <li key={i} className="text-gray-600 dark:text-gray-300 flex items-start">
-                          <span className="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-500 rounded-full mr-3 mt-2" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
-        </motion.div>
+        <SectionBlock title="Experience">
+          <div className="space-y-6">
+            {personalInfo.experience.map((exp, idx) => (
+              <GlassDetail
+                key={idx}
+                main={exp.title}
+                sub={exp.company}
+                duration={exp.duration}
+                description={exp.description}
+              />
+            ))}
+          </div>
+        </SectionBlock>
       </div>
     </div>
+  );
+}
+
+function SectionBlock({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <motion.section
+      className="mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <h2 className="text-3xl font-bold text-gray-800 mb-6">{title}</h2>
+      {children}
+    </motion.section>
+  );
+}
+
+function GlassCard({ title, items }: { title: string; items: string[] }) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="
+        relative
+        bg-white/70
+        backdrop-blur-sm
+        border
+        border-gray-200
+        rounded-2xl
+        p-6
+        shadow-sm
+      "
+    >
+      <h3 className="text-xl font-semibold mb-4 text-gray-800">{title}</h3>
+      <ul className="space-y-2 text-gray-700">
+        {items.map((item) => (
+          <li key={item} className="flex items-center">
+            <span className="w-2 h-2 bg-purple-400 rounded-full mr-2" />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+}
+
+function GlassDetail({
+  main,
+  sub,
+  duration,
+  description,
+}: {
+  main: string;
+  sub: string;
+  duration: string;
+  description?: string[];
+}) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.01 }}
+      className="
+        relative
+        bg-white/70
+        backdrop-blur-sm
+        border
+        border-gray-200
+        rounded-2xl
+        p-6
+        shadow-sm
+      "
+    >
+      <h3 className="text-xl font-semibold text-gray-800">{main}</h3>
+      <p className="text-gray-600">{sub}</p>
+      <p className="text-sm text-purple-600">{duration}</p>
+      {description && (
+        <ul className="list-disc list-inside mt-3 text-gray-700 space-y-1">
+          {description.map((line, i) => (
+            <li key={i}>{line}</li>
+          ))}
+        </ul>
+      )}
+    </motion.div>
   );
 }

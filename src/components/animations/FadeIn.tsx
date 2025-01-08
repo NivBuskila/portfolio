@@ -1,7 +1,7 @@
+// src/components/animations/FadeIn.tsx
 'use client';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
 
 interface FadeInProps {
   children: ReactNode;
@@ -37,8 +37,8 @@ export const FadeIn = ({
         y: 0,
       }}
       transition={{
-        duration: duration,
-        delay: delay,
+        duration,
+        delay,
         ease: [0.4, 0, 0.2, 1],
       }}
       className={className}

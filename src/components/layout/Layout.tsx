@@ -1,3 +1,4 @@
+// src/components/layout/Layout.tsx
 import React from 'react';
 import Head from 'next/head';
 import Navbar from './Navbar';
@@ -34,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="manifest" href="/manifest.json" />
       </Head>
 
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background text-foreground">
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />

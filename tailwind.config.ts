@@ -1,3 +1,4 @@
+// tailwind.config.ts
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,27 +9,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        // צבעים מותאמים
+        glassWhite: 'rgba(255, 255, 255, 0.25)',
+        neonGreen: '#39FF14',
+        neonBlue: '#00E7FF',
       },
+      backdropBlur: {
+        xs: '2px',
+      },
+      boxShadow: {
+        neon: '0 0 15px rgba(57,255,20, 0.6)', // לדוגמה ניאון ירוק
+      },
+      // אנימציית Gradient משתנה
       keyframes: {
-        'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+        'gradient-x': {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
         },
-        'slide-up': {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        }
       },
       animation: {
-        'fade-in': 'fade-in 0.5s ease-out',
-        'fade-in-delay': 'fade-in 0.5s ease-out 0.2s forwards',
-        'fade-in-delay-2': 'fade-in 0.5s ease-out 0.4s forwards',
-        'fade-in-delay-3': 'fade-in 0.5s ease-out 0.6s forwards',
-        'slide-up': 'slide-up 0.5s ease-out',
-      }
+        'gradient-x': 'gradient-x 8s ease infinite',
+      },
     },
   },
   plugins: [],
-}
+};
