@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
-import { projects } from '@/data/projects';
+import { projects, Project } from '@/data/projects';
 
 export default function Projects() {
   return (
@@ -50,7 +50,8 @@ export default function Projects() {
   );
 }
 
-function GlassProjectCard({ project }: { project: any }) {
+// Use your Project interface from "@/data/projects"
+function GlassProjectCard({ project }: { project: Project }) {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
@@ -82,7 +83,7 @@ function GlassProjectCard({ project }: { project: any }) {
           {project.description}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          {project.tech.map((tech: string) => (
+          {project.tech.map((tech) => (
             <span
               key={tech}
               className="
