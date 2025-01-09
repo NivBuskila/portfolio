@@ -36,7 +36,7 @@ export const projects: Project[] = [
   {
     title: 'AI Trip Advisor',
     description:
-      'AI-powered web app providing personalized travel itineraries and destination previews.',
+      'AI-powered web app providing personalized travel itineraries and destination previews using AI generated photos.',
     tech: ['JavaScript', 'Node.js', 'Express.js', 'React', 'Google Maps API'],
     image: '/images/ai-trip.png', // PNG
     github: 'https://github.com/NivBuskila/AI_Trip_Advisor',
