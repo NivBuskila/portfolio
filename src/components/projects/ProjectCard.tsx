@@ -1,8 +1,7 @@
-// PATH: src/components/projects/ProjectCard.tsx
+'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import ImageWithLoader from '../ui/ImageWithLoader';
+import Image from 'next/image';
 
 interface ProjectCardProps {
   title: string;
@@ -11,33 +10,34 @@ interface ProjectCardProps {
   thumbnail: string;
   github: string;
   demo?: string;
-  images: { src: string; alt: string; }[];
+  // images: { src: string; alt: string; }[]; // removed if not using
 }
 
-const ProjectCard = ({ 
-  title, 
-  description, 
-  tech, 
+export default function ProjectCard({
+  title,
+  description,
+  tech,
   thumbnail,
   github,
   demo,
-  images 
-}: ProjectCardProps) => {
+}: // images
+ProjectCardProps) {
   return (
     <div className="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white">
-      <div className="flex-shrink-0 relative h-48">
-        <ImageWithLoader
+      <div className="relative h-48">
+        <Image
           src={thumbnail}
           alt={`${title} thumbnail`}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
       </div>
-      
+
       <div className="flex-1 p-6 flex flex-col justify-between">
         <div className="flex-1">
           <h3 className="text-xl font-semibold text-gray-900 mb-3">{title}</h3>
           <p className="text-base text-gray-500 mb-4">{description}</p>
-          
+
           <div className="flex flex-wrap gap-2 mb-4">
             {tech.map((item) => (
               <span
@@ -49,11 +49,12 @@ const ProjectCard = ({
             ))}
           </div>
 
-          {images.length > 0 && (
+          {/* If you do NOT need a gallery, remove or comment out the lines below: */}
+          {/* {images.length > 0 && (
             <ProjectGallery images={images} />
-          )}
+          )} */}
         </div>
-        
+
         <div className="mt-6 flex gap-4">
           <a
             href={github}
@@ -77,6 +78,4 @@ const ProjectCard = ({
       </div>
     </div>
   );
-};
-
-export default ProjectCard;
+}
