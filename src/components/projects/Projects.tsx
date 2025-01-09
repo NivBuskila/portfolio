@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link'; // import Next.js Link
 import { motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { projects, Project } from '@/data/projects';
@@ -50,7 +51,6 @@ export default function Projects() {
   );
 }
 
-// Use your Project interface from "@/data/projects"
 function GlassProjectCard({ project }: { project: Project }) {
   return (
     <motion.div
@@ -75,6 +75,7 @@ function GlassProjectCard({ project }: { project: Project }) {
           className="object-cover"
         />
       </div>
+
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-2xl font-semibold text-gray-800">
           {project.title}
@@ -125,7 +126,27 @@ function GlassProjectCard({ project }: { project: Project }) {
           >
             GitHub
           </a>
-          {project.demo && (
+          {project.title === 'TinyReminder' ? (
+            <Link
+              href="/tinyreminder-demo"
+              className="
+                inline-flex
+                items-center
+                px-4
+                py-2
+                border
+                border-gray-300
+                text-sm
+                font-medium
+                rounded-full
+                text-gray-700
+                bg-white
+                hover:bg-gray-50
+              "
+            >
+              Live Demo
+            </Link>
+          ) : project.demo ? (
             <a
               href={project.demo}
               target="_blank"
@@ -147,7 +168,7 @@ function GlassProjectCard({ project }: { project: Project }) {
             >
               Live Demo
             </a>
-          )}
+          ) : null}
         </div>
       </div>
     </motion.div>
