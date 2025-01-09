@@ -10,7 +10,7 @@ interface ProjectCardProps {
   thumbnail: string;
   github: string;
   demo?: string;
-  // images: { src: string; alt: string; }[]; // removed if not using
+  
 }
 
 export default function ProjectCard({
@@ -49,10 +49,6 @@ ProjectCardProps) {
             ))}
           </div>
 
-          {/* If you do NOT need a gallery, remove or comment out the lines below: */}
-          {/* {images.length > 0 && (
-            <ProjectGallery images={images} />
-          )} */}
         </div>
 
         <div className="mt-6 flex gap-4">

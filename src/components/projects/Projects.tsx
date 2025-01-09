@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link'; // import Next.js Link
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { projects, Project } from '@/data/projects';

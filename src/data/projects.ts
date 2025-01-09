@@ -22,7 +22,7 @@ export const projects: Project[] = [
     description:
       'Life-Saving Android App to prevent child neglect in vehicles with real-time alerts and family management.',
     tech: ['Java', 'Firebase', 'Google Maps API', 'Android SDK'],
-    image: '/images/tinyreminder.png', // PNG
+    image: '/images/TinyReminder.png', // PNG
     github: 'https://github.com/NivBuskila/TinyReminder_LifeSavingApp',
   },
   {
