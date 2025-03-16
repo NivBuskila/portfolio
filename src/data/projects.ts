@@ -41,4 +41,22 @@ export const projects: Project[] = [
     image: '/images/ai-trip.png', // PNG
     github: 'https://github.com/NivBuskila/AI_Trip_Advisor',
   },
+  {
+    title: 'Face Recognition API',
+    description:
+      'A robust and secure REST API service for facial recognition and user management, built with Flask and AWS Rekognition. Provides real-time face detection, user registration, verification, and advanced security features via JWT-based authentication and more.',
+    tech: ['Python', 'Flask', 'MongoDB', 'AWS Rekognition', 'JWT', 'Swagger'],
+    image: '/images/face-recognition-project.jpg', // JPG
+    github: 'https://github.com/NivBuskila/face-recognition-api',
+  },
+  {
+    title: 'Face Recognition Project (Android)',
+    description:
+      'An Android library providing face recognition capabilities with a demonstration application. Facilitates user registration, verification, and comparison, with a clean architecture, ML Kit integration, and secure credential storage.',
+    tech: ['Java', 'Android SDK', 'ML Kit', 'CameraX', 'Retrofit'],
+    image: '/images/face-recognition-project.jpg', // JPG
+    github: 'https://github.com/NivBuskila/FaceRecognitionProject',
+    demo: 'https://youtube.com/shorts/J1JMCjIWSPc?feature=share',
+  },
+  
 ];
