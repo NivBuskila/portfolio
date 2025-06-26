@@ -73,7 +73,7 @@ function DefaultErrorFallback({
         </h1>
         
         <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed transition-colors duration-500">
-          We encountered an unexpected error. Don't worry, it's not your fault!
+          We encountered an unexpected error. Don&apos;t worry, it&apos;s not your fault!
         </p>
 
         {process.env.NODE_ENV === 'development' && error && (

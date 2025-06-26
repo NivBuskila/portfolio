@@ -135,7 +135,7 @@ export default function SkillsVisualization() {
             Skills & Expertise
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-500">
-            Here's a breakdown of my technical skills and proficiency levels across different technologies
+            Here&apos;s a breakdown of my technical skills and proficiency levels across different technologies
           </p>
         </motion.div>
 

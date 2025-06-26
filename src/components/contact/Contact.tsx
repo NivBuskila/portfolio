@@ -51,7 +51,7 @@ export default function Contact() {
         if (response.ok) {
           setNotification({
             type: 'success',
-            message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!'
+            message: 'Thank you! Your message has been sent successfully. I&apos;ll get back to you soon!'
           });
           resetForm();
   
@@ -155,10 +155,10 @@ export default function Contact() {
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2 text-center transition-colors duration-500">
-            Let's Connect
+            Let&apos;s Connect
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-center mb-8 transition-colors duration-500">
-            Have a project in mind? I'd love to hear about it!
+            Have a project in mind? I&apos;d love to hear about it!
           </p>
         </motion.div>
 

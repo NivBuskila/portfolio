@@ -88,7 +88,7 @@ export default function Home() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-7xl font-extrabold text-gray-800 dark:text-white transition-colors duration-500">
-            Hi, I'm{' '}
+            Hi, I&apos;m{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400">
               {personalInfo.name}
             </span>

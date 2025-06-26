@@ -7,10 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { projects, Project } from '@/data/projects';
 
-const allTechnologies = Array.from(
-  new Set(projects.flatMap(project => project.tech))
-).sort();
-
 const filterCategories = [
   { label: 'All', value: 'all' },
   { label: 'Frontend', value: 'frontend' },
@@ -126,7 +122,7 @@ export default function Projects() {
             My <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Projects</span>
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-xl max-w-3xl mx-auto transition-colors duration-500">
-            Here are some of the projects I've built, showcasing my skills across different technologies and domains
+            Here are some of the projects I&apos;ve built, showcasing my skills across different technologies and domains
           </p>
         </motion.div>
 
