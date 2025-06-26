@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     description: 'Personal portfolio website showcasing my projects and skills as a software developer',
     url: 'https://nivbuskila.tech',
     siteName: 'Niv Buskila Portfolio',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-      },
-    ],
+    // images: [
+    //   {
+    //     url: '/og-image.jpg',
+    //     width: 1200,
+    //     height: 630,
+    //   },
+    // ],
     locale: 'en_US',
     type: 'website',
   },
@@ -41,7 +41,10 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
