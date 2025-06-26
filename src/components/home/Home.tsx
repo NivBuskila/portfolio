@@ -15,18 +15,22 @@ export default function Home() {
         bg-gradient-to-b
         from-pink-100
         to-blue-50
+        dark:from-gray-900
+        dark:to-purple-900
         overflow-hidden
         flex
         items-center
+        transition-colors
+        duration-500
       "
     >
-      {/* Blob #1 (pastel pink) */}
       <motion.div
         className="
           absolute
           w-96
           h-96
           bg-pink-200
+          dark:bg-purple-800/30
           rounded-full
           mix-blend-multiply
           filter
@@ -40,13 +44,13 @@ export default function Home() {
         transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse' }}
       />
 
-      {/* Blob #2 (pastel blue) */}
       <motion.div
         className="
           absolute
           w-96
           h-96
           bg-blue-200
+          dark:bg-blue-800/30
           rounded-full
           mix-blend-multiply
           filter
@@ -83,18 +87,18 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl font-extrabold text-gray-800">
-            Hi, I’m{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
+          <h1 className="text-5xl md:text-7xl font-extrabold text-gray-800 dark:text-white transition-colors duration-500">
+            Hi, I'm{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400">
               {personalInfo.name}
             </span>
           </h1>
 
-          <h2 className="mt-4 text-2xl md:text-3xl font-medium text-gray-600">
+          <h2 className="mt-4 text-2xl md:text-3xl font-medium text-gray-600 dark:text-gray-300 transition-colors duration-500">
             {personalInfo.title}
           </h2>
 
-          <p className="mt-6 text-lg text-gray-700 max-w-2xl leading-relaxed">
+          <p className="mt-6 text-lg text-gray-700 dark:text-gray-300 max-w-2xl leading-relaxed transition-colors duration-500">
             {personalInfo.about}
           </p>
 
@@ -113,10 +117,13 @@ export default function Home() {
                 bg-gradient-to-r
                 from-purple-400
                 to-blue-400
+                dark:from-purple-500
+                dark:to-blue-500
                 text-white
-                shadow
+                shadow-lg
+                hover:shadow-xl
                 hover:scale-105
-                transition-transform
+                transition-all
                 duration-300
               "
             >
@@ -134,13 +141,17 @@ export default function Home() {
                 font-medium
                 rounded-full
                 bg-white
+                dark:bg-gray-800
                 text-gray-700
+                dark:text-gray-200
                 border
                 border-gray-200
+                dark:border-gray-600
                 shadow-sm
                 hover:bg-gray-50
+                dark:hover:bg-gray-700
                 hover:scale-105
-                transition-transform
+                transition-all
                 duration-300
               "
             >
@@ -153,7 +164,7 @@ export default function Home() {
               href={personalInfo.socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-purple-500 transition-colors transform hover:scale-110"
+              className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110"
             >
               <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -189,7 +200,7 @@ export default function Home() {
               href={personalInfo.socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-purple-500 transition-colors transform hover:scale-110"
+              className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110"
             >
               <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
                 <path

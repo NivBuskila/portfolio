@@ -7,7 +7,6 @@ export default function TinyReminderDemoPage() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-10 px-4">
       <h1 className="text-3xl font-bold mb-8 text-gray-800">TinyReminder Demo</h1>
 
-      {/* Responsive container for the YouTube embed */}
       <div className="w-full max-w-3xl aspect-video relative">
         <iframe
           width="560"

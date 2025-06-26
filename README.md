@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
 
-## Getting Started
+My personal portfolio website built with Next.js 15, React 19, and TypeScript. I wanted something that actually looks good and works well, so I built it from scratch with modern tools and proper engineering practices.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Dark mode that actually works** - Respects system preferences and remembers your choice. The toggle is smooth and everything adapts properly.
+
+**Project filtering and search** - Filter by technology, search by name, or browse by category. Much better than scrolling through an endless list.
+
+**Proper contact form** - Built with Formik and Yup validation. Handles errors gracefully and gives real feedback. Uses Formspree for the backend.
+
+**Animated skill bars** - Shows technical skills with animated progress bars. Much better than boring bullet points.
+
+**Performance optimized** - Image optimization, lazy loading, proper caching headers. Loads fast and stays fast.
+
+**Error boundaries** - When things break, users see a helpful error page instead of a white screen.
+
+## Tech stack
+
+**Frontend**: Next.js 15 with the new App Router, React 19, TypeScript
+**Styling**: Tailwind CSS with custom animations
+**Forms**: Formik + Yup validation
+**Animations**: Framer Motion
+**Icons**: Heroicons
+**Deployment**: Vercel
+
+## Project structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+├── components/
+│   ├── about/             # About page components
+│   ├── common/            # Shared components (ErrorBoundary, Loading, etc)
+│   ├── contact/           # Contact form
+│   ├── home/              # Homepage
+│   ├── layout/            # Header, footer, navigation
+│   └── projects/          # Projects page and filtering
+├── data/                  # Personal info and projects data
+├── hooks/                 # Custom React hooks
+└── types/                 # TypeScript definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development notes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Dark mode**: I use a custom hook that checks system preferences first, then falls back to localStorage. The class-based approach with CSS custom properties makes theming much cleaner than inline styles.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Animations**: Framer Motion is great but can be overkill. I keep animations subtle and respect `prefers-reduced-motion` for accessibility.
 
-## Learn More
+**Performance**: Next.js handles most optimization automatically, but I added custom image optimization and proper caching headers in `next.config.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+**Error handling**: The ErrorBoundary catches JavaScript errors and shows a recovery screen. Combined with proper form validation, users rarely see broken states.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run dev          # Development server
+npm run build        # Production build  
+npm run start        # Run production build locally
+npm run lint         # Check for code issues
+npm run format       # Format code with Prettier
+```
 
-## Deploy on Vercel
+## Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Niv Buskila - nivbuskila@icloud.com

@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import ErrorBoundary from '@/components/common/ErrorBoundary';
 
 const poppins = Poppins({
   weight: ['400', '500', '700'],
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Niv Buskila - Portfolio',
     description: 'Personal portfolio website showcasing my projects and skills as a software developer',
-    url: 'https://your-domain.com',
+    url: 'https://nivbuskila.tech',
     siteName: 'Niv Buskila Portfolio',
     images: [
       {
@@ -54,11 +55,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} bg-background text-foreground`}>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <ErrorBoundary>
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
+        </ErrorBoundary>
       </body>
     </html>
   );

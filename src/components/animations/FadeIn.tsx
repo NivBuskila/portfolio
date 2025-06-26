@@ -1,4 +1,3 @@
-// src/components/animations/FadeIn.tsx
 'use client';
 import React, { ReactNode } from 'react';
 import { motion } from 'framer-motion';

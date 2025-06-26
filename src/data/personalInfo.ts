@@ -1,4 +1,3 @@
-// src/data/personalInfo.ts
 export interface Experience {
   title: string;
   company: string;

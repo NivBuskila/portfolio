@@ -1,4 +1,3 @@
-// src/next-seo.config.ts
 import type { NextSeoProps } from 'next-seo';
 
 export const NEXT_SEO_DEFAULT: NextSeoProps = {
@@ -8,14 +7,14 @@ export const NEXT_SEO_DEFAULT: NextSeoProps = {
   openGraph: {
     type: 'website',
     locale: 'en_IE',
-    url: 'https://NivBuskila.engineer/',
+    url: 'https://nivbuskila.tech/',
     siteName: 'Niv Buskila Portfolio',
     title: 'Niv Buskila - Software Developer',
     description:
       'Personal portfolio of Niv Buskila, a software developer specializing in web development and modern technologies.',
     images: [
       {
-        url: 'https://your-domain.com/og-image.jpg',
+        url: 'https://nivbuskila.tech/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Niv Buskila',

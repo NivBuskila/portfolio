@@ -20,7 +20,7 @@ export default function ProjectCard({
   thumbnail,
   github,
   demo,
-}: // images
+}:
 ProjectCardProps) {
   return (
     <div className="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white">
