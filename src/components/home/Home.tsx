@@ -92,6 +92,7 @@ export default function Home() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400">
               {personalInfo.name}
             </span>
+            {' '}- Full Stack Developer
           </h1>
 
           <h2 className="mt-4 text-2xl md:text-3xl font-medium text-gray-600 dark:text-gray-300 transition-colors duration-500">
