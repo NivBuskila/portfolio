@@ -6,30 +6,29 @@ import { useInView } from 'react-intersection-observer';
 
 interface Skill {
   name: string;
-  level: number;
   category: 'frontend' | 'backend' | 'languages' | 'tools' | 'frameworks';
   icon?: string;
 }
 
 const skillsData: Skill[] = [
-  { name: 'React', level: 90, category: 'frontend', icon: '⚛️' },
-  { name: 'TypeScript', level: 85, category: 'frontend', icon: '🔷' },
-  { name: 'Next.js', level: 88, category: 'frontend', icon: '▲' },
-  { name: 'Tailwind CSS', level: 92, category: 'frontend', icon: '🎨' },
+  { name: 'React', category: 'frontend', icon: '⚛️' },
+  { name: 'TypeScript', category: 'frontend', icon: '🔷' },
+  { name: 'Next.js', category: 'frontend', icon: '▲' },
+  { name: 'Tailwind CSS', category: 'frontend', icon: '🎨' },
   
-  { name: 'Node.js', level: 80, category: 'backend', icon: '🟢' },
-  { name: 'Flask', level: 75, category: 'backend', icon: '🐍' },
-  { name: 'Firebase', level: 82, category: 'backend', icon: '🔥' },
+  { name: 'Node.js', category: 'backend', icon: '🟢' },
+  { name: 'Flask', category: 'backend', icon: '🐍' },
+  { name: 'Firebase', category: 'backend', icon: '🔥' },
   
-  { name: 'JavaScript', level: 90, category: 'languages', icon: '🟨' },
-  { name: 'Python', level: 85, category: 'languages', icon: '🐍' },
-  { name: 'Java', level: 78, category: 'languages', icon: '☕' },
-  { name: 'C', level: 70, category: 'languages', icon: '⚙️' },
+  { name: 'JavaScript', category: 'languages', icon: '🟨' },
+  { name: 'Python', category: 'languages', icon: '🐍' },
+  { name: 'Java', category: 'languages', icon: '☕' },
+  { name: 'C', category: 'languages', icon: '⚙️' },
   
-  { name: 'Git', level: 88, category: 'tools', icon: '📚' },
-  { name: 'Linux', level: 75, category: 'tools', icon: '🐧' },
-  { name: 'MongoDB', level: 80, category: 'tools', icon: '🍃' },
-  { name: 'AWS', level: 70, category: 'tools', icon: '☁️' },
+  { name: 'Git', category: 'tools', icon: '📚' },
+  { name: 'Linux', category: 'tools', icon: '🐧' },
+  { name: 'MongoDB', category: 'tools', icon: '🍃' },
+  { name: 'AWS', category: 'tools', icon: '☁️' },
 ];
 
 const categoryColors = {
@@ -40,47 +39,23 @@ const categoryColors = {
   frameworks: 'from-indigo-500 to-blue-500',
 };
 
-const SkillBar: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) => {
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
-
+const SkillTag: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) => {
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: -20 }}
-      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="mb-6"
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.05 }}
+      className={`
+        inline-flex items-center gap-2 px-4 py-2 rounded-full
+        bg-gradient-to-r ${categoryColors[skill.category]}
+        text-white font-medium shadow-lg
+        hover:shadow-xl transition-all duration-300
+      `}
     >
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <span className="text-lg">{skill.icon}</span>
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            {skill.name}
-          </span>
-        </div>
-        <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-          {skill.level}%
-        </span>
-      </div>
-      
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
-        <motion.div
-          className={`h-full bg-gradient-to-r ${categoryColors[skill.category]} rounded-full relative`}
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-          transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
-        >
-          <motion.div
-            className="absolute inset-0 bg-white/20 rounded-full"
-            animate={{ x: [-100, 100] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            style={{ width: '30px' }}
-          />
-        </motion.div>
-      </div>
+      <span className="text-sm">{skill.icon}</span>
+      <span className="text-sm font-medium">{skill.name}</span>
     </motion.div>
   );
 };
@@ -101,9 +76,11 @@ const SkillCategory: React.FC<{
       <h3 className={`text-xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r ${color}`}>
         {title}
       </h3>
-      {skills.map((skill, index) => (
-        <SkillBar key={skill.name} skill={skill} index={index} />
-      ))}
+      <div className="flex flex-wrap gap-3">
+        {skills.map((skill, index) => (
+          <SkillTag key={skill.name} skill={skill} index={index} />
+        ))}
+      </div>
     </motion.div>
   );
 };
@@ -135,7 +112,7 @@ export default function SkillsVisualization() {
             Skills & Expertise
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-500">
-            Here&apos;s a breakdown of my technical skills and proficiency levels across different technologies
+            Here&apos;s an overview of the technologies and tools I work with across different domains
           </p>
         </motion.div>
 
@@ -170,11 +147,11 @@ export default function SkillsVisualization() {
           className="mt-12 bg-gradient-to-r from-purple-500/10 to-blue-500/10 dark:from-purple-500/20 dark:to-blue-500/20 rounded-2xl p-8 border border-purple-200 dark:border-purple-800"
         >
           <h3 className="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-white">
-            Overall Proficiency
+            Technology Stack
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {Object.entries(skillsByCategory).map(([category, skills]) => {
-              const avgLevel = Math.round(skills.reduce((sum, skill) => sum + skill.level, 0) / skills.length);
+              const skillCount = skills.length;
               return (
                 <motion.div
                   key={category}
@@ -185,10 +162,10 @@ export default function SkillsVisualization() {
                   className="p-4"
                 >
                   <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                    {avgLevel}%
+                    {skillCount}
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                    {category.replace(' Development', '')}
+                    {category.replace(' Development', '')} Technologies
                   </div>
                 </motion.div>
               );
