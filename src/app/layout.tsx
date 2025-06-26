@@ -68,7 +68,6 @@ const structuredData = {
   "description": "Computer Science student and junior software developer specializing in React, Next.js, Python, Java, and mobile development",
   "url": "https://nivbuskila.tech",
   "email": "nivbuskila@icloud.com",
-  "telephone": "+972-54-3597115",
   "sameAs": [
     "https://github.com/NivBuskila",
     "https://linkedin.com/in/nivbuskila"
@@ -101,11 +100,11 @@ export default function RootLayout({
       </head>
       <body className={`${poppins.className} bg-background text-foreground`}>
         <ErrorBoundary>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </div>
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </div>
         </ErrorBoundary>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />

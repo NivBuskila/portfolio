@@ -9,29 +9,38 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Personal Portfolio',
+    title: 'Afeka ChatBot',
     description:
-      'A modern, responsive portfolio website built with Next.js and Tailwind CSS, featuring dynamic content management and responsive design.',
-    tech: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
-    image: '/images/portfolio.png',
-    github: 'https://github.com/NivBuskila/portfolio',
-    demo: 'https://nivbuskila.tech',
+      'Multilingual RAG platform that answers academic regulation questions for Afeka students, achieving 3.67s average RAG analysis time and 6s overall user response time. Microservice architecture with React + TypeScript frontend, FastAPI gateway, Gemini API + LangChain AI service, Supabase authentication and SQL migrations, document management, and analytics dashboard.',
+    tech: ['React', 'TypeScript', 'FastAPI', 'LangChain', 'Gemini API', 'Supabase', 'Microservices'],
+    image: '/images/ai-trip.png',
+    github: 'https://github.com/NivBuskila/afeka-chatbot',
+  },
+  {
+    title: 'Face Recognition SDK',
+    description:
+      'Android library for real-time face detection, registration and verification, published on JitPack as production ready library. Backed by a Flask REST API for secure user management and comparison with JWT authentication and AWS Rekognition integration.',
+    tech: ['Android SDK', 'RESTful APIs', 'Flask', 'AWS Rekognition', 'MongoDB', 'JWT'],
+    image: '/images/face-recognition-project.jpg',
+    github: 'https://github.com/NivBuskila/FaceRecognitionProject',
+    demo: 'https://youtube.com/shorts/J1JMCjIWSPc?feature=share',
   },
   {
     title: 'TinyReminder',
     description:
-      'Life-Saving Android App to prevent child neglect in vehicles with real-time alerts and family management.',
+      'Android application that helps ensure children are not left behind in vehicles. Based on event driven architecture with real-time alerts, live tracking, and family management features.',
     tech: ['Java', 'Firebase', 'Google Maps API', 'Android SDK'],
     image: '/images/TinyReminder.png',
     github: 'https://github.com/NivBuskila/TinyReminder_LifeSavingApp',
   },
   {
-    title: 'Universal Space Travel Manager',
+    title: 'Personal Portfolio',
     description:
-      'CLI tool for managing interstellar travel with advanced search, file I/O, and modular C design.',
-    tech: ['C', 'File I/O', 'Linux'],
-    image: '/images/space-travel.jpg',
-    github: 'https://github.com/NivBuskila/Universal_Space_Travel_Manager',
+      'Responsive Next.js website with Tailwind CSS, enhanced SEO, and dynamic Framer Motion animations. Achieved 100% score in PageSpeed Insights for Performance, SEO and Best Practices.',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'ESLint', 'Prettier', 'Formik/Yup', 'Vercel'],
+    image: '/images/portfolio.png',
+    github: 'https://github.com/NivBuskila/portfolio',
+    demo: 'https://nivbuskila.tech',
   },
   {
     title: 'AI Trip Advisor',
@@ -42,20 +51,11 @@ export const projects: Project[] = [
     github: 'https://github.com/NivBuskila/AI_Trip_Advisor',
   },
   {
-    title: 'Face Recognition API',
+    title: 'Universal Space Travel Manager',
     description:
-      'A robust and secure REST API service for facial recognition and user management, built with Flask and AWS Rekognition. Provides real-time face detection, user registration, verification, and advanced security features via JWT-based authentication and more.',
-    tech: ['Python', 'Flask', 'MongoDB', 'AWS Rekognition', 'JWT', 'Swagger'],
-    image: '/images/face-recognition-project.jpg',
-    github: 'https://github.com/NivBuskila/face-recognition-api',
-  },
-  {
-    title: 'Face Recognition Project (Android)',
-    description:
-      'An Android library providing face recognition capabilities with a demonstration application. Facilitates user registration, verification, and comparison, with a clean architecture, ML Kit integration, and secure credential storage.',
-    tech: ['Java', 'Android SDK', 'ML Kit', 'CameraX', 'Retrofit'],
-    image: '/images/face-recognition-project.jpg',
-    github: 'https://github.com/NivBuskila/FaceRecognitionProject',
-    demo: 'https://youtube.com/shorts/J1JMCjIWSPc?feature=share',
+      'CLI tool for managing interstellar travel with advanced search, file I/O, and modular C design.',
+    tech: ['C', 'File I/O', 'Linux'],
+    image: '/images/space-travel.jpg',
+    github: 'https://github.com/NivBuskila/Universal_Space_Travel_Manager',
   },
 ];

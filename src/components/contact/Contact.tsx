@@ -156,7 +156,7 @@ export default function Contact() {
         >
           <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2 text-center transition-colors duration-500">
             Let&apos;s Connect
-          </h2>
+        </h2>
           <p className="text-gray-600 dark:text-gray-300 text-center mb-8 transition-colors duration-500">
             Have a project in mind? I&apos;d love to hear about it!
           </p>
@@ -214,7 +214,7 @@ export default function Contact() {
               `}
             />
             <AnimatePresence>
-              {formik.touched.name && formik.errors.name && (
+            {formik.touched.name && formik.errors.name && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -222,9 +222,9 @@ export default function Contact() {
                   className="text-red-500 dark:text-red-400 text-sm mt-2 flex items-center gap-1"
                 >
                   <XCircleIcon className="h-4 w-4" />
-                  {formik.errors.name}
+                {formik.errors.name}
                 </motion.div>
-              )}
+            )}
             </AnimatePresence>
           </motion.div>
 
@@ -255,7 +255,7 @@ export default function Contact() {
               `}
             />
             <AnimatePresence>
-              {formik.touched.email && formik.errors.email && (
+            {formik.touched.email && formik.errors.email && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -263,9 +263,9 @@ export default function Contact() {
                   className="text-red-500 dark:text-red-400 text-sm mt-2 flex items-center gap-1"
                 >
                   <XCircleIcon className="h-4 w-4" />
-                  {formik.errors.email}
+                {formik.errors.email}
                 </motion.div>
-              )}
+            )}
             </AnimatePresence>
           </motion.div>
 
@@ -298,7 +298,7 @@ export default function Contact() {
             />
             <div className="flex justify-between items-center mt-2">
               <AnimatePresence>
-                {formik.touched.message && formik.errors.message && (
+            {formik.touched.message && formik.errors.message && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -306,14 +306,14 @@ export default function Contact() {
                     className="text-red-500 dark:text-red-400 text-sm flex items-center gap-1"
                   >
                     <XCircleIcon className="h-4 w-4" />
-                    {formik.errors.message}
+                {formik.errors.message}
                   </motion.div>
-                )}
+            )}
               </AnimatePresence>
               <span className="text-xs text-gray-500 dark:text-gray-400">
                 {formik.values.message.length}/1000
               </span>
-            </div>
+          </div>
           </motion.div>
 
           <motion.div
@@ -393,13 +393,15 @@ export default function Contact() {
             >
               {personalInfo.email}
             </a>
-            <a
-              href={`tel:${personalInfo.phone}`}
-              className="block text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors duration-300"
-            >
-              {personalInfo.phone}
-            </a>
-          </div>
+            {personalInfo.phone && (
+              <a
+                href={`tel:${personalInfo.phone}`}
+                className="block text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors duration-300"
+              >
+                {personalInfo.phone}
+              </a>
+            )}
+        </div>
         </motion.div>
       </motion.div>
     </div>

@@ -8,38 +8,38 @@ import SkillsVisualization from './SkillsVisualization';
 export default function About() {
   return (
     <div className="relative min-h-screen">
-      <div
-        className="
-          relative
-          bg-gradient-to-b
-          from-blue-50
-          to-purple-50
+    <div
+      className="
+        relative
+        bg-gradient-to-b
+        from-blue-50
+        to-purple-50
           dark:from-gray-900
           dark:to-purple-900
-          overflow-hidden
+        overflow-hidden
           py-20
           transition-colors
           duration-500
-        "
-      >
-        <motion.div
-          className="
-            absolute
-            w-80
-            h-80
-            bg-purple-200
+      "
+    >
+      <motion.div
+        className="
+          absolute
+          w-80
+          h-80
+          bg-purple-200
             dark:bg-purple-800/30
-            rounded-full
-            mix-blend-multiply
-            filter
-            blur-3xl
-            opacity-50
-            top-[-5rem]
-            left-[-5rem]
-          "
-          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse' }}
-        />
+          rounded-full
+          mix-blend-multiply
+          filter
+          blur-3xl
+          opacity-50
+          top-[-5rem]
+          left-[-5rem]
+        "
+        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+        transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse' }}
+      />
 
         <motion.div
           className="
@@ -60,22 +60,22 @@ export default function About() {
           transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-          >
+        >
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 dark:text-white mb-6 transition-colors duration-500">
               About <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">Me</span>
             </h1>
             <p className="max-w-4xl mx-auto text-xl text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-500">
-              {personalInfo.about}
+          {personalInfo.about}
             </p>
           </motion.div>
         </div>
-      </div>
+          </div>
 
       <SkillsVisualization />
 
@@ -83,33 +83,33 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-2">
             <SectionBlock title="Education" icon="🎓">
-              <div className="space-y-6">
-                {personalInfo.education.map((edu, idx) => (
+          <div className="space-y-6">
+            {personalInfo.education.map((edu, idx) => (
                   <EducationCard
-                    key={idx}
+                key={idx}
                     degree={edu.degree}
                     school={edu.school}
-                    duration={edu.duration}
+                duration={edu.duration}
                     index={idx}
-                  />
-                ))}
-              </div>
-            </SectionBlock>
+              />
+            ))}
+          </div>
+        </SectionBlock>
 
             <SectionBlock title="Experience" icon="💼">
-              <div className="space-y-6">
-                {personalInfo.experience.map((exp, idx) => (
+          <div className="space-y-6">
+            {personalInfo.experience.map((exp, idx) => (
                   <ExperienceCard
-                    key={idx}
+                key={idx}
                     title={exp.title}
                     company={exp.company}
-                    duration={exp.duration}
-                    description={exp.description}
+                duration={exp.duration}
+                description={exp.description}
                     index={idx}
-                  />
-                ))}
-              </div>
-            </SectionBlock>
+              />
+            ))}
+          </div>
+        </SectionBlock>
           </div>
         </div>
       </div>
@@ -287,8 +287,8 @@ function ExperienceCard({
             <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
             {item}
           </motion.li>
-        ))}
-      </ul>
+          ))}
+        </ul>
     </motion.div>
   );
 }
