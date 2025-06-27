@@ -31,16 +31,16 @@ export default function Projects() {
             );
           case 'backend':
             return project.tech.some(tech => 
-              ['Node.js', 'Flask', 'Python', 'MongoDB', 'Firebase', 'AWS Rekognition'].includes(tech)
+              ['Node.js', 'Flask', 'FastAPI', 'Python', 'MongoDB', 'Firebase', 'AWS Rekognition', 'Supabase', 'Express.js'].includes(tech)
             );
           case 'mobile':
             return project.tech.some(tech => 
-              ['Java', 'Android SDK', 'ML Kit', 'CameraX'].includes(tech)
+              ['Java', 'Android SDK', 'ML Kit', 'CameraX', 'Retrofit'].includes(tech)
             );
           case 'ai':
             return project.tech.some(tech => 
-              ['AWS Rekognition', 'ML Kit', 'AI'].includes(tech)
-            ) || project.title.toLowerCase().includes('ai');
+              ['AWS Rekognition', 'ML Kit', 'AI', 'LangChain', 'Gemini API', 'RAG'].includes(tech)
+            ) || project.title.toLowerCase().includes('ai') || project.title.toLowerCase().includes('chatbot');
           default:
             return true;
         }

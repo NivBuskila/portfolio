@@ -17,6 +17,10 @@ export interface Skills {
   tools: string[];
   languages: string[];
   frameworks: string[];
+  databases: string[];
+  cloud: string[];
+  mobile: string[];
+  ai: string[];
 }
 
 export interface SocialLinks {
@@ -47,11 +51,15 @@ export const personalInfo: PersonalInfo = {
     linkedin: 'https://www.linkedin.com/in/nivbuskila/',
   },
   skills: {
-    frontend: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'HTML/CSS', 'JavaScript'],
+    languages: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C', 'SQL', 'HTML/CSS'],
+    frontend: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
     backend: ['Python', 'Java', 'FastAPI', 'Flask', 'Node.js', 'RESTful APIs', 'Microservices'],
-    languages: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C', 'Hebrew (Native)', 'English (Fluent)'],
-    frameworks: ['React', 'Next.js', 'FastAPI', 'Flask', 'Android SDK', 'LangChain', 'Framer Motion'],
-    tools: ['Git', 'Firebase', 'Supabase', 'MongoDB', 'AWS Rekognition', 'Google Maps API', 'Gemini API', 'JWT', 'ESLint', 'Prettier', 'Formik/Yup', 'Vercel', 'CI/CD'],
+    frameworks: ['React', 'Next.js', 'FastAPI', 'Flask', 'Android SDK', 'LangChain', 'Framer Motion', 'Express.js'],
+    databases: ['MongoDB', 'Supabase', 'PostgreSQL', 'SQL'],
+    cloud: ['AWS Rekognition', 'Firebase', 'Vercel', 'Supabase', 'CI/CD'],
+    mobile: ['Android SDK', 'Java', 'ML Kit', 'CameraX', 'Retrofit', 'Android Development'],
+    ai: ['LangChain', 'Gemini API', 'RAG (Retrieval-Augmented Generation)', 'AI Chatbots'],
+    tools: ['Git', 'GitHub', 'ESLint', 'Prettier', 'JWT Authentication', 'Google Maps API', 'JitPack', 'Formik/Yup', 'Swagger', 'File I/O', 'Linux'],
   },
   experience: [
     {

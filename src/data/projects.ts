@@ -13,14 +13,23 @@ export const projects: Project[] = [
     description:
       'Multilingual RAG platform that answers academic regulation questions for Afeka students, achieving 3.67s average RAG analysis time and 6s overall user response time. Microservice architecture with React + TypeScript frontend, FastAPI gateway, Gemini API + LangChain AI service, Supabase authentication and SQL migrations, document management, and analytics dashboard.',
     tech: ['React', 'TypeScript', 'FastAPI', 'LangChain', 'Gemini API', 'Supabase', 'Microservices'],
-    image: '/images/ai-trip.png',
-    github: 'https://github.com/NivBuskila/afeka-chatbot',
+    image: '/images/APEX_PIC.jpg',
+    github: 'https://github.com/NivBuskila/Afeka_ChatBot',
+  },
+  {
+    title: 'Face Recognition API',
+    description:
+      'A robust and secure REST API service for facial recognition and user management, built with Flask and AWS Rekognition. Provides real-time face detection, user registration, verification, and advanced security features via JWT-based authentication and Swagger documentation.',
+    tech: ['Python', 'Flask', 'MongoDB', 'AWS Rekognition', 'JWT', 'Swagger', 'Vercel'],
+    image: '/images/face-recognition-project.jpg',
+    github: 'https://github.com/NivBuskila/face-recognition-api',
+    demo: 'https://face-recognition-api-orcin.vercel.app',
   },
   {
     title: 'Face Recognition SDK',
     description:
-      'Android library for real-time face detection, registration and verification, published on JitPack as production ready library. Backed by a Flask REST API for secure user management and comparison with JWT authentication and AWS Rekognition integration.',
-    tech: ['Android SDK', 'RESTful APIs', 'Flask', 'AWS Rekognition', 'MongoDB', 'JWT'],
+      'An Android library providing face detection capabilities with a demonstration application. Facilitates user registration, verification, and comparison using ML Kit integration, published on JitPack as production ready library with clean modular architecture.',
+    tech: ['Android SDK', 'Java', 'ML Kit', 'CameraX', 'Retrofit', 'JitPack'],
     image: '/images/face-recognition-project.jpg',
     github: 'https://github.com/NivBuskila/FaceRecognitionProject',
     demo: 'https://youtube.com/shorts/J1JMCjIWSPc?feature=share',
