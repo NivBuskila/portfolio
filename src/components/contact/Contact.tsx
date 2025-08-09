@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { CheckCircleIcon, XCircleIcon, PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import { personalInfo } from '@/data/personalInfo';
 
@@ -29,6 +30,14 @@ export default function Contact() {
     message: string;
   }>({ type: null, message: '' });
 
+  // Init EmailJS once (client-side)
+  const publicKeyFromEnv = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
+  useEffect(() => {
+    if (publicKeyFromEnv) {
+      emailjs.init({ publicKey: publicKeyFromEnv });
+    }
+  }, [publicKeyFromEnv]);
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -40,30 +49,78 @@ export default function Contact() {
       try {
         setNotification({ type: null, message: '' });
         
-        const response = await fetch('https://formspree.io/f/xrbboyzz', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(values),
-        });
+        // EmailJS configuration
+        const serviceId = (process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '').trim();
+        const templateId = (process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '').trim();
+        const publicKey = (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '').trim();
 
-        if (response.ok) {
-          setNotification({
-            type: 'success',
-            message: 'Thank you! Your message has been sent successfully. I&apos;ll get back to you soon!'
+        // Debug (safe): print lengths to verify env are loaded
+        // short, sharp logs only in dev
+        if (process.env.NODE_ENV !== 'production') {
+          console.debug('EmailJS ids', {
+            serviceId,
+            templateId,
+            publicKeyLen: publicKey.length,
           });
-          resetForm();
-  
-          setTimeout(() => setNotification({ type: null, message: '' }), 5000);
-        } else {
-          throw new Error('Failed to send message');
         }
-      } catch {
+        
+        // Guard: missing config
+        if (!serviceId || !templateId || !publicKey) {
+          setNotification({
+            type: 'error',
+            message: `Send failed (setup). Email me: ${personalInfo.email}`,
+          });
+          return;
+        }
+
+        // Template parameters that will be sent to EmailJS
+        const templateParams = {
+          from_name: values.name,
+          from_email: values.email,
+          message: values.message,
+          to_email: personalInfo.email,
+          // also provide generic keys some templates expect
+          name: values.name,
+          email: values.email,
+        };
+
+        await emailjs.send(serviceId, templateId, templateParams, { publicKey });
+
+        setNotification({
+          type: 'success',
+          message: "Thank you! Your message has been sent successfully. I'll get back to you soon!",
+        });
+        // analytics: track successful submit
+        if (typeof window !== 'undefined') {
+          window.gtag?.('event', 'contact_submit', {
+            method: 'emailjs',
+            status: 'success',
+          });
+        }
+        resetForm();
+
+        setTimeout(() => setNotification({ type: null, message: '' }), 5000);
+      } catch (error) {
+        console.error('Email sending failed:', error);
+        let message = 'Send failed. Please try again.';
+        if (error instanceof EmailJSResponseStatus) {
+          if (error.status === 400) message = 'Send failed (invalid service/template).';
+          else if (error.status === 401) message = 'Send failed (auth).';
+          else if (error.status === 422) message = 'Send failed (missing fields).';
+          else if (error.status === 429) message = 'Send failed (rate limit).';
+          else if (error.status >= 500) message = 'Send failed (server).';
+        }
         setNotification({
           type: 'error',
-          message: 'Oops! Failed to send your message. Please try again or contact me directly.'
+          message: `${message} Email me: ${personalInfo.email}`,
         });
+        // analytics: track failed submit
+        if (typeof window !== 'undefined') {
+          window.gtag?.('event', 'contact_submit', {
+            method: 'emailjs',
+            status: 'error',
+          });
+        }
       } finally {
         setSubmitting(false);
       }

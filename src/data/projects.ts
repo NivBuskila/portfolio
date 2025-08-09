@@ -23,7 +23,6 @@ export const projects: Project[] = [
     tech: ['Python', 'Flask', 'MongoDB', 'AWS Rekognition', 'JWT', 'Swagger', 'Vercel'],
     image: '/images/face-recognition-project.jpg',
     github: 'https://github.com/NivBuskila/face-recognition-api',
-    demo: 'https://face-recognition-api-orcin.vercel.app',
   },
   {
     title: 'Face Recognition SDK',
