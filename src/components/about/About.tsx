@@ -87,7 +87,6 @@ export default function About() {
                     degree={edu.degree}
                     school={edu.school}
                 duration={edu.duration}
-                    index={idx}
               />
             ))}
           </div>
@@ -102,7 +101,6 @@ export default function About() {
                     company={exp.company}
                 duration={exp.duration}
                 description={exp.description}
-                    index={idx}
               />
             ))}
           </div>
@@ -119,19 +117,16 @@ export default function About() {
                 title="Problem Solver"
                 description="Passionate about finding elegant solutions to complex technical challenges"
                 icon="🧠"
-                index={0}
               />
               <HighlightCard
                 title="Continuous Learner"
                 description="Always exploring new technologies and staying updated with industry trends"
                 icon="📚"
-                index={1}
               />
               <HighlightCard
                 title="Team Player"
                 description="Strong communication skills and experience working in collaborative environments"
                 icon="🤝"
-                index={2}
               />
             </div>
           </SectionBlock>
@@ -169,12 +164,10 @@ function EducationCard({
   degree,
   school,
   duration,
-  index
 }: {
   degree: string;
   school: string;
   duration: string;
-  index: number;
 }) {
   return (
     <motion.div
@@ -219,13 +212,11 @@ function ExperienceCard({
   company,
   duration,
   description,
-  index
 }: {
   title: string;
   company: string;
   duration: string;
   description: string[];
-  index: number;
 }) {
   return (
     <motion.div
@@ -282,12 +273,10 @@ function HighlightCard({
   title,
   description,
   icon,
-  index
 }: {
   title: string;
   description: string;
   icon: string;
-  index: number;
 }) {
   return (
     <motion.div

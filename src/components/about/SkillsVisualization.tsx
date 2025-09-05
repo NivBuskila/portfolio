@@ -62,7 +62,7 @@ const skillCategories: SkillCategory[] = [
   },
 ];
 
-const SkillTag: React.FC<{ skill: string; index: number; color: string }> = ({ skill, index, color }) => {
+const SkillTag: React.FC<{ skill: string; color: string }> = ({ skill, color }) => {
   return (
     <motion.div
       initial={false}
@@ -82,8 +82,7 @@ const SkillTag: React.FC<{ skill: string; index: number; color: string }> = ({ s
 
 const SkillCategoryCard: React.FC<{ 
   category: SkillCategory;
-  index: number;
-}> = ({ category, index }) => {
+}> = ({ category }) => {
   if (category.skills.length === 0) return null;
   
   return (
@@ -101,11 +100,10 @@ const SkillCategoryCard: React.FC<{
         </span>
       </div>
       <div className="flex flex-wrap gap-2">
-        {category.skills.map((skill, skillIndex) => (
+        {category.skills.map((skill) => (
           <SkillTag 
             key={skill} 
             skill={skill} 
-            index={skillIndex} 
             color={category.color} 
           />
         ))}
@@ -135,11 +133,10 @@ export default function SkillsVisualization() {
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-          {visibleCategories.map((category, index) => (
+          {visibleCategories.map((category) => (
             <SkillCategoryCard
               key={category.name}
               category={category}
-              index={index}
             />
           ))}
         </div>
