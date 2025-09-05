@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { personalInfo } from '@/data/personalInfo';
 
 interface SkillCategory {
@@ -66,10 +65,7 @@ const skillCategories: SkillCategory[] = [
 const SkillTag: React.FC<{ skill: string; index: number; color: string }> = ({ skill, index, color }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      viewport={{ once: true }}
+      initial={false}
       whileHover={{ scale: 1.05 }}
       className={`
         inline-flex items-center px-3 py-2 rounded-full
@@ -92,10 +88,7 @@ const SkillCategoryCard: React.FC<{
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true }}
+      initial={false}
       className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
     >
       <div className="flex items-center gap-3 mb-6">
@@ -122,10 +115,6 @@ const SkillCategoryCard: React.FC<{
 };
 
 export default function SkillsVisualization() {
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
 
   const totalSkills = skillCategories.reduce((total, category) => total + category.skills.length, 0);
   const visibleCategories = skillCategories.filter(category => category.skills.length > 0);
@@ -134,10 +123,7 @@ export default function SkillsVisualization() {
     <div className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
+          initial={false}
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-4 transition-colors duration-500">
@@ -159,10 +145,7 @@ export default function SkillsVisualization() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
+          initial={false}
           className="mt-12 bg-gradient-to-r from-purple-500/10 to-blue-500/10 dark:from-purple-500/20 dark:to-blue-500/20 rounded-2xl p-8 border border-purple-200 dark:border-purple-800"
         >
           <h3 className="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">
@@ -170,10 +153,7 @@ export default function SkillsVisualization() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
+              initial={false}
               className="p-4"
             >
               <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
@@ -184,10 +164,7 @@ export default function SkillsVisualization() {
               </div>
             </motion.div>
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
+              initial={false}
               className="p-4"
             >
               <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
@@ -198,10 +175,7 @@ export default function SkillsVisualization() {
               </div>
             </motion.div>
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
+              initial={false}
               className="p-4"
             >
               <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">

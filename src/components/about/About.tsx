@@ -63,9 +63,6 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
         >
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 dark:text-white mb-6 transition-colors duration-500">
               About <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">Me</span>
@@ -155,10 +152,7 @@ function SectionBlock({
 }) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      initial={false}
     >
       <div className="flex items-center gap-3 mb-8">
         {icon && <span className="text-3xl">{icon}</span>}
@@ -184,10 +178,7 @@ function EducationCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial={false}
       whileHover={{ scale: 1.02 }}
       className="
         relative
@@ -238,10 +229,7 @@ function ExperienceCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial={false}
       whileHover={{ scale: 1.02 }}
       className="
         relative
@@ -278,10 +266,7 @@ function ExperienceCard({
         {description.map((item, i) => (
           <motion.li
             key={i}
-            initial={{ opacity: 0, x: 10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: (index * 0.1) + (i * 0.05) }}
+            initial={false}
             className="flex items-start gap-3 text-gray-700 dark:text-gray-300 text-sm transition-colors duration-500"
           >
             <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
@@ -306,10 +291,7 @@ function HighlightCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial={false}
       whileHover={{ scale: 1.05, y: -5 }}
       className="
         bg-gradient-to-br
