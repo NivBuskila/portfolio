@@ -4,13 +4,15 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact Niv Buskila - Get In Touch',
-  description: 'Contact Niv Buskila for collaboration, internship opportunities, or project inquiries. Available for React, Python and Java development.',
+  description:
+    'Contact Niv Buskila for collaboration, internship opportunities, or project inquiries. Available for React, Python and Java development.',
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
     title: 'Contact Niv Buskila - Get In Touch',
-    description: 'Contact Niv Buskila for collaboration, internship opportunities, or project inquiries. Available for React, Python and Java development.',
+    description:
+      'Contact Niv Buskila for collaboration, internship opportunities, or project inquiries. Available for React, Python and Java development.',
     url: 'https://nivbuskila.tech/contact',
   },
 };

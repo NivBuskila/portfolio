@@ -13,8 +13,22 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL('https://nivbuskila.tech'),
   title: 'Niv Buskila - Full Stack Developer Portfolio',
-  description: 'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
-  keywords: ['Niv Buskila', 'Full Stack Developer', 'React Developer', 'Python Developer', 'Java Developer', 'Computer Science Graduate', 'Web Development', 'Mobile Development', 'Portfolio', 'Software Engineer', 'Frontend Developer', 'Backend Developer'],
+  description:
+    'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
+  keywords: [
+    'Niv Buskila',
+    'Full Stack Developer',
+    'React Developer',
+    'Python Developer',
+    'Java Developer',
+    'Computer Science Graduate',
+    'Web Development',
+    'Mobile Development',
+    'Portfolio',
+    'Software Engineer',
+    'Frontend Developer',
+    'Backend Developer',
+  ],
   authors: [{ name: 'Niv Buskila' }],
   creator: 'Niv Buskila',
   alternates: {
@@ -22,7 +36,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Niv Buskila - Full Stack Developer Portfolio',
-    description: 'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
+    description:
+      'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
     url: 'https://nivbuskila.tech',
     siteName: 'Niv Buskila Portfolio',
     images: [
@@ -39,7 +54,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Niv Buskila - Full Stack Developer Portfolio',
-    description: 'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects.',
+    description:
+      'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects.',
     images: ['/images/portfolio.png'],
   },
   robots: {
@@ -64,28 +80,38 @@ export const metadata: Metadata = {
 };
 
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Niv Buskila",
-  "jobTitle": "Full Stack Developer",
-  "description": "Computer Science graduate and full stack developer specializing in React, Next.js, Python, Java, and mobile development",
-  "url": "https://nivbuskila.tech",
-  "email": "nivbuskila@icloud.com",
-  "sameAs": [
-    "https://github.com/NivBuskila",
-    "https://linkedin.com/in/nivbuskila"
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Niv Buskila',
+  jobTitle: 'Full Stack Developer',
+  description:
+    'Computer Science graduate and full stack developer specializing in React, Next.js, Python, Java, and mobile development',
+  url: 'https://nivbuskila.tech',
+  email: 'nivbuskila@icloud.com',
+  sameAs: [
+    'https://github.com/NivBuskila',
+    'https://linkedin.com/in/nivbuskila',
   ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Amazon"
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Amazon',
   },
-  "alumniOf": {
-    "@type": "EducationalOrganization",
-    "name": "Afeka College of Engineering"
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'Afeka College of Engineering',
   },
-  "knowsAbout": [
-    "React", "Next.js", "TypeScript", "Python", "Java", "JavaScript", "Node.js", "Web Development", "Mobile Development", "Software Engineering"
-  ]
+  knowsAbout: [
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Python',
+    'Java',
+    'JavaScript',
+    'Node.js',
+    'Web Development',
+    'Mobile Development',
+    'Software Engineering',
+  ],
 };
 
 export default function RootLayout({
@@ -99,7 +125,7 @@ export default function RootLayout({
         <script
           id="theme-initializer"
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;var d=s ? s === 'dark' : p; if(d){document.documentElement.classList.add('dark');}}catch(e){}})();`
+            __html: `(function(){try{var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;var d=s ? s === 'dark' : p; if(d){document.documentElement.classList.add('dark');}}catch(e){}})();`,
           }}
         />
         <script
@@ -108,9 +134,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.className} bg-background text-foreground`}>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <ClientLayout>{children}</ClientLayout>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}

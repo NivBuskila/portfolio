@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
 
-
 export default function Home() {
   return (
     <div
@@ -81,15 +80,13 @@ export default function Home() {
           md:items-start
         "
       >
-        <motion.div
-          className="flex-1 mt-10 md:mt-32"
-        >
+        <motion.div className="flex-1 mt-10 md:mt-32">
           <h1 className="text-5xl md:text-7xl font-extrabold text-gray-800 dark:text-white transition-colors duration-500">
             Hi, I&apos;m{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400">
               {personalInfo.name}
-            </span>
-            {' '}- Full Stack Developer
+            </span>{' '}
+            - Full Stack Developer
           </h1>
 
           <h2 className="mt-4 text-2xl md:text-3xl font-medium text-gray-600 dark:text-gray-300 transition-colors duration-500">
@@ -102,22 +99,33 @@ export default function Home() {
 
           <div className="mt-6 text-base text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed transition-colors duration-500">
             <p>
-              I&apos;m a Computer Science graduate from Afeka College of Engineering 
-              currently working at Amazon. My expertise spans across modern web technologies, 
-              mobile development, and backend systems. I specialize in building scalable applications using 
-              React, Next.js, TypeScript, Python, and Java.
+              I&apos;m a Computer Science graduate from Afeka College of
+              Engineering currently working at Amazon. My expertise spans across
+              modern web technologies, mobile development, and backend systems.
+              I specialize in building scalable applications using React,
+              Next.js, TypeScript, Python, and Java.
             </p>
             <p className="mt-4">
               Explore my{' '}
-              <Link href="/projects" className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium">
+              <Link
+                href="/projects"
+                className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium"
+              >
                 portfolio projects
               </Link>{' '}
-              including Android apps, AI tools, and full-stack web applications. Learn more{' '}
-              <Link href="/about" className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium">
+              including Android apps, AI tools, and full-stack web applications.
+              Learn more{' '}
+              <Link
+                href="/about"
+                className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium"
+              >
                 about my experience
               </Link>{' '}
               and technical skills, or{' '}
-              <Link href="/contact" className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium">
+              <Link
+                href="/contact"
+                className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium"
+              >
                 get in touch
               </Link>{' '}
               for collaboration opportunities and internships.

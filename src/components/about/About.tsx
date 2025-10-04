@@ -8,8 +8,8 @@ import SkillsVisualization from './SkillsVisualization';
 export default function About() {
   return (
     <div className="relative min-h-screen">
-    <div
-      className="
+      <div
+        className="
         relative
         bg-gradient-to-b
         from-blue-50
@@ -21,9 +21,9 @@ export default function About() {
           transition-colors
           duration-500
       "
-    >
-      <motion.div
-        className="
+      >
+        <motion.div
+          className="
           absolute
           w-80
           h-80
@@ -37,9 +37,9 @@ export default function About() {
           top-[-5rem]
           left-[-5rem]
         "
-        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse' }}
-      />
+          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+          transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse' }}
+        />
 
         <motion.div
           className="
@@ -60,19 +60,20 @@ export default function About() {
           transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
         />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            className="text-center"
-        >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div className="text-center">
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 dark:text-white mb-6 transition-colors duration-500">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">Me</span>
+              About{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
+                Me
+              </span>
             </h1>
             <p className="max-w-4xl mx-auto text-xl text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-500">
-          {personalInfo.about}
+              {personalInfo.about}
             </p>
           </motion.div>
         </div>
-          </div>
+      </div>
 
       <SkillsVisualization />
 
@@ -80,36 +81,36 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-2">
             <SectionBlock title="Education" icon="🎓">
-          <div className="space-y-6">
-            {personalInfo.education.map((edu, idx) => (
+              <div className="space-y-6">
+                {personalInfo.education.map((edu, idx) => (
                   <EducationCard
-                key={idx}
+                    key={idx}
                     degree={edu.degree}
                     school={edu.school}
-                duration={edu.duration}
-              />
-            ))}
-          </div>
-        </SectionBlock>
+                    duration={edu.duration}
+                  />
+                ))}
+              </div>
+            </SectionBlock>
 
             <SectionBlock title="Experience" icon="💼">
-          <div className="space-y-6">
-            {personalInfo.experience.map((exp, idx) => (
+              <div className="space-y-6">
+                {personalInfo.experience.map((exp, idx) => (
                   <ExperienceCard
-                key={idx}
+                    key={idx}
                     title={exp.title}
                     company={exp.company}
-                duration={exp.duration}
-                description={exp.description}
-              />
-            ))}
-          </div>
-        </SectionBlock>
+                    duration={exp.duration}
+                    description={exp.description}
+                  />
+                ))}
+              </div>
+            </SectionBlock>
           </div>
         </div>
       </div>
 
-              <div className="bg-white dark:bg-gray-900 py-16 transition-colors duration-500">
+      <div className="bg-white dark:bg-gray-900 py-16 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionBlock title="Personal Highlights" icon="⭐">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -138,47 +139,88 @@ export default function About() {
           <SectionBlock title="Technologies & Resources" icon="🚀">
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                I continuously learn and work with modern technologies to build scalable and efficient applications. 
-                Here are some of the key technologies and resources I use and recommend:
+                I continuously learn and work with modern technologies to build
+                scalable and efficient applications. Here are some of the key
+                technologies and resources I use and recommend:
               </p>
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Frontend Development</h3>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+                    Frontend Development
+                  </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
-                      <a href="https://react.dev" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                      <a
+                        href="https://react.dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
+                      >
                         React Documentation
-                      </a> - Official React documentation and tutorials
+                      </a>{' '}
+                      - Official React documentation and tutorials
                     </li>
                     <li>
-                      <a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                      <a
+                        href="https://nextjs.org/docs"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
+                      >
                         Next.js Guide
-                      </a> - Complete guide to Next.js framework
+                      </a>{' '}
+                      - Complete guide to Next.js framework
                     </li>
                     <li>
-                      <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                      <a
+                        href="https://tailwindcss.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
+                      >
                         Tailwind CSS
-                      </a> - Utility-first CSS framework
+                      </a>{' '}
+                      - Utility-first CSS framework
                     </li>
                   </ul>
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Backend & Mobile</h3>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+                    Backend & Mobile
+                  </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
-                      <a href="https://www.python.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                      <a
+                        href="https://www.python.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
+                      >
                         Python Official Site
-                      </a> - Python programming language resources
+                      </a>{' '}
+                      - Python programming language resources
                     </li>
                     <li>
-                      <a href="https://developer.android.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                      <a
+                        href="https://developer.android.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
+                      >
                         Android Developers
-                      </a> - Official Android development documentation
+                      </a>{' '}
+                      - Official Android development documentation
                     </li>
                     <li>
-                      <a href="https://firebase.google.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                      <a
+                        href="https://firebase.google.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
+                      >
                         Firebase
-                      </a> - Backend-as-a-Service platform by Google
+                      </a>{' '}
+                      - Backend-as-a-Service platform by Google
                     </li>
                   </ul>
                 </div>
@@ -191,19 +233,17 @@ export default function About() {
   );
 }
 
-function SectionBlock({ 
-  title, 
-  children, 
-  icon 
-}: { 
-  title: string; 
-  children: React.ReactNode; 
+function SectionBlock({
+  title,
+  children,
+  icon,
+}: {
+  title: string;
+  children: React.ReactNode;
   icon?: string;
 }) {
   return (
-    <motion.section
-      initial={false}
-    >
+    <motion.section initial={false}>
       <div className="flex items-center gap-3 mb-8">
         {icon && <span className="text-3xl">{icon}</span>}
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white transition-colors duration-500">
@@ -307,7 +347,7 @@ function ExperienceCard({
         </div>
         <div className="text-2xl">💼</div>
       </div>
-      
+
       <ul className="space-y-2">
         {description.map((item, i) => (
           <motion.li
@@ -318,8 +358,8 @@ function ExperienceCard({
             <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
             {item}
           </motion.li>
-          ))}
-        </ul>
+        ))}
+      </ul>
     </motion.div>
   );
 }
