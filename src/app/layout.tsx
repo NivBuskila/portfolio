@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nivbuskila.tech'),
-  title: 'Niv Buskila - Full Stack Developer Portfolio',
+  title: 'Niv Buskila - Full Stack Developer | Software Engineer',
   description:
     'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
   keywords: [
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
   authors: [{ name: 'Niv Buskila' }],
   creator: 'Niv Buskila',
   alternates: {
-    canonical: '/',
+    canonical: 'https://nivbuskila.tech',
   },
   openGraph: {
-    title: 'Niv Buskila - Full Stack Developer Portfolio',
+    title: 'Niv Buskila - Full Stack Developer | Software Engineer',
     description:
       'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
     url: 'https://nivbuskila.tech',

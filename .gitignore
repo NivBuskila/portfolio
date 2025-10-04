@@ -140,3 +140,5 @@ CHANGELOG_SEO.md
 # Gitignore Setup Documentation (internal)
 הגדרת_gitignore.md
 INTERNAL_DOCS_INDEX.md
+src/components/home/Home.tsx
+SEO_FIXES_ROUND2.md

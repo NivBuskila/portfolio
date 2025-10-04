@@ -130,6 +130,12 @@ export default function Home() {
               </Link>{' '}
               for collaboration opportunities and internships.
             </p>
+            <p className="mt-4">
+              I specialize in creating responsive user interfaces with React and
+              Next.js, building RESTful APIs, and deploying on cloud platforms
+              like AWS and Vercel. My work showcases modern development practices
+              and clean, maintainable code.
+            </p>
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -189,14 +195,14 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-8 flex gap-6">
+          <div className="mt-8 mb-16 flex gap-6 justify-end">
             <a
               href={personalInfo.socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110"
             >
-              <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   fillRule="evenodd"
                   d="M12 2C6.477 2 2
@@ -232,7 +238,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110"
             >
-              <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   d="M19 0h-14c-2.761 0-5
                   2.239-5 5v14c0 2.761 2.239

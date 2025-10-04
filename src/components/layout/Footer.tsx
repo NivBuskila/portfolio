@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
 import HeartIcon from '@heroicons/react/24/solid/HeartIcon';
 import { personalInfo } from '@/data/personalInfo';
@@ -83,13 +82,7 @@ export default function Footer() {
       
       <div className="relative max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="col-span-1 md:col-span-2"
-          >
+          <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 {personalInfo.name}
@@ -122,14 +115,9 @@ export default function Footer() {
                 </a>
               )}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+          <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 transition-colors duration-500">
               Navigation
             </h3>
@@ -145,14 +133,9 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 transition-colors duration-500">
               Connect
             </h3>
@@ -172,33 +155,22 @@ export default function Footer() {
                 </a>
               ))}
           </div>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center"
-        >
+        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400 text-sm transition-colors duration-500">
             <span>&copy; {new Date().getFullYear()}</span>
             <span>{personalInfo.name}.</span>
             <span>Made with</span>
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
+            <span>
               <HeartIcon className="h-4 w-4 text-red-500" />
-            </motion.span>
+            </span>
             <span>and Next.js</span>
           </div>
 
-          <motion.button
+          <button
             onClick={scrollToTop}
-            whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.9 }}
             className="
               mt-4 md:mt-0
               flex items-center gap-2
@@ -206,14 +178,14 @@ export default function Footer() {
               bg-gradient-to-r from-purple-500 to-blue-500
               text-white text-sm font-medium
               rounded-full shadow-lg
-              hover:shadow-xl
+              hover:shadow-xl hover:scale-105
               transition-all duration-300
             "
           >
             <ArrowUpIcon className="h-4 w-4" />
             Back to Top
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
       </div>
     </footer>
   );
