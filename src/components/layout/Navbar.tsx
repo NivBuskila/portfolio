@@ -3,7 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bars3Icon, XMarkIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline';
+import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon';
+import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
+import SunIcon from '@heroicons/react/24/outline/SunIcon';
+import MoonIcon from '@heroicons/react/24/outline/MoonIcon';
 import { useTheme } from '@/hooks/useTheme';
 
 const navigation = [

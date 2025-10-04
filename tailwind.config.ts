@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
   darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -17,9 +18,8 @@ module.exports = {
         xs: '2px',
       },
       boxShadow: {
-        neon: '0 0 15px rgba(57,255,20, 0.6)', 
+        neon: '0 0 15px rgba(57,255,20, 0.6)',
       },
-
       keyframes: {
         'gradient-x': {
           '0%, 100%': { 'background-position': '0% 50%' },
@@ -33,3 +33,5 @@ module.exports = {
   },
   plugins: [],
 };
+
+export default config;

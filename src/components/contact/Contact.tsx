@@ -5,7 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
-import { CheckCircleIcon, XCircleIcon, PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import CheckCircleIcon from '@heroicons/react/24/solid/CheckCircleIcon';
+import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
+import PaperAirplaneIcon from '@heroicons/react/24/solid/PaperAirplaneIcon';
 import { personalInfo } from '@/data/personalInfo';
 
 const ContactSchema = Yup.object().shape({
@@ -54,15 +56,7 @@ export default function Contact() {
         const templateId = (process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '').trim();
         const publicKey = (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '').trim();
 
-        // Debug (safe): print lengths to verify env are loaded
-        // short, sharp logs only in dev
-        if (process.env.NODE_ENV !== 'production') {
-          console.debug('EmailJS ids', {
-            serviceId,
-            templateId,
-            publicKeyLen: publicKey.length,
-          });
-        }
+        // EmailJS configuration validated - no debug logs for security
         
         // Guard: missing config
         if (!serviceId || !templateId || !publicKey) {

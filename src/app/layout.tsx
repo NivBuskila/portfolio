@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import ErrorBoundary from '@/components/common/ErrorBoundary';
+import ClientLayout from './client-layout';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 const poppins = Poppins({
@@ -105,13 +103,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.className} bg-background text-foreground`}>
-        <ErrorBoundary>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
-        </ErrorBoundary>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}

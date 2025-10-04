@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /.env
+Disallow: /.env.local
 
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://nivbuskila.tech/sitemap.xml

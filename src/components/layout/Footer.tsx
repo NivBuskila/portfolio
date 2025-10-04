@@ -3,7 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpIcon, HeartIcon } from '@heroicons/react/24/solid';
+import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
+import HeartIcon from '@heroicons/react/24/solid/HeartIcon';
 import { personalInfo } from '@/data/personalInfo';
 
 export default function Footer() {
