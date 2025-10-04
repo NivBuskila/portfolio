@@ -7,11 +7,13 @@ This document outlines the security measures implemented in this portfolio websi
 ### Setup Instructions
 
 1. Copy the example environment file:
+
    ```bash
    cp .env.example .env.local
    ```
 
 2. Fill in your actual values:
+
    - **Google Analytics**: Get your GA4 Measurement ID from https://analytics.google.com/
    - **EmailJS**: Get your credentials from https://www.emailjs.com/
 
@@ -20,6 +22,7 @@ This document outlines the security measures implemented in this portfolio websi
 ### For Deployment (Vercel)
 
 Add these environment variables in your Vercel project settings:
+
 - `NEXT_PUBLIC_GA_ID`
 - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
 - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
@@ -48,6 +51,7 @@ The following security headers are configured in `next.config.ts`:
 ## Dependencies
 
 Keep dependencies updated:
+
 ```bash
 npm audit
 npm audit fix
@@ -56,19 +60,23 @@ npm audit fix
 ## Testing Security
 
 ### Local Testing
+
 ```bash
 npm run build
 npm run start
 ```
 
 ### Production Security Scan
+
 After deploying, test your security headers:
+
 - https://securityheaders.com/
 - https://observatory.mozilla.org/
 
 ## Public Information
 
 The following information is intentionally public:
+
 - Email: nivbuskila@icloud.com (for professional contact)
 - GitHub profile
 - LinkedIn profile

@@ -50,14 +50,20 @@ export default function Contact() {
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         setNotification({ type: null, message: '' });
-        
+
         // EmailJS configuration
-        const serviceId = (process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '').trim();
-        const templateId = (process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '').trim();
-        const publicKey = (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '').trim();
+        const serviceId = (
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || ''
+        ).trim();
+        const templateId = (
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || ''
+        ).trim();
+        const publicKey = (
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
+        ).trim();
 
         // EmailJS configuration validated - no debug logs for security
-        
+
         // Guard: missing config
         if (!serviceId || !templateId || !publicKey) {
           setNotification({
@@ -78,11 +84,14 @@ export default function Contact() {
           email: values.email,
         };
 
-        await emailjs.send(serviceId, templateId, templateParams, { publicKey });
+        await emailjs.send(serviceId, templateId, templateParams, {
+          publicKey,
+        });
 
         setNotification({
           type: 'success',
-          message: "Thank you! Your message has been sent successfully. I'll get back to you soon!",
+          message:
+            "Thank you! Your message has been sent successfully. I'll get back to you soon!",
         });
         // analytics: track successful submit
         if (typeof window !== 'undefined') {
@@ -98,9 +107,11 @@ export default function Contact() {
         console.error('Email sending failed:', error);
         let message = 'Send failed. Please try again.';
         if (error instanceof EmailJSResponseStatus) {
-          if (error.status === 400) message = 'Send failed (invalid service/template).';
+          if (error.status === 400)
+            message = 'Send failed (invalid service/template).';
           else if (error.status === 401) message = 'Send failed (auth).';
-          else if (error.status === 422) message = 'Send failed (missing fields).';
+          else if (error.status === 422)
+            message = 'Send failed (missing fields).';
           else if (error.status === 429) message = 'Send failed (rate limit).';
           else if (error.status >= 500) message = 'Send failed (server).';
         }
@@ -200,7 +211,7 @@ export default function Contact() {
         <motion.div>
           <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2 text-center transition-colors duration-500">
             Let&apos;s Connect
-        </h2>
+          </h2>
           <p className="text-gray-600 dark:text-gray-300 text-center mb-8 transition-colors duration-500">
             Have a project in mind? I&apos;d love to hear about it!
           </p>
@@ -214,9 +225,10 @@ export default function Contact() {
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               className={`
                 flex items-center gap-3 p-4 rounded-lg mb-6 border
-                ${notification.type === 'success' 
-                  ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300' 
-                  : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-300'
+                ${
+                  notification.type === 'success'
+                    ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300'
+                    : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-300'
                 }
               `}
             >
@@ -236,7 +248,10 @@ export default function Contact() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-500">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-500"
+            >
               Full Name
             </label>
             <input
@@ -251,14 +266,15 @@ export default function Contact() {
                 placeholder-gray-500 dark:placeholder-gray-400
                 transition-all duration-300
                 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent
-                ${formik.touched.name && formik.errors.name 
-                  ? 'border-red-500 dark:border-red-400' 
-                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+                ${
+                  formik.touched.name && formik.errors.name
+                    ? 'border-red-500 dark:border-red-400'
+                    : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
                 }
               `}
             />
             <AnimatePresence>
-            {formik.touched.name && formik.errors.name && (
+              {formik.touched.name && formik.errors.name && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -266,9 +282,9 @@ export default function Contact() {
                   className="text-red-500 dark:text-red-400 text-sm mt-2 flex items-center gap-1"
                 >
                   <XCircleIcon className="h-4 w-4" />
-                {formik.errors.name}
+                  {formik.errors.name}
                 </motion.div>
-            )}
+              )}
             </AnimatePresence>
           </motion.div>
 
@@ -277,7 +293,10 @@ export default function Contact() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-500">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-500"
+            >
               Email Address
             </label>
             <input
@@ -292,14 +311,15 @@ export default function Contact() {
                 placeholder-gray-500 dark:placeholder-gray-400
                 transition-all duration-300
                 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent
-                ${formik.touched.email && formik.errors.email 
-                  ? 'border-red-500 dark:border-red-400' 
-                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+                ${
+                  formik.touched.email && formik.errors.email
+                    ? 'border-red-500 dark:border-red-400'
+                    : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
                 }
               `}
             />
             <AnimatePresence>
-            {formik.touched.email && formik.errors.email && (
+              {formik.touched.email && formik.errors.email && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -307,9 +327,9 @@ export default function Contact() {
                   className="text-red-500 dark:text-red-400 text-sm mt-2 flex items-center gap-1"
                 >
                   <XCircleIcon className="h-4 w-4" />
-                {formik.errors.email}
+                  {formik.errors.email}
                 </motion.div>
-            )}
+              )}
             </AnimatePresence>
           </motion.div>
 
@@ -318,7 +338,10 @@ export default function Contact() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-500">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-500"
+            >
               Message
             </label>
             <textarea
@@ -334,15 +357,16 @@ export default function Contact() {
                 transition-all duration-300
                 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent
                 resize-none
-                ${formik.touched.message && formik.errors.message 
-                  ? 'border-red-500 dark:border-red-400' 
-                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+                ${
+                  formik.touched.message && formik.errors.message
+                    ? 'border-red-500 dark:border-red-400'
+                    : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
                 }
               `}
             />
             <div className="flex justify-between items-center mt-2">
               <AnimatePresence>
-            {formik.touched.message && formik.errors.message && (
+                {formik.touched.message && formik.errors.message && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -350,14 +374,14 @@ export default function Contact() {
                     className="text-red-500 dark:text-red-400 text-sm flex items-center gap-1"
                   >
                     <XCircleIcon className="h-4 w-4" />
-                {formik.errors.message}
+                    {formik.errors.message}
                   </motion.div>
-            )}
+                )}
               </AnimatePresence>
               <span className="text-xs text-gray-500 dark:text-gray-400">
                 {formik.values.message.length}/1000
               </span>
-          </div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -406,7 +430,11 @@ export default function Contact() {
                 <>
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
                     className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                   />
                   Sending Message...
@@ -445,7 +473,7 @@ export default function Contact() {
                 {personalInfo.phone}
               </a>
             )}
-        </div>
+          </div>
         </motion.div>
       </motion.div>
     </div>
