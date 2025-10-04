@@ -22,7 +22,7 @@
 1. **Meta Tags**: Title (79 chars), Description (203 chars)
 2. **H1 Tag**: "Hi, I'm Niv Buskila - Full Stack Developer" (44 chars)
 3. **Keywords**: 12 relevant technical keywords
-4. **Google Analytics**: G-Z52GF4DBMC configured
+4. **Google Analytics**: Configured (see .env.local)
 5. **Favicon**: Complete set (ICO, PNG, SVG, Apple)
 6. **Structured Data**: Rich Schema.org Person data
 7. **Open Graph**: Full social media optimization

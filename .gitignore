@@ -108,3 +108,17 @@ jspm_packages/
 *.backup
 *.bak
 *.tmp
+
+# Internal documentation and guides (not for public repo)
+SECURITY_FULL_AUDIT.md
+SECURITY_AUDIT.md
+SECURITY_AUDIT_HEBREW.md
+SECURITY_WARNING.md
+GOOGLE_ANALYTICS_GUIDE.md
+FIXES_SUMMARY.md
+QUICK_START.md
+DEPLOYMENT_CHECKLIST.md
+public/analytics-test.html
+scripts/check-analytics.js
+INTERNAL_DOCS_README.md
+DEPLOYMENT_CHECKLIST.md
