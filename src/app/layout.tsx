@@ -11,31 +11,36 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Niv Buskila - Full Stack Developer | React, Python, Java Portfolio',
-  description: 'Niv Buskila - Computer Science student and junior software developer specializing in React, Next.js, Python, Java, and mobile development. View my projects including Android apps, web development, and AI tools. Available for internships and collaboration opportunities.',
-  keywords: ['Niv Buskila', 'Full Stack Developer', 'React Developer', 'Python Developer', 'Java Developer', 'Computer Science Student', 'Web Development', 'Mobile Development', 'Portfolio', 'Software Engineer', 'Frontend Developer', 'Backend Developer'],
+  metadataBase: new URL('https://nivbuskila.tech'),
+  title: 'Niv Buskila - Full Stack Developer Portfolio',
+  description: 'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
+  keywords: ['Niv Buskila', 'Full Stack Developer', 'React Developer', 'Python Developer', 'Java Developer', 'Computer Science Graduate', 'Web Development', 'Mobile Development', 'Portfolio', 'Software Engineer', 'Frontend Developer', 'Backend Developer'],
   authors: [{ name: 'Niv Buskila' }],
   creator: 'Niv Buskila',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Niv Buskila - Full Stack Developer Portfolio',
-    description: 'Computer Science student and junior software developer specializing in React, Next.js, Python, Java, and mobile development. View my projects and get in touch for collaboration opportunities.',
+    description: 'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
     url: 'https://nivbuskila.tech',
     siteName: 'Niv Buskila Portfolio',
-    // images: [
-    //   {
-    //     url: '/og-image.png',
-    //     width: 1200,
-    //     height: 630,
-    //     alt: 'Niv Buskila - Full Stack Developer Portfolio',
-    //   },
-    // ],
+    images: [
+      {
+        url: '/images/portfolio.png',
+        width: 1200,
+        height: 630,
+        alt: 'Niv Buskila - Full Stack Developer Portfolio',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Niv Buskila - Full Stack Developer Portfolio',
-    description: 'Computer Science student and junior software developer. View my React, Python, and Java projects.',
+    description: 'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects.',
+    images: ['/images/portfolio.png'],
   },
   robots: {
     index: true,
@@ -63,7 +68,7 @@ const structuredData = {
   "@type": "Person",
   "name": "Niv Buskila",
   "jobTitle": "Full Stack Developer",
-  "description": "Computer Science student and junior software developer specializing in React, Next.js, Python, Java, and mobile development",
+  "description": "Computer Science graduate and full stack developer specializing in React, Next.js, Python, Java, and mobile development",
   "url": "https://nivbuskila.tech",
   "email": "nivbuskila@icloud.com",
   "sameAs": [
@@ -72,7 +77,7 @@ const structuredData = {
   ],
   "worksFor": {
     "@type": "Organization",
-    "name": "Amazon Security Team"
+    "name": "Amazon"
   },
   "alumniOf": {
     "@type": "EducationalOrganization",
@@ -89,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <script
           id="theme-initializer"

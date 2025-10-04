@@ -132,6 +132,61 @@ export default function About() {
           </SectionBlock>
         </div>
       </div>
+
+      <div className="bg-gray-50 dark:bg-gray-800 py-16 transition-colors duration-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionBlock title="Technologies & Resources" icon="🚀">
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                I continuously learn and work with modern technologies to build scalable and efficient applications. 
+                Here are some of the key technologies and resources I use and recommend:
+              </p>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Frontend Development</h3>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li>
+                      <a href="https://react.dev" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                        React Documentation
+                      </a> - Official React documentation and tutorials
+                    </li>
+                    <li>
+                      <a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                        Next.js Guide
+                      </a> - Complete guide to Next.js framework
+                    </li>
+                    <li>
+                      <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                        Tailwind CSS
+                      </a> - Utility-first CSS framework
+                    </li>
+                  </ul>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Backend & Mobile</h3>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li>
+                      <a href="https://www.python.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                        Python Official Site
+                      </a> - Python programming language resources
+                    </li>
+                    <li>
+                      <a href="https://developer.android.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                        Android Developers
+                      </a> - Official Android development documentation
+                    </li>
+                    <li>
+                      <a href="https://firebase.google.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                        Firebase
+                      </a> - Backend-as-a-Service platform by Google
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </SectionBlock>
+        </div>
+      </div>
     </div>
   );
 }

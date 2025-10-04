@@ -100,6 +100,30 @@ export default function Home() {
             {personalInfo.about}
           </p>
 
+          <div className="mt-6 text-base text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed transition-colors duration-500">
+            <p>
+              I&apos;m a Computer Science graduate from Afeka College of Engineering 
+              currently working at Amazon. My expertise spans across modern web technologies, 
+              mobile development, and backend systems. I specialize in building scalable applications using 
+              React, Next.js, TypeScript, Python, and Java.
+            </p>
+            <p className="mt-4">
+              Explore my{' '}
+              <Link href="/projects" className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium">
+                portfolio projects
+              </Link>{' '}
+              including Android apps, AI tools, and full-stack web applications. Learn more{' '}
+              <Link href="/about" className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium">
+                about my experience
+              </Link>{' '}
+              and technical skills, or{' '}
+              <Link href="/contact" className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium">
+                get in touch
+              </Link>{' '}
+              for collaboration opportunities and internships.
+            </p>
+          </div>
+
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Link
               href="/projects"

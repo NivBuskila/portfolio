@@ -118,8 +118,25 @@ GOOGLE_ANALYTICS_GUIDE.md
 FIXES_SUMMARY.md
 QUICK_START.md
 DEPLOYMENT_CHECKLIST.md
+INTERNAL_DOCS_README.md
 public/analytics-test.html
 scripts/check-analytics.js
-INTERNAL_DOCS_README.md
-DEPLOYMENT_CHECKLIST.md
-DEPLOYMENT_CHECKLIST.md
+
+# SEO Optimization Documentation (internal)
+SEO_FIXES_SUMMARY.md
+תיקון_בעיות_SEO.md
+הוראות_בדיקה_מהירות.md
+CHANGELOG_SEO.md
+
+# Syntax & Bug Fixes Documentation (internal)
+תיקון_שגיאות_syntax.md
+תיקון_פרטים_אישיים.md
+סיכום_מלא_תיקונים.md
+
+# CSS & Code Optimization Documentation (internal)
+תיקון_CSS_מלא.md
+סיכום_תיקון_קצר.md
+
+# Gitignore Setup Documentation (internal)
+הגדרת_gitignore.md
+INTERNAL_DOCS_INDEX.md

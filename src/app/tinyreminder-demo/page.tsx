@@ -19,12 +19,12 @@ export default function TinyReminderDemoPage() {
           width="560"
           height="315"
           src="https://www.youtube.com/embed/6WYPOGxUxes?si=FtgaRQ_O8Uz_1JFF"
-          title="YouTube video player"
-          frameBorder="0"
+          title="YouTube video player - TinyReminder Demo"
+          loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
-          className="absolute top-0 left-0 w-full h-full rounded-md shadow-md"
+          className="absolute top-0 left-0 w-full h-full rounded-md shadow-md border-0"
         />
       </div>
 
