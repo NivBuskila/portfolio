@@ -48,7 +48,7 @@ export default function SocialPreviewModal({
           try {
             const { data, timestamp } = JSON.parse(cachedData);
             const cacheAge = Date.now() - timestamp;
-            
+
             // Use cached data if it's fresh (less than 5 minutes old)
             if (cacheAge < CACHE_DURATION) {
               setGithubData(data);
@@ -64,21 +64,21 @@ export default function SocialPreviewModal({
 
       // Fetch from API
       const response = await fetch(`https://api.github.com/users/${username}`);
-      
+
       // Check for rate limit
       if (response.status === 403) {
         const rateLimitReset = response.headers.get('X-RateLimit-Reset');
-        const resetTime = rateLimitReset 
+        const resetTime = rateLimitReset
           ? new Date(parseInt(rateLimitReset) * 1000).toLocaleTimeString()
           : 'soon';
         setError(`GitHub API rate limit reached. Try again after ${resetTime}`);
         return;
       }
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch GitHub data');
       }
-      
+
       const data = await response.json();
       setGithubData(data);
 
@@ -129,9 +129,7 @@ export default function SocialPreviewModal({
           <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
             Oops!
           </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
-            {error}
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
           <button
             onClick={fetchGitHubData}
             className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
