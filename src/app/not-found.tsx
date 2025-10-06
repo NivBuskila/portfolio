@@ -25,11 +25,11 @@ export default function NotFound() {
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ 
-            type: "spring",
+          transition={{
+            type: 'spring',
             stiffness: 100,
             damping: 15,
-            duration: 0.8 
+            duration: 0.8,
           }}
           className="mb-8"
         >
@@ -49,8 +49,8 @@ export default function NotFound() {
             Oops! Page Not Found
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-md mx-auto">
-            The page you&apos;re looking for doesn&apos;t exist or has been moved. 
-            Let&apos;s get you back on track!
+            The page you&apos;re looking for doesn&apos;t exist or has been
+            moved. Let&apos;s get you back on track!
           </p>
         </motion.div>
 
@@ -62,14 +62,14 @@ export default function NotFound() {
           className="mb-12"
         >
           <motion.div
-            animate={{ 
+            animate={{
               y: [0, -10, 0],
-              rotate: [0, 5, -5, 0]
+              rotate: [0, 5, -5, 0],
             }}
-            transition={{ 
+            transition={{
               duration: 3,
               repeat: Infinity,
-              repeatType: 'reverse'
+              repeatType: 'reverse',
             }}
             className="inline-block"
           >
@@ -97,17 +97,17 @@ export default function NotFound() {
             onClick={() => window.history.back()}
             className="group inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-semibold rounded-full border-2 border-purple-600 dark:border-purple-400 hover:bg-purple-50 dark:hover:bg-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
-            <svg 
-              className="w-5 h-5" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
             <span>Go Back</span>
@@ -129,7 +129,7 @@ export default function NotFound() {
               { name: 'Home', href: '/' },
               { name: 'About', href: '/about' },
               { name: 'Projects', href: '/projects' },
-              { name: 'Contact', href: '/contact' }
+              { name: 'Contact', href: '/contact' },
             ].map((link) => (
               <Link
                 key={link.name}

@@ -10,11 +10,11 @@ export const useTheme = () => {
 
   useEffect(() => {
     setMounted(true);
-    
+
     try {
       const stored = localStorage.getItem('theme') as Theme;
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
+
       if (stored && (stored === 'light' || stored === 'dark')) {
         setTheme(stored);
         document.documentElement.classList.toggle('dark', stored === 'dark');
@@ -44,7 +44,7 @@ export const useTheme = () => {
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    
+
     try {
       localStorage.setItem('theme', newTheme);
     } catch (error) {
@@ -53,7 +53,7 @@ export const useTheme = () => {
         console.warn('Failed to persist theme preference:', error);
       }
     }
-    
+
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
   };
 
