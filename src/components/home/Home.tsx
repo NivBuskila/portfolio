@@ -1,11 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
+import SocialPreviewModal from './SocialPreviewModal';
 
 export default function Home() {
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState<'github' | 'linkedin'>('github');
   return (
     <div
       className="
@@ -196,11 +199,13 @@ export default function Home() {
           </div>
 
           <div className="mt-8 mb-16 flex gap-6 justify-end">
-            <a
-              href={personalInfo.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110"
+            <button
+              onClick={() => {
+                setModalType('github');
+                setShowModal(true);
+              }}
+              className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110 cursor-pointer"
+              aria-label="View GitHub Profile"
             >
               <svg
                 className="h-12 w-12"
@@ -235,12 +240,14 @@ export default function Home() {
                   17.522 2 12 2z"
                 />
               </svg>
-            </a>
-            <a
-              href={personalInfo.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110"
+            </button>
+            <button
+              onClick={() => {
+                setModalType('linkedin');
+                setShowModal(true);
+              }}
+              className="text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors transform hover:scale-110 cursor-pointer"
+              aria-label="View LinkedIn Profile"
             >
               <svg
                 className="h-12 w-12"
@@ -263,8 +270,15 @@ export default function Home() {
                   7-2.777 7 2.476v6.759z"
                 />
               </svg>
-            </a>
+            </button>
           </div>
+
+          <SocialPreviewModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            type={modalType}
+            username="NivBuskila"
+          />
         </motion.div>
       </div>
     </div>
