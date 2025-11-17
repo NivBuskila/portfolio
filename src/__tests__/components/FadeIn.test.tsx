@@ -4,7 +4,12 @@ import { FadeIn } from '@/components/animations/FadeIn';
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, initial, animate, transition, className, ...props }: any) => (
+    div: ({ children, initial, animate, transition, className, ...props }: React.PropsWithChildren<{
+      initial?: Record<string, unknown>;
+      animate?: Record<string, unknown>;
+      transition?: Record<string, unknown>;
+      className?: string
+    }>) => (
       <div
         className={className}
         data-initial={JSON.stringify(initial)}

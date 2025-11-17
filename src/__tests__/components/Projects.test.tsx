@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Projects from '@/components/projects/Projects';
 import { projects } from '@/data/projects';
@@ -6,7 +6,7 @@ import { projects } from '@/data/projects';
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: any) => {
+  default: ({ src, alt, ...props }: { src: string; alt: string }) => {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt={alt} {...props} />;
   },
@@ -15,7 +15,7 @@ jest.mock('next/image', () => ({
 // Mock next/link
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: any) => {
+  default: ({ children, href, ...props }: React.PropsWithChildren<{ href: string }>) => {
     return <a href={href} {...props}>{children}</a>;
   },
 }));
@@ -23,18 +23,18 @@ jest.mock('next/link', () => ({
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    button: ({ children, onClick, ...props }: any) => (
+    div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => <div {...props}>{children}</div>,
+    button: ({ children, onClick, ...props }: React.PropsWithChildren<{ onClick?: () => void }>) => (
       <button onClick={onClick} {...props}>{children}</button>
     ),
-    a: ({ children, href, ...props }: any) => <a href={href} {...props}>{children}</a>,
+    a: ({ children, href, ...props }: React.PropsWithChildren<{ href?: string }>) => <a href={href} {...props}>{children}</a>,
   },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
+  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
 }));
 
 // Mock FadeIn component
 jest.mock('@/components/animations/FadeIn', () => ({
-  FadeIn: ({ children }: any) => <div>{children}</div>,
+  FadeIn: ({ children }: React.PropsWithChildren) => <div>{children}</div>,
 }));
 
 describe('Projects', () => {
@@ -321,11 +321,11 @@ describe('Projects', () => {
     // Find projects with demo URLs
     const projectsWithDemo = projects.filter(p => p.demo);
 
-    projectsWithDemo.forEach(project => {
-      // For each project with demo, there should be a Live Demo link
+    // Check that live demo links exist for projects with demo URLs
+    if (projectsWithDemo.length > 0) {
       const liveDemoLinks = screen.getAllByText('Live Demo');
       expect(liveDemoLinks.length).toBeGreaterThan(0);
-    });
+    }
   });
 
   it('handles special TinyReminder demo link', () => {
