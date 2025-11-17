@@ -322,7 +322,7 @@ const ExperienceCard = React.memo(({
   company: string;
   duration: string;
   description: string[];
-}) {
+}) => {
   return (
     <motion.div
       initial={false}
@@ -383,7 +383,7 @@ const HighlightCard = React.memo(({
   title: string;
   description: string;
   icon: string;
-}) {
+}) => {
   return (
     <motion.div
       initial={false}
