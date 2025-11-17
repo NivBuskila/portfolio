@@ -1,0 +1,357 @@
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Projects from '@/components/projects/Projects';
+import { projects } from '@/data/projects';
+
+// Mock next/image
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: ({ src, alt, ...props }: any) => {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src} alt={alt} {...props} />;
+  },
+}));
+
+// Mock next/link
+jest.mock('next/link', () => ({
+  __esModule: true,
+  default: ({ children, href, ...props }: any) => {
+    return <a href={href} {...props}>{children}</a>;
+  },
+}));
+
+// Mock framer-motion
+jest.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    button: ({ children, onClick, ...props }: any) => (
+      <button onClick={onClick} {...props}>{children}</button>
+    ),
+    a: ({ children, href, ...props }: any) => <a href={href} {...props}>{children}</a>,
+  },
+  AnimatePresence: ({ children }: any) => <>{children}</>,
+}));
+
+// Mock FadeIn component
+jest.mock('@/components/animations/FadeIn', () => ({
+  FadeIn: ({ children }: any) => <div>{children}</div>,
+}));
+
+describe('Projects', () => {
+  it('renders the projects page with title and description', () => {
+    render(<Projects />);
+
+    expect(screen.getByText('My')).toBeInTheDocument();
+    expect(screen.getByText('Projects')).toBeInTheDocument();
+    expect(
+      screen.getByText(/here are some of the projects I've built/i)
+    ).toBeInTheDocument();
+  });
+
+  it('renders search input', () => {
+    render(<Projects />);
+
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    expect(searchInput).toBeInTheDocument();
+  });
+
+  it('renders all filter categories', () => {
+    render(<Projects />);
+
+    expect(screen.getByRole('button', { name: /^all$/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /frontend/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /backend/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /mobile/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /ai\/ml/i })).toBeInTheDocument();
+  });
+
+  it('displays all projects by default', () => {
+    render(<Projects />);
+
+    // Check that the correct count is displayed
+    expect(screen.getByText(new RegExp(`Showing ${projects.length} of ${projects.length} projects`))).toBeInTheDocument();
+
+    // Verify all projects are rendered
+    projects.forEach(project => {
+      expect(screen.getByText(project.title)).toBeInTheDocument();
+    });
+  });
+
+  it('filters projects by Frontend category', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const frontendButton = screen.getByRole('button', { name: /frontend/i });
+    await user.click(frontendButton);
+
+    await waitFor(() => {
+      // Frontend projects should contain React, Next.js, TypeScript, etc.
+      const frontendProjects = projects.filter(p =>
+        p.tech.some(tech =>
+          ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'JavaScript'].includes(tech)
+        )
+      );
+
+      // Check count
+      expect(
+        screen.getByText(new RegExp(`Showing ${frontendProjects.length} of ${projects.length} projects`))
+      ).toBeInTheDocument();
+
+      // Verify frontend projects are shown
+      frontendProjects.forEach(project => {
+        expect(screen.getByText(project.title)).toBeInTheDocument();
+      });
+    });
+  });
+
+  it('filters projects by Backend category', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const backendButton = screen.getByRole('button', { name: /backend/i });
+    await user.click(backendButton);
+
+    await waitFor(() => {
+      const backendProjects = projects.filter(p =>
+        p.tech.some(tech =>
+          ['Node.js', 'Flask', 'FastAPI', 'Python', 'MongoDB', 'Firebase', 'AWS Rekognition', 'Supabase', 'Express.js'].includes(tech)
+        )
+      );
+
+      expect(
+        screen.getByText(new RegExp(`Showing ${backendProjects.length} of ${projects.length} projects`))
+      ).toBeInTheDocument();
+    });
+  });
+
+  it('filters projects by Mobile category', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const mobileButton = screen.getByRole('button', { name: /mobile/i });
+    await user.click(mobileButton);
+
+    await waitFor(() => {
+      const mobileProjects = projects.filter(p =>
+        p.tech.some(tech =>
+          ['Java', 'Android SDK', 'ML Kit', 'CameraX', 'Retrofit'].includes(tech)
+        )
+      );
+
+      expect(
+        screen.getByText(new RegExp(`Showing ${mobileProjects.length} of ${projects.length} projects`))
+      ).toBeInTheDocument();
+    });
+  });
+
+  it('filters projects by AI/ML category', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const aiButton = screen.getByRole('button', { name: /ai\/ml/i });
+    await user.click(aiButton);
+
+    await waitFor(() => {
+      const aiProjects = projects.filter(p =>
+        p.tech.some(tech =>
+          ['AWS Rekognition', 'ML Kit', 'AI', 'LangChain', 'Gemini API', 'RAG'].includes(tech)
+        ) || p.title.toLowerCase().includes('ai') || p.title.toLowerCase().includes('chatbot')
+      );
+
+      expect(
+        screen.getByText(new RegExp(`Showing ${aiProjects.length} of ${projects.length} projects`))
+      ).toBeInTheDocument();
+    });
+  });
+
+  it('searches projects by title', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'ChatBot');
+
+    await waitFor(() => {
+      expect(screen.getByText('Afeka ChatBot')).toBeInTheDocument();
+      expect(screen.getByText(/showing 1 of/i)).toBeInTheDocument();
+      expect(screen.getByText(/for "ChatBot"/i)).toBeInTheDocument();
+    });
+  });
+
+  it('searches projects by description', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'facial recognition');
+
+    await waitFor(() => {
+      // Should find Face Recognition API project
+      expect(screen.getByText('Face Recognition API')).toBeInTheDocument();
+    });
+  });
+
+  it('searches projects by technology', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'Firebase');
+
+    await waitFor(() => {
+      expect(screen.getByText('TinyReminder')).toBeInTheDocument();
+    });
+  });
+
+  it('shows "No projects found" when search has no results', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'NonExistentProject12345');
+
+    await waitFor(() => {
+      expect(screen.getByText(/no projects found/i)).toBeInTheDocument();
+      expect(screen.getByText(/try adjusting your search terms or filters/i)).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /show all projects/i })).toBeInTheDocument();
+    });
+  });
+
+  it('shows "No projects found" when filter has no results', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    // Apply a filter
+    await user.click(screen.getByRole('button', { name: /frontend/i }));
+
+    // Then search for something that doesn't match
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'Universal Space');
+
+    await waitFor(() => {
+      expect(screen.getByText(/no projects found/i)).toBeInTheDocument();
+    });
+  });
+
+  it('resets filters when "Show All Projects" button is clicked', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    // Apply a filter and search
+    await user.click(screen.getByRole('button', { name: /frontend/i }));
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'xyz');
+
+    await waitFor(() => {
+      expect(screen.getByText(/no projects found/i)).toBeInTheDocument();
+    });
+
+    // Click "Show All Projects"
+    const showAllButton = screen.getByRole('button', { name: /show all projects/i });
+    await user.click(showAllButton);
+
+    await waitFor(() => {
+      // Should show all projects again
+      expect(
+        screen.getByText(new RegExp(`Showing ${projects.length} of ${projects.length} projects`))
+      ).toBeInTheDocument();
+      expect(searchInput).toHaveValue('');
+    });
+  });
+
+  it('applies both filter and search together', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    // Filter by Backend
+    await user.click(screen.getByRole('button', { name: /backend/i }));
+
+    // Search for "API"
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'API');
+
+    await waitFor(() => {
+      // Should find Face Recognition API (backend + contains "API")
+      expect(screen.getByText('Face Recognition API')).toBeInTheDocument();
+    });
+  });
+
+  it('highlights active filter button', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const frontendButton = screen.getByRole('button', { name: /frontend/i });
+    const allButton = screen.getByRole('button', { name: /^all$/i });
+
+    // Initially "All" should be active
+    expect(allButton.className).toContain('from-purple-500');
+
+    // Click Frontend
+    await user.click(frontendButton);
+
+    await waitFor(() => {
+      expect(frontendButton.className).toContain('from-purple-500');
+    });
+  });
+
+  it('renders project cards with correct information', () => {
+    const { container } = render(<Projects />);
+
+    const firstProject = projects[0];
+
+    // Check title
+    expect(screen.getByText(firstProject.title)).toBeInTheDocument();
+
+    // Check description
+    expect(screen.getByText(new RegExp(firstProject.description.slice(0, 30)))).toBeInTheDocument();
+
+    // Check technologies (use container.textContent since some tech appears multiple times)
+    firstProject.tech.forEach(tech => {
+      expect(container.textContent).toContain(tech);
+    });
+
+    // Check GitHub link
+    const githubLinks = screen.getAllByText('GitHub');
+    expect(githubLinks.length).toBeGreaterThan(0);
+  });
+
+  it('renders Live Demo links for projects with demo URLs', () => {
+    render(<Projects />);
+
+    // Find projects with demo URLs
+    const projectsWithDemo = projects.filter(p => p.demo);
+
+    projectsWithDemo.forEach(project => {
+      // For each project with demo, there should be a Live Demo link
+      const liveDemoLinks = screen.getAllByText('Live Demo');
+      expect(liveDemoLinks.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('handles special TinyReminder demo link', () => {
+    render(<Projects />);
+
+    // TinyReminder has a special internal demo link
+    const tinyReminderTitle = screen.getByText('TinyReminder');
+    expect(tinyReminderTitle).toBeInTheDocument();
+
+    // Should have a Live Demo link that goes to /tinyreminder-demo
+    const liveDemoLinks = screen.getAllByText('Live Demo');
+    const tinyReminderDemo = liveDemoLinks.find(
+      link => link.closest('a')?.getAttribute('href') === '/tinyreminder-demo'
+    );
+    expect(tinyReminderDemo).toBeDefined();
+  });
+
+  it('case-insensitive search', async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+
+    const searchInput = screen.getByPlaceholderText(/search projects/i);
+    await user.type(searchInput, 'CHATBOT');
+
+    await waitFor(() => {
+      expect(screen.getByText('Afeka ChatBot')).toBeInTheDocument();
+    });
+  });
+});

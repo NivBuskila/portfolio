@@ -143,4 +143,178 @@ describe('ThemeContext', () => {
     expect(screen.getByTestId('current-theme')).toHaveTextContent('dark');
     expect(document.documentElement.classList.contains('dark')).toBe(true);
   });
+
+  it('falls back to system preference when localStorage fails', async () => {
+    // Mock localStorage to throw an error
+    const originalGetItem = Storage.prototype.getItem;
+    Storage.prototype.getItem = jest.fn(() => {
+      throw new Error('localStorage disabled');
+    });
+
+    // Mock system preference to dark
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: true, // prefers dark
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    });
+
+    expect(screen.getByTestId('current-theme')).toHaveTextContent('dark');
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+
+    // Restore
+    Storage.prototype.getItem = originalGetItem;
+  });
+
+  it('falls back to light theme when both localStorage and matchMedia fail', async () => {
+    // Mock localStorage to throw
+    const originalGetItem = Storage.prototype.getItem;
+    Storage.prototype.getItem = jest.fn(() => {
+      throw new Error('localStorage disabled');
+    });
+
+    // Mock matchMedia to throw
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn(() => {
+        throw new Error('matchMedia not supported');
+      }),
+    });
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    });
+
+    // Should fall back to light theme
+    expect(screen.getByTestId('current-theme')).toHaveTextContent('light');
+
+    // Restore
+    Storage.prototype.getItem = originalGetItem;
+  });
+
+  it('handles localStorage failure when toggling theme', async () => {
+    // Mock localStorage.setItem to throw
+    const originalSetItem = Storage.prototype.setItem;
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+    Storage.prototype.setItem = jest.fn(() => {
+      throw new Error('localStorage is full');
+    });
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    });
+
+    const toggleButton = screen.getByTestId('toggle-button');
+
+    // Toggle theme - should still work even if localStorage fails
+    fireEvent.click(toggleButton);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('current-theme')).toHaveTextContent('dark');
+    });
+
+    // Dark class should still be applied
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+
+    // Restore
+    Storage.prototype.setItem = originalSetItem;
+    consoleWarnSpy.mockRestore();
+  });
+
+  it('uses system preference when localStorage has no stored theme', async () => {
+    // Clear localStorage
+    localStorage.clear();
+
+    // Mock system preference to dark
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: true, // prefers dark
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    });
+
+    expect(screen.getByTestId('current-theme')).toHaveTextContent('dark');
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+  });
+
+  it('ignores invalid theme values from localStorage', async () => {
+    // Set an invalid theme value
+    localStorage.setItem('theme', 'invalid-theme');
+
+    // Mock system preference to light
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false, // prefers light
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    });
+
+    // Should fall back to system preference (light)
+    expect(screen.getByTestId('current-theme')).toHaveTextContent('light');
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
+  });
 });
