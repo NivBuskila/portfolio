@@ -87,9 +87,10 @@ export default function Projects() {
           opacity-50
           top-[-8rem]
           left-[-8rem]
+          will-change-transform
         "
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <motion.div
@@ -106,9 +107,10 @@ export default function Projects() {
           opacity-50
           bottom-[-8rem]
           right-[-8rem]
+          will-change-transform
         "
         animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

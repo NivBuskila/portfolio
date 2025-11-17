@@ -36,9 +36,10 @@ export default function About() {
           opacity-50
           top-[-5rem]
           left-[-5rem]
+          will-change-transform
         "
           animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse' }}
+          transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
         />
 
         <motion.div
@@ -55,13 +56,19 @@ export default function About() {
             opacity-50
             bottom-[-8rem]
             right-[-8rem]
+            will-change-transform
           "
           animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div className="text-center">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 dark:text-white mb-6 transition-colors duration-500">
               About{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">

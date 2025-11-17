@@ -2,9 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
-import SocialPreviewModal from './SocialPreviewModal';
+
+const SocialPreviewModal = dynamic(() => import('./SocialPreviewModal'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -41,9 +45,10 @@ export default function Home() {
           top-[-8rem]
           left-[-8rem]
           z-0
+          will-change-transform
         "
         animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <motion.div
@@ -61,9 +66,10 @@ export default function Home() {
           bottom-[-8rem]
           right-[-8rem]
           z-0
+          will-change-transform
         "
         animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <div
