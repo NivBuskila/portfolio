@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
 import SkillsVisualization from './SkillsVisualization';
+import AnimatedBackground from '@/components/common/AnimatedBackground';
 
 export default function About() {
   return (
@@ -22,45 +23,7 @@ export default function About() {
           duration-500
       "
       >
-        <motion.div
-          className="
-          absolute
-          w-80
-          h-80
-          bg-purple-200
-            dark:bg-purple-800/30
-          rounded-full
-          mix-blend-multiply
-          filter
-          blur-3xl
-          opacity-50
-          top-[-5rem]
-          left-[-5rem]
-          will-change-transform
-        "
-          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-        />
-
-        <motion.div
-          className="
-            absolute
-            w-96
-            h-96
-            bg-blue-200
-            dark:bg-blue-800/30
-            rounded-full
-            mix-blend-multiply
-            filter
-            blur-3xl
-            opacity-50
-            bottom-[-8rem]
-            right-[-8rem]
-            will-change-transform
-          "
-          animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-        />
+        <AnimatedBackground colorScheme="purple" intensity="medium" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div

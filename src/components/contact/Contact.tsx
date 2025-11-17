@@ -9,6 +9,7 @@ import CheckCircleIcon from '@heroicons/react/24/solid/CheckCircleIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
 import PaperAirplaneIcon from '@heroicons/react/24/solid/PaperAirplaneIcon';
 import { personalInfo } from '@/data/personalInfo';
+import AnimatedBackground from '@/components/common/AnimatedBackground';
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
@@ -151,45 +152,7 @@ export default function Contact() {
         duration-500
       "
     >
-      <motion.div
-        className="
-          absolute
-          w-80
-          h-80
-          bg-blue-200
-          dark:bg-blue-800/30
-          rounded-full
-          mix-blend-multiply
-          filter
-          blur-3xl
-          opacity-50
-          top-[-6rem]
-          left-[-6rem]
-          will-change-transform
-        "
-        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-      />
-
-      <motion.div
-        className="
-          absolute
-          w-72
-          h-72
-          bg-purple-200
-          dark:bg-purple-800/30
-          rounded-full
-          mix-blend-multiply
-          filter
-          blur-3xl
-          opacity-50
-          bottom-[-6rem]
-          right-[-6rem]
-          will-change-transform
-        "
-        animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
-        transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-      />
+      <AnimatedBackground colorScheme="purple" intensity="medium" />
 
       <motion.div
         className="

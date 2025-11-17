@@ -24,7 +24,7 @@ export default function Navbar() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-white/95 backdrop-blur-sm shadow-sm dark:bg-gray-900/95 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+    <nav className="bg-white/98 shadow-sm dark:bg-gray-900/98 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
@@ -55,13 +55,13 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg text-gray-600 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
+                className="p-3 rounded-lg text-gray-600 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? (
-                  <SunIcon className="h-5 w-5" />
+                  <SunIcon className="h-6 w-6" />
                 ) : (
-                  <MoonIcon className="h-5 w-5" />
+                  <MoonIcon className="h-6 w-6" />
                 )}
               </button>
             )}
@@ -71,28 +71,28 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg text-gray-600 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="p-3 rounded-lg text-gray-600 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? (
-                  <SunIcon className="h-5 w-5" />
+                  <SunIcon className="h-6 w-6" />
                 ) : (
-                  <MoonIcon className="h-5 w-5" />
+                  <MoonIcon className="h-6 w-6" />
                 )}
               </button>
             )}
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-purple-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-purple-400 dark:hover:bg-gray-800 transition-all duration-300"
+              className="inline-flex items-center justify-center p-3 rounded-lg text-gray-600 hover:text-purple-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-purple-400 dark:hover:bg-gray-800 transition-all duration-300"
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={isOpen}
               onClick={() => setIsOpen(!isOpen)}
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
-                <XMarkIcon className="block h-6 w-6" />
+                <XMarkIcon className="block h-7 w-7" />
               ) : (
-                <Bars3Icon className="block h-6 w-6" />
+                <Bars3Icon className="block h-7 w-7" />
               )}
             </button>
           </div>
