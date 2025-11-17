@@ -45,7 +45,7 @@ export default function Navbar() {
                   ${
                     isActive(item.href)
                       ? 'border-purple-500 text-purple-600 dark:text-purple-400'
-                      : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-white'
+                      : 'border-transparent text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:border-gray-300 dark:hover:!text-white dark:hover:border-gray-600'
                   }`}
               >
                 {item.name}
@@ -111,7 +111,7 @@ export default function Navbar() {
                   ${
                     isActive(item.href)
                       ? 'bg-purple-50 border-purple-500 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400'
-                      : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 hover:border-gray-300 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:bg-gray-800/50 dark:hover:text-white'
+                      : 'border-transparent text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 hover:border-gray-300 dark:hover:!text-white dark:hover:border-gray-600 dark:hover:bg-gray-800/50'
                   }`}
                 onClick={() => setIsOpen(false)}
               >
