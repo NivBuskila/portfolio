@@ -4,7 +4,11 @@ import LoadingSpinner, { PageLoader, ButtonLoader, InlineLoader } from '@/compon
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, animate, transition, className, ...props }: any) => (
+    div: ({ children, animate, transition, className, ...props }: React.PropsWithChildren<{
+      animate?: Record<string, unknown>;
+      transition?: Record<string, unknown>;
+      className?: string;
+    }>) => (
       <div
         className={className}
         data-animate={JSON.stringify(animate)}
@@ -14,7 +18,11 @@ jest.mock('framer-motion', () => ({
         {children}
       </div>
     ),
-    p: ({ children, animate, transition, className, ...props }: any) => (
+    p: ({ children, animate, transition, className, ...props }: React.PropsWithChildren<{
+      animate?: Record<string, unknown>;
+      transition?: Record<string, unknown>;
+      className?: string;
+    }>) => (
       <p
         className={className}
         data-animate={JSON.stringify(animate)}

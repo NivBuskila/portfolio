@@ -5,7 +5,7 @@ import { personalInfo } from '@/data/personalInfo';
 // Mock next/link
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: any) => {
+  default: ({ children, href, ...props }: React.PropsWithChildren<{ href: string }>) => {
     return <a href={href} {...props}>{children}</a>;
   },
 }));
@@ -13,7 +13,7 @@ jest.mock('next/link', () => ({
 // Mock next/dynamic
 jest.mock('next/dynamic', () => ({
   __esModule: true,
-  default: (fn: any) => {
+  default: () => {
     const Component = () => <div data-testid="social-preview-modal">Modal</div>;
     return Component;
   },
@@ -22,7 +22,7 @@ jest.mock('next/dynamic', () => ({
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, className, ...props }: any) => (
+    div: ({ children, className, ...props }: React.PropsWithChildren<{ className?: string }>) => (
       <div className={className} {...props}>{children}</div>
     ),
   },
@@ -122,7 +122,7 @@ describe('Home', () => {
   });
 
   it('opens modal when GitHub button is clicked', () => {
-    const { container } = render(<Home />);
+    render(<Home />);
 
     const githubButton = screen.getByLabelText(/view github profile/i);
     fireEvent.click(githubButton);
@@ -132,7 +132,7 @@ describe('Home', () => {
   });
 
   it('opens modal when LinkedIn button is clicked', () => {
-    const { container } = render(<Home />);
+    render(<Home />);
 
     const linkedinButton = screen.getByLabelText(/view linkedin profile/i);
     fireEvent.click(linkedinButton);

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Contact from '@/components/contact/Contact';
 import emailjs from '@emailjs/browser';
@@ -22,10 +22,10 @@ jest.mock('@emailjs/browser', () => ({
 // Mock framer-motion to avoid animation issues in tests
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    form: ({ children, ...props }: any) => <form {...props}>{children}</form>,
+    div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => <div {...props}>{children}</div>,
+    form: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => <form {...props}>{children}</form>,
   },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
+  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
 }));
 
 describe('Contact', () => {
@@ -39,11 +39,11 @@ describe('Contact', () => {
     process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY = 'test_public_key';
 
     // Mock window.gtag
-    (window as any).gtag = jest.fn();
+    (window as Window & { gtag?: typeof jest.fn }).gtag = jest.fn();
   });
 
   afterEach(() => {
-    delete (window as any).gtag;
+    delete (window as Window & { gtag?: typeof jest.fn }).gtag;
   });
 
   it('renders the contact form', () => {
@@ -159,7 +159,7 @@ describe('Contact', () => {
     mockEmailJS.send.mockResolvedValueOnce({
       status: 200,
       text: 'OK',
-    } as any);
+    } as emailjs.EmailJSResponseStatus);
 
     render(<Contact />);
 
@@ -192,7 +192,7 @@ describe('Contact', () => {
     );
 
     // Verify analytics was tracked
-    expect((window as any).gtag).toHaveBeenCalledWith('event', 'contact_submit', {
+    expect((window as Window & { gtag?: typeof jest.fn }).gtag).toHaveBeenCalledWith('event', 'contact_submit', {
       method: 'emailjs',
       status: 'success',
     });
@@ -240,7 +240,7 @@ describe('Contact', () => {
 
   it('handles EmailJS 400 error (invalid service/template)', async () => {
     const user = userEvent.setup();
-    const EmailJSResponseStatus = (emailjs as any).EmailJSResponseStatus;
+    const EmailJSResponseStatus = emailjs.EmailJSResponseStatus;
     mockEmailJS.send.mockRejectedValueOnce(new EmailJSResponseStatus(400, 'Bad Request'));
 
     render(<Contact />);
@@ -256,7 +256,7 @@ describe('Contact', () => {
     });
 
     // Verify analytics was tracked
-    expect((window as any).gtag).toHaveBeenCalledWith('event', 'contact_submit', {
+    expect((window as Window & { gtag?: typeof jest.fn }).gtag).toHaveBeenCalledWith('event', 'contact_submit', {
       method: 'emailjs',
       status: 'error',
     });
@@ -264,7 +264,7 @@ describe('Contact', () => {
 
   it('handles EmailJS 401 error (authentication)', async () => {
     const user = userEvent.setup();
-    const EmailJSResponseStatus = (emailjs as any).EmailJSResponseStatus;
+    const EmailJSResponseStatus = emailjs.EmailJSResponseStatus;
     mockEmailJS.send.mockRejectedValueOnce(new EmailJSResponseStatus(401, 'Unauthorized'));
 
     render(<Contact />);
@@ -282,7 +282,7 @@ describe('Contact', () => {
 
   it('handles EmailJS 422 error (missing fields)', async () => {
     const user = userEvent.setup();
-    const EmailJSResponseStatus = (emailjs as any).EmailJSResponseStatus;
+    const EmailJSResponseStatus = emailjs.EmailJSResponseStatus;
     mockEmailJS.send.mockRejectedValueOnce(new EmailJSResponseStatus(422, 'Unprocessable Entity'));
 
     render(<Contact />);
@@ -300,7 +300,7 @@ describe('Contact', () => {
 
   it('handles EmailJS 429 error (rate limit)', async () => {
     const user = userEvent.setup();
-    const EmailJSResponseStatus = (emailjs as any).EmailJSResponseStatus;
+    const EmailJSResponseStatus = emailjs.EmailJSResponseStatus;
     mockEmailJS.send.mockRejectedValueOnce(new EmailJSResponseStatus(429, 'Too Many Requests'));
 
     render(<Contact />);
@@ -318,7 +318,7 @@ describe('Contact', () => {
 
   it('handles EmailJS 500+ error (server error)', async () => {
     const user = userEvent.setup();
-    const EmailJSResponseStatus = (emailjs as any).EmailJSResponseStatus;
+    const EmailJSResponseStatus = emailjs.EmailJSResponseStatus;
     mockEmailJS.send.mockRejectedValueOnce(new EmailJSResponseStatus(500, 'Internal Server Error'));
 
     render(<Contact />);
@@ -371,7 +371,7 @@ describe('Contact', () => {
 
     // Mock a slow response
     mockEmailJS.send.mockImplementation(() =>
-      new Promise(resolve => setTimeout(() => resolve({ status: 200, text: 'OK' } as any), 1000))
+      new Promise(resolve => setTimeout(() => resolve({ status: 200, text: 'OK' } as emailjs.EmailJSResponseStatus), 1000))
     );
 
     render(<Contact />);

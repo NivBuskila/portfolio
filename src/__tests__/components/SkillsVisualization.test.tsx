@@ -5,7 +5,7 @@ import { personalInfo } from '@/data/personalInfo';
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, className, whileHover, transition, ...props }: any) => (
+    div: ({ children, className, ...props }: React.PropsWithChildren<{ className?: string }>) => (
       <div className={className} {...props}>{children}</div>
     ),
   },

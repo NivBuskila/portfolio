@@ -4,7 +4,7 @@ import SocialPreviewModal from '@/components/home/SocialPreviewModal';
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: any) => {
+  default: ({ src, alt, ...props }: { src: string; alt: string }) => {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt={alt} {...props} />;
   },
@@ -13,11 +13,11 @@ jest.mock('next/image', () => ({
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, onClick, className, ...props }: any) => (
+    div: ({ children, onClick, className, ...props }: React.PropsWithChildren<{ onClick?: () => void; className?: string }>) => (
       <div onClick={onClick} className={className} {...props}>{children}</div>
     ),
   },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
+  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
 }));
 
 // Mock fetch

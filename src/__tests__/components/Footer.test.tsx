@@ -5,7 +5,7 @@ import { personalInfo } from '@/data/personalInfo';
 // Mock next/link
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: any) => {
+  default: ({ children, href, ...props }: React.PropsWithChildren<{ href: string }>) => {
     return <a href={href} {...props}>{children}</a>;
   },
 }));

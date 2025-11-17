@@ -5,11 +5,11 @@ import { personalInfo } from '@/data/personalInfo';
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, className, ...props }: any) => (
+    div: ({ children, className, ...props }: React.PropsWithChildren<{ className?: string }>) => (
       <div className={className} {...props}>{children}</div>
     ),
-    section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
-    li: ({ children, className, ...props }: any) => (
+    section: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => <section {...props}>{children}</section>,
+    li: ({ children, className, ...props }: React.PropsWithChildren<{ className?: string }>) => (
       <li className={className} {...props}>{children}</li>
     ),
   },
