@@ -1,4 +1,5 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
+// @ts-ignore - next-pwa doesn't have types
 import withPWA from 'next-pwa';
 
 const withBundleAnalyzer = bundleAnalyzer({

@@ -1,14 +1,10 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
 import './globals.css';
 import ClientLayout from './client-layout';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-const poppins = Poppins({
-  weight: ['400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-});
+// Using system fonts for reliability - Poppins loaded via CDN in head
+const fontFamily = 'Poppins, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nivbuskila.tech'),
@@ -122,6 +118,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#9333ea" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -139,7 +141,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={`${poppins.className} bg-background text-foreground`}>
+      <body className="bg-background text-foreground" style={{ fontFamily }}>
         <ClientLayout>{children}</ClientLayout>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
