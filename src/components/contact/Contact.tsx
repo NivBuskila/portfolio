@@ -104,7 +104,9 @@ export default function Contact() {
 
         setTimeout(() => setNotification({ type: null, message: '' }), 5000);
       } catch (error) {
-        console.error('Email sending failed:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Email sending failed:', error);
+        }
         let message = 'Send failed. Please try again.';
         if (error instanceof EmailJSResponseStatus) {
           if (error.status === 400)
