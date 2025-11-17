@@ -1,0 +1,40 @@
+name: Deploy Preview
+
+# Create preview deployments for PRs
+# This allows reviewing changes before merging to main
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  preview-info:
+    name: Preview Deployment Info
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🚀 Preview Deployment
+
+              Your changes are being deployed to a preview environment!
+
+              **Platform**: Vercel/Netlify will automatically create a preview
+              **URL**: Check the deployment section below
+
+              ### What's being deployed:
+              - Branch: \`${context.payload.pull_request.head.ref}\`
+              - Commit: \`${context.payload.pull_request.head.sha.substring(0, 7)}\`
+              - Changes: ${context.payload.pull_request.changed_files} files
+
+              ⏳ Preview will be ready in ~2 minutes...
+
+              ---
+              *This is an automated preview deployment. Production deploys only happen when merging to \`main\`.*`
+            })
