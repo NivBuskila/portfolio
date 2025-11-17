@@ -151,6 +151,7 @@ export default function SocialPreviewModal({
             alt={githubData.name}
             width={80}
             height={80}
+            loading="lazy"
             className="rounded-full border-4 border-purple-500"
           />
           <div>

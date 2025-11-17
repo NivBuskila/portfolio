@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
 
@@ -62,7 +62,7 @@ const skillCategories: SkillCategory[] = [
   },
 ];
 
-const SkillTag: React.FC<{ skill: string; color: string }> = ({ skill, color }) => {
+const SkillTag = React.memo<{ skill: string; color: string }>(({ skill, color }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -78,13 +78,15 @@ const SkillTag: React.FC<{ skill: string; color: string }> = ({ skill, color }) 
       {skill}
     </motion.div>
   );
-};
+});
 
-const SkillCategoryCard: React.FC<{ 
+SkillTag.displayName = 'SkillTag';
+
+const SkillCategoryCard = React.memo<{
   category: SkillCategory;
-}> = ({ category }) => {
+}>(({ category }) => {
   if (category.skills.length === 0) return null;
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -103,21 +105,29 @@ const SkillCategoryCard: React.FC<{
       </div>
       <div className="flex flex-wrap gap-2">
         {category.skills.map((skill) => (
-          <SkillTag 
-            key={skill} 
-            skill={skill} 
-            color={category.color} 
+          <SkillTag
+            key={skill}
+            skill={skill}
+            color={category.color}
           />
         ))}
       </div>
     </motion.div>
   );
-};
+});
+
+SkillCategoryCard.displayName = 'SkillCategoryCard';
 
 export default function SkillsVisualization() {
+  const totalSkills = useMemo(
+    () => skillCategories.reduce((total, category) => total + category.skills.length, 0),
+    []
+  );
 
-  const totalSkills = skillCategories.reduce((total, category) => total + category.skills.length, 0);
-  const visibleCategories = skillCategories.filter(category => category.skills.length > 0);
+  const visibleCategories = useMemo(
+    () => skillCategories.filter((category) => category.skills.length > 0),
+    []
+  );
 
   return (
     <div className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
