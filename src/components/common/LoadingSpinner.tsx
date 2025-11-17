@@ -114,7 +114,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-50 transition-colors duration-500">
+      <div className="fixed inset-0 bg-white/95 dark:bg-gray-900/95 flex items-center justify-center z-50 transition-colors duration-500">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
