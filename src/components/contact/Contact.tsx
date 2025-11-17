@@ -194,9 +194,8 @@ export default function Contact() {
       <motion.div
         className="
           relative
-          bg-white/90
-          dark:bg-gray-800/90
-          backdrop-blur-md
+          bg-white/98
+          dark:bg-gray-800/98
           border
           border-gray-200
           dark:border-gray-700

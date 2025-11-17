@@ -92,7 +92,7 @@ const SkillCategoryCard = React.memo<{
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
+      className="bg-white/95 dark:bg-gray-800/95 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
     >
       <div className="flex items-center gap-3 mb-6">
         <span className="text-2xl">{category.icon}</span>

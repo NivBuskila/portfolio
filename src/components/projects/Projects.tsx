@@ -147,9 +147,8 @@ export default function Projects() {
                   border
                   border-gray-300
                   dark:border-gray-600
-                  bg-white/80
-                  dark:bg-gray-800/80
-                  backdrop-blur-md
+                  bg-white/95
+                  dark:bg-gray-800/95
                   text-gray-900
                   dark:text-white
                   placeholder-gray-500
@@ -189,9 +188,8 @@ export default function Projects() {
                   px-6 py-3 rounded-full font-medium transition-all duration-300
                   ${activeFilter === category.value
                     ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                    : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                   }
-                  backdrop-blur-md
                 `}
               >
                 {category.label}
@@ -268,9 +266,8 @@ function GlassProjectCard({ project }: { project: Project }) {
       whileHover={{ scale: 1.02, y: -5 }}
       transition={{ duration: 0.3 }}
       className="
-        bg-white/80
-        dark:bg-gray-800/80
-        backdrop-blur-md
+        bg-white/95
+        dark:bg-gray-800/95
         border
         border-gray-200
         dark:border-gray-700

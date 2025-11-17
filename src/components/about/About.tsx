@@ -240,7 +240,7 @@ export default function About() {
   );
 }
 
-function SectionBlock({
+const SectionBlock = React.memo(({
   title,
   children,
   icon,
@@ -248,7 +248,7 @@ function SectionBlock({
   title: string;
   children: React.ReactNode;
   icon?: string;
-}) {
+}) => {
   return (
     <motion.section initial={false}>
       <div className="flex items-center gap-3 mb-8">
@@ -260,9 +260,11 @@ function SectionBlock({
       {children}
     </motion.section>
   );
-}
+});
 
-function EducationCard({
+SectionBlock.displayName = 'SectionBlock';
+
+const EducationCard = React.memo(({
   degree,
   school,
   duration,
@@ -270,16 +272,15 @@ function EducationCard({
   degree: string;
   school: string;
   duration: string;
-}) {
+}) => {
   return (
     <motion.div
       initial={false}
       whileHover={{ scale: 1.02 }}
       className="
         relative
-        bg-white/80
-        dark:bg-gray-800/80
-        backdrop-blur-md
+        bg-white/95
+        dark:bg-gray-800/95
         border
         border-gray-200
         dark:border-gray-700
@@ -307,9 +308,11 @@ function EducationCard({
       </div>
     </motion.div>
   );
-}
+});
 
-function ExperienceCard({
+EducationCard.displayName = 'EducationCard';
+
+const ExperienceCard = React.memo(({
   title,
   company,
   duration,
@@ -326,9 +329,8 @@ function ExperienceCard({
       whileHover={{ scale: 1.02 }}
       className="
         relative
-        bg-white/80
-        dark:bg-gray-800/80
-        backdrop-blur-md
+        bg-white/95
+        dark:bg-gray-800/95
         border
         border-gray-200
         dark:border-gray-700
@@ -369,9 +371,11 @@ function ExperienceCard({
       </ul>
     </motion.div>
   );
-}
+});
 
-function HighlightCard({
+ExperienceCard.displayName = 'ExperienceCard';
+
+const HighlightCard = React.memo(({
   title,
   description,
   icon,
@@ -410,4 +414,6 @@ function HighlightCard({
       </p>
     </motion.div>
   );
-}
+});
+
+HighlightCard.displayName = 'HighlightCard';
