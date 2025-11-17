@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: 'Niv Buskila Portfolio',
     images: [
       {
-        url: '/images/portfolio.png',
+        url: 'https://nivbuskila.tech/images/portfolio.png',
         width: 1200,
         height: 630,
         alt: 'Niv Buskila - Full Stack Developer Portfolio',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: 'Niv Buskila - Full Stack Developer Portfolio',
     description:
       'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects.',
-    images: ['/images/portfolio.png'],
+    images: ['https://nivbuskila.tech/images/portfolio.png'],
   },
   robots: {
     index: true,

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { projects, Project } from '@/data/projects';
+import AnimatedBackground from '@/components/common/AnimatedBackground';
 
 const filterCategories = [
   { label: 'All', value: 'all' },
@@ -73,45 +74,7 @@ export default function Projects() {
         duration-500
       "
     >
-      <motion.div
-        className="
-          absolute
-          w-80
-          h-80
-          bg-purple-200
-          dark:bg-purple-800/30
-          rounded-full
-          mix-blend-multiply
-          filter
-          blur-3xl
-          opacity-50
-          top-[-8rem]
-          left-[-8rem]
-          will-change-transform
-        "
-        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-      />
-
-      <motion.div
-        className="
-          absolute
-          w-96
-          h-96
-          bg-pink-200
-          dark:bg-pink-800/30
-          rounded-full
-          mix-blend-multiply
-          filter
-          blur-3xl
-          opacity-50
-          bottom-[-8rem]
-          right-[-8rem]
-          will-change-transform
-        "
-        animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-      />
+      <AnimatedBackground colorScheme="purple" intensity="medium" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -132,12 +95,17 @@ export default function Projects() {
           transition={{ delay: 0.2, duration: 0.6 }}
         >
                       <div className="mb-8 max-w-md mx-auto">
+            <label htmlFor="project-search" className="sr-only">
+              Search projects by name, description, or technology
+            </label>
             <div className="relative">
               <input
-                type="text"
+                id="project-search"
+                type="search"
                 placeholder="Search projects..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                aria-label="Search projects by name, description, or technology"
                 className="
                   w-full
                   px-4
@@ -260,7 +228,7 @@ export default function Projects() {
   );
 }
 
-function GlassProjectCard({ project }: { project: Project }) {
+const GlassProjectCard = React.memo<{ project: Project }>(({ project }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -5 }}
@@ -449,4 +417,6 @@ function GlassProjectCard({ project }: { project: Project }) {
       </div>
     </motion.div>
   );
-}
+});
+
+GlassProjectCard.displayName = 'GlassProjectCard';

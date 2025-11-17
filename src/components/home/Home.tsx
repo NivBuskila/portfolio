@@ -5,6 +5,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
+import AnimatedBackground from '@/components/common/AnimatedBackground';
 
 const SocialPreviewModal = dynamic(() => import('./SocialPreviewModal'), {
   ssr: false,
@@ -30,47 +31,7 @@ export default function Home() {
         duration-500
       "
     >
-      <motion.div
-        className="
-          absolute
-          w-96
-          h-96
-          bg-pink-200
-          dark:bg-purple-800/30
-          rounded-full
-          mix-blend-multiply
-          filter
-          blur-3xl
-          opacity-50
-          top-[-8rem]
-          left-[-8rem]
-          z-0
-          will-change-transform
-        "
-        animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-      />
-
-      <motion.div
-        className="
-          absolute
-          w-96
-          h-96
-          bg-blue-200
-          dark:bg-blue-800/30
-          rounded-full
-          mix-blend-multiply
-          filter
-          blur-3xl
-          opacity-50
-          bottom-[-8rem]
-          right-[-8rem]
-          z-0
-          will-change-transform
-        "
-        animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
-      />
+      <AnimatedBackground colorScheme="purple" intensity="medium" />
 
       <div
         className="
