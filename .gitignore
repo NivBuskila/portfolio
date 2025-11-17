@@ -104,6 +104,12 @@ jspm_packages/
 .turbo
 .vercel
 
+# PWA service worker files (auto-generated)
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
+
 # Backup files
 *.backup
 *.bak

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
 
@@ -62,11 +62,11 @@ const skillCategories: SkillCategory[] = [
   },
 ];
 
-const SkillTag: React.FC<{ skill: string; color: string }> = ({ skill, color }) => {
+const SkillTag = React.memo<{ skill: string; color: string }>(({ skill, color }) => {
   return (
     <motion.div
-      initial={false}
       whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.2 }}
       className={`
         inline-flex items-center px-3 py-2 rounded-full
         bg-gradient-to-r ${color}
@@ -78,17 +78,21 @@ const SkillTag: React.FC<{ skill: string; color: string }> = ({ skill, color }) 
       {skill}
     </motion.div>
   );
-};
+});
 
-const SkillCategoryCard: React.FC<{ 
+SkillTag.displayName = 'SkillTag';
+
+const SkillCategoryCard = React.memo<{
   category: SkillCategory;
-}> = ({ category }) => {
+}>(({ category }) => {
   if (category.skills.length === 0) return null;
-  
+
   return (
     <motion.div
-      initial={false}
-      className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white/95 dark:bg-gray-800/95 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
     >
       <div className="flex items-center gap-3 mb-6">
         <span className="text-2xl">{category.icon}</span>
@@ -101,27 +105,37 @@ const SkillCategoryCard: React.FC<{
       </div>
       <div className="flex flex-wrap gap-2">
         {category.skills.map((skill) => (
-          <SkillTag 
-            key={skill} 
-            skill={skill} 
-            color={category.color} 
+          <SkillTag
+            key={skill}
+            skill={skill}
+            color={category.color}
           />
         ))}
       </div>
     </motion.div>
   );
-};
+});
+
+SkillCategoryCard.displayName = 'SkillCategoryCard';
 
 export default function SkillsVisualization() {
+  const totalSkills = useMemo(
+    () => skillCategories.reduce((total, category) => total + category.skills.length, 0),
+    []
+  );
 
-  const totalSkills = skillCategories.reduce((total, category) => total + category.skills.length, 0);
-  const visibleCategories = skillCategories.filter(category => category.skills.length > 0);
+  const visibleCategories = useMemo(
+    () => skillCategories.filter((category) => category.skills.length > 0),
+    []
+  );
 
   return (
     <div className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={false}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-4 transition-colors duration-500">
@@ -142,46 +156,39 @@ export default function SkillsVisualization() {
         </div>
 
         <motion.div
-          initial={false}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 bg-gradient-to-r from-purple-500/10 to-blue-500/10 dark:from-purple-500/20 dark:to-blue-500/20 rounded-2xl p-8 border border-purple-200 dark:border-purple-800"
         >
           <h3 className="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">
             Skills Overview
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <motion.div
-              initial={false}
-              className="p-4"
-            >
+            <div className="p-4">
               <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
                 {totalSkills}+
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                 Total Skills
               </div>
-            </motion.div>
-            <motion.div
-              initial={false}
-              className="p-4"
-            >
+            </div>
+            <div className="p-4">
               <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                 {visibleCategories.length}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                 Tech Domains
               </div>
-            </motion.div>
-            <motion.div
-              initial={false}
-              className="p-4"
-            >
+            </div>
+            <div className="p-4">
               <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
                 {personalInfo.skills.languages.length}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                 Programming Languages
               </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>

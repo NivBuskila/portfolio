@@ -24,7 +24,7 @@ export default function Navbar() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md shadow-sm dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+    <nav className="bg-white/95 backdrop-blur-sm shadow-sm dark:bg-gray-900/95 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
@@ -40,6 +40,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={true}
                 className={`inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-all duration-300
                   ${
                     isActive(item.href)
@@ -99,12 +100,13 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="sm:hidden bg-white/95 backdrop-blur-md dark:bg-gray-900/95 border-t border-gray-200 dark:border-gray-700" id="mobile-menu">
+        <div className="sm:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700" id="mobile-menu">
           <div className="pt-2 pb-3 space-y-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={true}
                 className={`block pl-3 pr-4 py-3 border-l-4 text-base font-medium transition-all duration-300
                   ${
                     isActive(item.href)

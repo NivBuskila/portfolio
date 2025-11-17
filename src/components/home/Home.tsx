@@ -2,9 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
-import SocialPreviewModal from './SocialPreviewModal';
+
+const SocialPreviewModal = dynamic(() => import('./SocialPreviewModal'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -41,9 +45,10 @@ export default function Home() {
           top-[-8rem]
           left-[-8rem]
           z-0
+          will-change-transform
         "
         animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <motion.div
@@ -61,9 +66,10 @@ export default function Home() {
           bottom-[-8rem]
           right-[-8rem]
           z-0
+          will-change-transform
         "
         animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <div
@@ -112,6 +118,7 @@ export default function Home() {
               Explore my{' '}
               <Link
                 href="/projects"
+                prefetch={true}
                 className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium"
               >
                 portfolio projects
@@ -120,6 +127,7 @@ export default function Home() {
               Learn more{' '}
               <Link
                 href="/about"
+                prefetch={true}
                 className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium"
               >
                 about my experience
@@ -127,6 +135,7 @@ export default function Home() {
               and technical skills, or{' '}
               <Link
                 href="/contact"
+                prefetch={true}
                 className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 underline font-medium"
               >
                 get in touch
@@ -144,6 +153,7 @@ export default function Home() {
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Link
               href="/projects"
+              prefetch={true}
               className="
                 inline-flex
                 items-center
@@ -170,6 +180,7 @@ export default function Home() {
             </Link>
             <Link
               href="/contact"
+              prefetch={true}
               className="
                 inline-flex
                 items-center

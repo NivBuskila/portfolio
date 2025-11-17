@@ -161,6 +161,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
+                    prefetch={true}
                     className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 block"
                   >
                     {item.name}

@@ -165,9 +165,10 @@ export default function Contact() {
           opacity-50
           top-[-6rem]
           left-[-6rem]
+          will-change-transform
         "
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <motion.div
@@ -184,17 +185,17 @@ export default function Contact() {
           opacity-50
           bottom-[-6rem]
           right-[-6rem]
+          will-change-transform
         "
         animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
-        transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <motion.div
         className="
           relative
-          bg-white/90
-          dark:bg-gray-800/90
-          backdrop-blur-md
+          bg-white/98
+          dark:bg-gray-800/98
           border
           border-gray-200
           dark:border-gray-700

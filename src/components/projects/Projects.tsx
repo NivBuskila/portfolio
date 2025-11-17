@@ -87,9 +87,10 @@ export default function Projects() {
           opacity-50
           top-[-8rem]
           left-[-8rem]
+          will-change-transform
         "
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <motion.div
@@ -106,9 +107,10 @@ export default function Projects() {
           opacity-50
           bottom-[-8rem]
           right-[-8rem]
+          will-change-transform
         "
         animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -145,9 +147,8 @@ export default function Projects() {
                   border
                   border-gray-300
                   dark:border-gray-600
-                  bg-white/80
-                  dark:bg-gray-800/80
-                  backdrop-blur-md
+                  bg-white/95
+                  dark:bg-gray-800/95
                   text-gray-900
                   dark:text-white
                   placeholder-gray-500
@@ -187,9 +188,8 @@ export default function Projects() {
                   px-6 py-3 rounded-full font-medium transition-all duration-300
                   ${activeFilter === category.value
                     ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                    : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                   }
-                  backdrop-blur-md
                 `}
               >
                 {category.label}
@@ -266,9 +266,8 @@ function GlassProjectCard({ project }: { project: Project }) {
       whileHover={{ scale: 1.02, y: -5 }}
       transition={{ duration: 0.3 }}
       className="
-        bg-white/80
-        dark:bg-gray-800/80
-        backdrop-blur-md
+        bg-white/95
+        dark:bg-gray-800/95
         border
         border-gray-200
         dark:border-gray-700
@@ -288,6 +287,8 @@ function GlassProjectCard({ project }: { project: Project }) {
           src={project.image}
           alt={project.title}
           fill
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
