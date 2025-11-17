@@ -17,36 +17,6 @@ export const reportWebVitals = (metric: WebVitalsMetric) => {
     });
   }
 
-  // Save to localStorage for Analytics Dashboard
-  if (typeof window !== 'undefined') {
-    try {
-      const rating = getRating(metric.name, metric.value);
-      const metricData = {
-        name: metric.name,
-        value: Math.round(metric.value),
-        rating,
-        timestamp: Date.now(),
-      };
-
-      // Get existing metrics
-      const existingMetrics = localStorage.getItem('web-vitals-metrics');
-      const metrics = existingMetrics ? JSON.parse(existingMetrics) : [];
-
-      // Add new metric (keep last 50 metrics to avoid storage bloat)
-      metrics.push(metricData);
-      if (metrics.length > 50) {
-        metrics.shift(); // Remove oldest
-      }
-
-      localStorage.setItem('web-vitals-metrics', JSON.stringify(metrics));
-    } catch (error) {
-      // Storage quota exceeded or disabled - not critical
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('Failed to save Web Vitals to localStorage:', error);
-      }
-    }
-  }
-
   // Log in development for debugging
   if (process.env.NODE_ENV === 'development') {
     console.log('Web Vital:', {
