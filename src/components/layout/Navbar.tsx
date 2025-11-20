@@ -66,11 +66,11 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 prefetch={true}
-                className={`inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-all duration-300 group
+                className={`inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-all duration-300
                   ${
                     isActive(item.href)
                       ? 'border-purple-500 text-purple-600 dark:text-purple-400'
-                      : 'border-transparent text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:border-gray-300 dark:hover:text-white dark:hover:border-gray-600'
+                      : 'border-transparent text-gray-700 dark:text-gray-200 hover:text-purple-600 hover:border-purple-500 dark:hover:text-purple-400 dark:hover:border-purple-500'
                   }`}
               >
                 {item.name}
@@ -140,7 +140,7 @@ export default function Navbar() {
                   ${
                     isActive(item.href)
                       ? 'bg-purple-50 border-purple-500 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400'
-                      : 'border-transparent text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 hover:border-gray-300 dark:hover:text-white dark:hover:border-gray-600 dark:hover:bg-gray-800/50'
+                      : 'border-transparent text-gray-700 dark:text-gray-200 hover:text-purple-600 hover:bg-purple-50 hover:border-purple-500 dark:hover:text-purple-400 dark:hover:border-purple-500 dark:hover:bg-purple-900/10'
                   }`}
                 onClick={() => setIsOpen(false)}
               >
