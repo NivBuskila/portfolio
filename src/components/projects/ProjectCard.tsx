@@ -13,15 +13,14 @@ interface ProjectCardProps {
   
 }
 
-export default function ProjectCard({
+const ProjectCard = React.memo<ProjectCardProps>(({
   title,
   description,
   tech,
   thumbnail,
   github,
   demo,
-}:
-ProjectCardProps) {
+}) => {
   return (
     <div className="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white">
       <div className="relative h-48">
@@ -74,4 +73,8 @@ ProjectCardProps) {
       </div>
     </div>
   );
-}
+});
+
+ProjectCard.displayName = 'ProjectCard';
+
+export default ProjectCard;
