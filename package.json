@@ -14,7 +14,6 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@heroicons/react": "^2.2.0",
     "@next/third-parties": "^15.3.4",
     "formik": "^2.4.6",
