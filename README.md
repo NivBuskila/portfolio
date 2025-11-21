@@ -18,7 +18,7 @@ My personal portfolio website built with Next.js 15, React 19, and TypeScript. I
 
 **Project filtering and search** - Filter by technology, search by name, or browse by category. Much better than scrolling through an endless list.
 
-**Proper contact form** - Built with Formik and Yup validation. Handles errors gracefully and gives real feedback. Uses Formspree for the backend.
+**Proper contact form** - Built with Formik and Yup validation. Handles errors gracefully and gives real feedback. Uses Web3Forms for reliable email delivery.
 
 **Animated skill bars** - Shows technical skills with animated progress bars. Much better than boring bullet points.
 
@@ -35,7 +35,7 @@ My personal portfolio website built with Next.js 15, React 19, and TypeScript. I
 **Frontend**: Next.js 15 with the new App Router, React 19, TypeScript
 **Styling**: Tailwind CSS with custom animations
 **Forms**: Formik + Yup validation
-**Email**: EmailJS integration
+**Email**: Web3Forms (free, unlimited)
 **Animations**: Framer Motion
 **Icons**: Heroicons
 **Testing**: Jest + React Testing Library (25 tests)
@@ -114,6 +114,18 @@ npm run test:coverage
 ### Deployment
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+**Environment Variables Required:**
+
+For local development, create `.env.local`:
+```bash
+WEB3FORMS_ACCESS_KEY=your-access-key-here
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX  # Optional
+```
+
+For production (Vercel), add these variables in Settings → Environment Variables:
+- `WEB3FORMS_ACCESS_KEY` - Get from [web3forms.com](https://web3forms.com)
+- `NEXT_PUBLIC_GA_ID` - Google Analytics ID (optional)
 
 **Quick deploy:**
 ```bash
