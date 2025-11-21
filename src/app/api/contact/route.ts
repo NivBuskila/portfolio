@@ -52,6 +52,19 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(web3formsData),
     });
 
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      console.error('Web3Forms returned non-JSON response:', await response.text());
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Email service configuration error. Please contact support.',
+        },
+        { status: 500 }
+      );
+    }
+
     const result = await response.json();
 
     if (!response.ok || !result.success) {
