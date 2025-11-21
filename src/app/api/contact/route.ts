@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,61 +23,63 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get Web3Forms access key from environment
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      console.error('WEB3FORMS_ACCESS_KEY is not configured');
+    // Get email configuration from environment
+    const emailUser = process.env.EMAIL_USER;
+    const emailPass = process.env.EMAIL_PASS;
+    const emailTo = process.env.EMAIL_TO || emailUser;
+
+    if (!emailUser || !emailPass) {
+      console.error('Email configuration is missing');
       return NextResponse.json(
         { success: false, message: 'Email service is not configured' },
         { status: 500 }
       );
     }
 
-    // Prepare data for Web3Forms
-    const web3formsData = {
-      access_key: accessKey,
-      name,
-      email,
-      message,
-      subject: `New Contact Form Message from ${name}`,
-      from_name: 'Portfolio Contact Form',
-    };
+    // Detect email service
+    const emailService = emailUser.includes('@gmail.com')
+      ? 'gmail'
+      : emailUser.includes('@icloud.com') || emailUser.includes('@me.com')
+      ? {
+          host: 'smtp.mail.me.com',
+          port: 587,
+          secure: false,
+        }
+      : 'gmail'; // default to gmail
 
-    // Send to Web3Forms
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+      ...(typeof emailService === 'string' ? { service: emailService } : emailService),
+      auth: {
+        user: emailUser,
+        pass: emailPass,
       },
-      body: JSON.stringify(web3formsData),
     });
 
-    // Check if response is JSON
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      console.error('Web3Forms returned non-JSON response:', await response.text());
-      return NextResponse.json(
-        {
-          success: false,
-          message: 'Email service configuration error. Please contact support.',
-        },
-        { status: 500 }
-      );
-    }
+    // Email content
+    const mailOptions = {
+      from: `"Portfolio Contact Form" <${emailUser}>`,
+      to: emailTo,
+      replyTo: email,
+      subject: `New Contact Form Message from ${name}`,
+      text: `
+Name: ${name}
+Email: ${email}
 
-    const result = await response.json();
+Message:
+${message}
+      `,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
+    };
 
-    if (!response.ok || !result.success) {
-      console.error('Web3Forms error:', result);
-      return NextResponse.json(
-        {
-          success: false,
-          message: result.message || 'Failed to send message',
-        },
-        { status: response.status }
-      );
-    }
+    // Send email
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json({
       success: true,
@@ -85,7 +88,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Contact form error:', error);
     return NextResponse.json(
-      { success: false, message: 'Internal server error' },
+      { success: false, message: 'Failed to send message. Please try again.' },
       { status: 500 }
     );
   }
