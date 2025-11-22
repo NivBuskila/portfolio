@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Send to Web3Forms
+    console.log('Sending to Web3Forms API...');
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {
@@ -55,7 +56,11 @@ export async function POST(request: NextRequest) {
     const result = await response.json();
 
     if (!response.ok || !result.success) {
-      console.error('Web3Forms error:', result);
+      console.error('Web3Forms API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        result,
+      });
       return NextResponse.json(
         {
           success: false,
@@ -65,14 +70,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    console.log('Email sent successfully via Web3Forms');
+
     return NextResponse.json({
       success: true,
       message: 'Message sent successfully',
     });
   } catch (error) {
     console.error('Contact form error:', error);
+    // Log more details for debugging
+    console.error('Error details:', {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+
     return NextResponse.json(
-      { success: false, message: 'Internal server error' },
+      {
+        success: false,
+        message: 'Internal server error',
+        // Only include error details in development
+        ...(process.env.NODE_ENV === 'development' && {
+          error: error instanceof Error ? error.message : String(error),
+        }),
+      },
       { status: 500 }
     );
   }
