@@ -116,14 +116,19 @@ public/workbox-*.js.map
 *.tmp
 
 # Internal documentation and guides (not for public repo)
-SECURITY_FULL_AUDIT.md
+CLAUDE.md
+DEPLOYMENT.md
+DEPLOYMENT_CHECKLIST.md
+QUICK_DEPLOY.md
+SECURITY.md
 SECURITY_AUDIT.md
 SECURITY_AUDIT_HEBREW.md
+SECURITY_FULL_AUDIT.md
 SECURITY_WARNING.md
+WEB3FORMS_SETUP.md
 GOOGLE_ANALYTICS_GUIDE.md
 FIXES_SUMMARY.md
 QUICK_START.md
-DEPLOYMENT_CHECKLIST.md
 INTERNAL_DOCS_README.md
 public/analytics-test.html
 scripts/check-analytics.js
