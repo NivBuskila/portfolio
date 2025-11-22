@@ -37,19 +37,50 @@ export default function Contact() {
       name: '',
       email: '',
       message: '',
+      botcheck: '', // Honeypot field
     },
     validationSchema: ContactSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         setNotification({ type: null, message: '' });
 
-        // Send to our API route
-        const response = await fetch('/api/contact', {
+        // Honeypot check - if filled, it's a bot
+        if (values.botcheck) {
+          console.warn('Bot detected - honeypot field was filled');
+          // Pretend success but don't actually send
+          setNotification({
+            type: 'success',
+            message: "Thank you! Your message has been sent successfully.",
+          });
+          resetForm();
+          return;
+        }
+
+        // Get Web3Forms access key
+        const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+        if (!accessKey) {
+          throw new Error('Contact form is not configured');
+        }
+
+        // Send directly to Web3Forms (client-side)
+        const web3formsData = {
+          access_key: accessKey,
+          name: values.name,
+          email: values.email,
+          message: values.message,
+          subject: `New Contact Form Message from ${values.name}`,
+          from_name: `${values.name} via Portfolio`,
+          botcheck: '', // Always send empty for real users
+          redirect: false, // Prevent redirect
+        };
+
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(web3formsData),
         });
 
         const result = await response.json();
@@ -170,6 +201,16 @@ export default function Contact() {
         </AnimatePresence>
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
+          {/* Honeypot field - hidden from users, visible to bots */}
+          <input
+            type="text"
+            className="hidden"
+            style={{ display: 'none' }}
+            tabIndex={-1}
+            autoComplete="off"
+            {...formik.getFieldProps('botcheck')}
+          />
+
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}

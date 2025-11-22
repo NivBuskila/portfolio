@@ -21,7 +21,7 @@ Personal portfolio website built with modern web technologies, showcasing projec
 - **Styling**: Tailwind CSS 3.4.1
 - **Animations**: Framer Motion 11.16.1
 - **Forms**: Formik + Yup
-- **Email**: EmailJS
+- **Email**: Web3Forms (client-side)
 - **Icons**: Heroicons 2.2.0
 - **Analytics**: Google Analytics (via @next/third-parties)
 
@@ -278,14 +278,17 @@ const totalSkills = useMemo(
 - Proper image `sizes` attribute
 
 #### `Contact.tsx`
-- EmailJS integration
+- Web3Forms integration (client-side)
 - Form validation (Formik + Yup)
+- Honeypot anti-spam protection
 - Error handling
 - Success/error notifications
 - Direct email/phone links
 
 **Features**:
-- Rate limiting awareness
+- Client-side email sending (bypasses Cloudflare bot protection)
+- Honeypot field for bot detection
+- Rate limiting via Web3Forms
 - Analytics tracking
 - Animated notifications
 
@@ -471,10 +474,14 @@ npm run analyze
 Create `.env.local`:
 ```env
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_xxxxxx
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_xxxxxx
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxx
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your-access-key-here
 ```
+
+**Important**: After getting your Web3Forms access key:
+1. Go to [Web3Forms Dashboard](https://web3forms.com/)
+2. Configure:
+   - **Allowed Domains**: `nivbuskila.tech`, `localhost`
+   - **Email Notifications**: Your email address
 
 ### Code Style
 
@@ -665,6 +672,33 @@ Email addresses are obfuscated in the footer:
 ---
 
 ## 📝 Changelog
+
+### 2025-01-22 - Security & Email System Upgrade
+
+#### Added
+- 🔒 Honeypot anti-spam protection for contact form
+- ✉️ Web3Forms integration (client-side email sending)
+- 🛡️ Bot detection with hidden form field
+- 📧 Client-side CORS bypass for Cloudflare protection
+
+#### Changed
+- 🔄 Migrated from EmailJS to Web3Forms
+- ⚡ Contact form now sends directly from browser (client-side)
+- 🔧 Updated environment variables (`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`)
+- 🗑️ Removed unused `/api/contact` server route
+
+#### Security Improvements
+- ✅ Honeypot field blocks automated bots
+- ✅ Web3Forms built-in rate limiting
+- ✅ Cloudflare DDoS protection compatibility
+- ✅ Domain restrictions support
+
+#### Files Changed
+- Modified: `src/components/contact/Contact.tsx`
+- Deleted: `src/app/api/contact/route.ts`
+- Updated: `.env.example`, `CLAUDE.md`
+
+---
 
 ### 2025-01-17 - Performance Optimization Release
 
