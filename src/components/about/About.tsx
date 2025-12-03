@@ -4,7 +4,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
 import SkillsVisualization from './SkillsVisualization';
-import GitHubStats from './GitHubStats';
 import {
   Card,
   CardContent,
@@ -49,8 +48,6 @@ export default function About() {
       </div>
 
       <SkillsVisualization />
-
-      <GitHubStats />
 
       {/* Education & Experience */}
       <div className="py-16 bg-muted/30">
