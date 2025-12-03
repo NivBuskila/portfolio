@@ -1,197 +1,122 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  Code,
+  Layout,
+  Server,
+  Brain,
+  Cloud,
+  Database,
+  Smartphone,
+  Wrench,
+} from 'lucide-react';
 
 interface SkillCategory {
   name: string;
   skills: string[];
-  icon: string;
-  color: string;
+  icon: React.ReactNode;
 }
 
 const skillCategories: SkillCategory[] = [
   {
     name: 'Programming Languages',
     skills: personalInfo.skills.languages,
-    icon: '💻',
-    color: 'from-purple-500 to-pink-500',
+    icon: <Code className="h-5 w-5" />,
   },
   {
     name: 'Frontend Development',
     skills: personalInfo.skills.frontend,
-    icon: '🎨',
-    color: 'from-blue-500 to-cyan-500',
+    icon: <Layout className="h-5 w-5" />,
   },
   {
     name: 'Backend Development',
     skills: personalInfo.skills.backend,
-    icon: '⚙️',
-    color: 'from-green-500 to-emerald-500',
+    icon: <Server className="h-5 w-5" />,
   },
   {
     name: 'AI & Machine Learning',
     skills: personalInfo.skills.ai,
-    icon: '🤖',
-    color: 'from-indigo-500 to-purple-500',
+    icon: <Brain className="h-5 w-5" />,
   },
   {
     name: 'Cloud & DevOps',
     skills: personalInfo.skills.cloud,
-    icon: '☁️',
-    color: 'from-sky-500 to-blue-500',
+    icon: <Cloud className="h-5 w-5" />,
   },
   {
     name: 'Databases',
     skills: personalInfo.skills.databases,
-    icon: '🗄️',
-    color: 'from-orange-500 to-red-500',
+    icon: <Database className="h-5 w-5" />,
   },
   {
     name: 'Mobile Development',
     skills: personalInfo.skills.mobile,
-    icon: '📱',
-    color: 'from-green-400 to-blue-500',
+    icon: <Smartphone className="h-5 w-5" />,
   },
   {
     name: 'Development Tools',
     skills: personalInfo.skills.tools,
-    icon: '🛠️',
-    color: 'from-gray-600 to-gray-800',
+    icon: <Wrench className="h-5 w-5" />,
   },
 ];
 
-const SkillTag = React.memo<{ skill: string; color: string }>(({ skill, color }) => {
-  return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.2 }}
-      className={`
-        inline-flex items-center px-3 py-2 rounded-full
-        bg-gradient-to-r ${color}
-        text-white font-medium shadow-md
-        hover:shadow-lg transition-all duration-300
-        text-sm
-      `}
-    >
-      {skill}
-    </motion.div>
-  );
-});
-
-SkillTag.displayName = 'SkillTag';
-
-const SkillCategoryCard = React.memo<{
-  category: SkillCategory;
-}>(({ category }) => {
-  if (category.skills.length === 0) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="bg-white/95 dark:bg-gray-800/95 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
-    >
-      <div className="flex items-center gap-3 mb-6">
-        <span className="text-2xl">{category.icon}</span>
-        <h3 className={`text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${category.color}`}>
-          {category.name}
-        </h3>
-        <span className="ml-auto text-sm text-gray-500 dark:text-gray-400 font-medium">
-          {category.skills.length} skills
-        </span>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {category.skills.map((skill) => (
-          <SkillTag
-            key={skill}
-            skill={skill}
-            color={category.color}
-          />
-        ))}
-      </div>
-    </motion.div>
-  );
-});
-
-SkillCategoryCard.displayName = 'SkillCategoryCard';
-
 export default function SkillsVisualization() {
-  const totalSkills = useMemo(
-    () => skillCategories.reduce((total, category) => total + category.skills.length, 0),
-    []
-  );
-
-  const visibleCategories = useMemo(
-    () => skillCategories.filter((category) => category.skills.length > 0),
-    []
-  );
-
   return (
-    <div className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-4 transition-colors duration-500">
+    <div className="py-16 bg-background">
+      <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tight mb-4">
             Technical Skills
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-500">
-            Comprehensive expertise across {visibleCategories.length} technology domains with {totalSkills}+ proven skills
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            A comprehensive overview of my technical expertise and the
+            technologies I work with.
           </p>
-        </motion.div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-          {visibleCategories.map((category) => (
-            <SkillCategoryCard
-              key={category.name}
-              category={category}
-            />
-          ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 bg-gradient-to-r from-purple-500/10 to-blue-500/10 dark:from-purple-500/20 dark:to-blue-500/20 rounded-2xl p-8 border border-purple-200 dark:border-purple-800"
-        >
-          <h3 className="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">
-            Skills Overview
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div className="p-4">
-              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                {totalSkills}+
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                Total Skills
-              </div>
-            </div>
-            <div className="p-4">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                {visibleCategories.length}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                Tech Domains
-              </div>
-            </div>
-            <div className="p-4">
-              <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                {personalInfo.skills.languages.length}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                Programming Languages
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {skillCategories.map(
+            (category, idx) =>
+              category.skills.length > 0 && (
+                <motion.div
+                  key={category.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                >
+                  <Card className="h-full hover:shadow-md transition-shadow">
+                    <CardHeader className="flex flex-row items-center gap-3 space-y-0 pb-2">
+                      <div className="bg-primary/10 p-2 rounded-full text-primary">
+                        {category.icon}
+                      </div>
+                      <CardTitle className="text-base font-semibold">
+                        {category.name}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-4">
+                      <div className="flex flex-wrap gap-2">
+                        {category.skills.map((skill) => (
+                          <Badge
+                            key={skill}
+                            variant="secondary"
+                            className="font-normal"
+                          >
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              )
+          )}
+        </div>
       </div>
     </div>
   );
-} 
+}

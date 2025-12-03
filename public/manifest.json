@@ -1,7 +1,7 @@
 {
-  "name": "Niv Buskila - Full Stack Developer Portfolio",
+  "name": "Niv Buskila - AI & Full Stack Developer",
   "short_name": "Niv Buskila",
-  "description": "Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.",
+  "description": "Computer Science graduate and full stack developer specializing in AI agents, RAG systems, React, Next.js, and Python. View my projects and connect for collaboration.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

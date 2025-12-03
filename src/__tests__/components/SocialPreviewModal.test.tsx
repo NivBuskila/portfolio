@@ -13,8 +13,18 @@ jest.mock('next/image', () => ({
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, onClick, className, ...props }: React.PropsWithChildren<{ onClick?: () => void; className?: string }>) => (
-      <div onClick={onClick} className={className} {...props}>{children}</div>
+    div: ({
+      children,
+      onClick,
+      className,
+      ...props
+    }: React.PropsWithChildren<{
+      onClick?: () => void;
+      className?: string;
+    }>) => (
+      <div onClick={onClick} className={className} {...props}>
+        {children}
+      </div>
     ),
   },
   AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
@@ -105,7 +115,9 @@ describe('SocialPreviewModal', () => {
         expect(screen.getByText('Full Stack Developer')).toBeInTheDocument();
       });
 
-      expect(fetch).toHaveBeenCalledWith('https://api.github.com/users/NivBuskila');
+      expect(fetch).toHaveBeenCalledWith(
+        'https://api.github.com/users/NivBuskila'
+      );
     });
 
     it('displays GitHub stats', async () => {
@@ -158,9 +170,15 @@ describe('SocialPreviewModal', () => {
 
       await waitFor(() => {
         const profileLink = screen.getByText(/view full profile/i);
-        expect(profileLink.closest('a')).toHaveAttribute('href', mockGitHubData.html_url);
+        expect(profileLink.closest('a')).toHaveAttribute(
+          'href',
+          mockGitHubData.html_url
+        );
         expect(profileLink.closest('a')).toHaveAttribute('target', '_blank');
-        expect(profileLink.closest('a')).toHaveAttribute('rel', 'noopener noreferrer');
+        expect(profileLink.closest('a')).toHaveAttribute(
+          'rel',
+          'noopener noreferrer'
+        );
       });
     });
 
@@ -191,7 +209,7 @@ describe('SocialPreviewModal', () => {
     it('fetches new data when cache is stale', async () => {
       const staleData = {
         data: mockGitHubData,
-        timestamp: Date.now() - (6 * 60 * 1000), // 6 minutes ago (stale)
+        timestamp: Date.now() - 6 * 60 * 1000, // 6 minutes ago (stale)
       };
       localStorage.setItem('github_NivBuskila', JSON.stringify(staleData));
 
@@ -268,7 +286,9 @@ describe('SocialPreviewModal', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByText(/failed to load github profile/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/failed to load github profile/i)
+        ).toBeInTheDocument();
         expect(screen.getByText('⚠️')).toBeInTheDocument();
       });
     });
@@ -286,7 +306,9 @@ describe('SocialPreviewModal', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
+        expect(
+          screen.getByRole('button', { name: /try again/i })
+        ).toBeInTheDocument();
       });
 
       // Mock successful response for retry
@@ -328,7 +350,9 @@ describe('SocialPreviewModal', () => {
       });
 
       // Bio should not be displayed
-      expect(screen.queryByText('Full Stack Developer')).not.toBeInTheDocument();
+      expect(
+        screen.queryByText('Full Stack Developer')
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -359,7 +383,9 @@ describe('SocialPreviewModal', () => {
         />
       );
 
-      expect(screen.getByText(/computer science graduate/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/computer science graduate/i)
+      ).toBeInTheDocument();
       expect(screen.getByText(/afeka college/i)).toBeInTheDocument();
     });
 
@@ -407,9 +433,15 @@ describe('SocialPreviewModal', () => {
       );
 
       const linkedinLink = screen.getByText(/connect on linkedin/i);
-      expect(linkedinLink.closest('a')).toHaveAttribute('href', 'https://www.linkedin.com/in/nivbuskila/');
+      expect(linkedinLink.closest('a')).toHaveAttribute(
+        'href',
+        'https://www.linkedin.com/in/nivbuskila/'
+      );
       expect(linkedinLink.closest('a')).toHaveAttribute('target', '_blank');
-      expect(linkedinLink.closest('a')).toHaveAttribute('rel', 'noopener noreferrer');
+      expect(linkedinLink.closest('a')).toHaveAttribute(
+        'rel',
+        'noopener noreferrer'
+      );
     });
 
     it('does not fetch data for LinkedIn', () => {
@@ -473,7 +505,9 @@ describe('SocialPreviewModal', () => {
         />
       );
 
-      const xButton = container.querySelector('button svg[viewBox="0 0 24 24"]')?.closest('button');
+      const xButton = container
+        .querySelector('button svg[viewBox="0 0 24 24"]')
+        ?.closest('button');
       if (xButton) {
         fireEvent.click(xButton);
         expect(onClose).toHaveBeenCalled();
@@ -510,7 +544,7 @@ describe('SocialPreviewModal', () => {
         />
       );
 
-      expect(container.querySelector('.backdrop-blur-sm')).toBeInTheDocument();
+      expect(container.querySelector('.bg-black\\/60')).toBeInTheDocument();
     });
 
     it('has rounded corners on modal', () => {

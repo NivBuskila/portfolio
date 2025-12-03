@@ -4,41 +4,43 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/data/personalInfo';
 import SkillsVisualization from './SkillsVisualization';
-import AnimatedBackground from '@/components/common/AnimatedBackground';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  GraduationCap,
+  Briefcase,
+  Star,
+  BookOpen,
+  Code,
+  Smartphone,
+} from 'lucide-react';
 
 export default function About() {
   return (
-    <div className="relative min-h-screen">
-      <div
-        className="
-        relative
-        bg-gradient-to-b
-        from-blue-50
-        to-purple-50
-          dark:from-gray-900
-          dark:to-purple-900
-        overflow-hidden
-          py-20
-          transition-colors
-          duration-500
-      "
-      >
-        <AnimatedBackground colorScheme="purple" intensity="medium" />
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <div className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
+          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container px-4 md:px-6 mx-auto max-w-7xl relative z-10">
           <motion.div
-            className="text-center"
+            className="text-center space-y-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 dark:text-white mb-6 transition-colors duration-500">
-              About{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
-                Me
-              </span>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+              About <span className="text-primary">Me</span>
             </h1>
-            <p className="max-w-4xl mx-auto text-xl text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-500">
+            <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground leading-relaxed">
               {personalInfo.about}
             </p>
           </motion.div>
@@ -47,336 +49,173 @@ export default function About() {
 
       <SkillsVisualization />
 
-      <div className="bg-gray-50 dark:bg-gray-800 py-16 transition-colors duration-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-16 lg:grid-cols-2">
-            <SectionBlock title="Education" icon="🎓">
+      {/* Education & Experience */}
+      <div className="py-16 bg-muted/30">
+        <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-2">
+            {/* Education */}
+            <div className="space-y-8">
+              <div className="flex items-center gap-3">
+                <GraduationCap className="h-8 w-8 text-primary" />
+                <h2 className="text-3xl font-bold tracking-tight">Education</h2>
+              </div>
               <div className="space-y-6">
                 {personalInfo.education.map((edu, idx) => (
-                  <EducationCard
-                    key={idx}
-                    degree={edu.degree}
-                    school={edu.school}
-                    duration={edu.duration}
-                  />
+                  <Card key={idx} className="border-l-4 border-l-primary">
+                    <CardHeader>
+                      <CardTitle>{edu.degree}</CardTitle>
+                      <CardDescription className="text-base font-medium text-primary">
+                        {edu.school}
+                      </CardDescription>
+                      <p className="text-sm text-muted-foreground">
+                        {edu.duration}
+                      </p>
+                    </CardHeader>
+                  </Card>
                 ))}
               </div>
-            </SectionBlock>
+            </div>
 
-            <SectionBlock title="Experience" icon="💼">
+            {/* Experience */}
+            <div className="space-y-8">
+              <div className="flex items-center gap-3">
+                <Briefcase className="h-8 w-8 text-primary" />
+                <h2 className="text-3xl font-bold tracking-tight">
+                  Experience
+                </h2>
+              </div>
               <div className="space-y-6">
                 {personalInfo.experience.map((exp, idx) => (
-                  <ExperienceCard
-                    key={idx}
-                    title={exp.title}
-                    company={exp.company}
-                    duration={exp.duration}
-                    description={exp.description}
-                  />
+                  <Card key={idx} className="border-l-4 border-l-primary">
+                    <CardHeader>
+                      <CardTitle>{exp.title}</CardTitle>
+                      <CardDescription className="text-base font-medium text-primary">
+                        {exp.company}
+                      </CardDescription>
+                      <p className="text-sm text-muted-foreground">
+                        {exp.duration}
+                      </p>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {exp.description.map((item, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-2 text-sm text-muted-foreground"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
-            </SectionBlock>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-900 py-16 transition-colors duration-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionBlock title="Personal Highlights" icon="⭐">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <HighlightCard
-                title="Problem Solver"
-                description="Passionate about finding elegant solutions to complex technical challenges"
-                icon="🧠"
-              />
-              <HighlightCard
-                title="Continuous Learner"
-                description="Always exploring new technologies and staying updated with industry trends"
-                icon="📚"
-              />
-              <HighlightCard
-                title="Team Player"
-                description="Strong communication skills and experience working in collaborative environments"
-                icon="🤝"
-              />
-            </div>
-          </SectionBlock>
+      {/* Highlights */}
+      <div className="py-16 bg-background">
+        <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+          <div className="flex items-center gap-3 mb-8 justify-center">
+            <Star className="h-8 w-8 text-primary" />
+            <h2 className="text-3xl font-bold tracking-tight text-center">
+              Personal Highlights
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card className="bg-muted/50 border-none shadow-none hover:bg-muted transition-colors">
+              <CardHeader className="text-center">
+                <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit mb-2">
+                  <Code className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle>Problem Solver</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Passionate about finding elegant solutions to complex technical
+                challenges
+              </CardContent>
+            </Card>
+            <Card className="bg-muted/50 border-none shadow-none hover:bg-muted transition-colors">
+              <CardHeader className="text-center">
+                <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit mb-2">
+                  <BookOpen className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle>Continuous Learner</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Always exploring new technologies and staying updated with
+                industry trends
+              </CardContent>
+            </Card>
+            <Card className="bg-muted/50 border-none shadow-none hover:bg-muted transition-colors">
+              <CardHeader className="text-center">
+                <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit mb-2">
+                  <Briefcase className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle>Team Player</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Strong communication skills and experience working in
+                collaborative environments
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
 
-      <div className="bg-gray-50 dark:bg-gray-800 py-16 transition-colors duration-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionBlock title="Technologies & Resources" icon="🚀">
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                I continuously learn and work with modern technologies to build
-                scalable and efficient applications. Here are some of the key
-                technologies and resources I use and recommend:
-              </p>
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
-                    Frontend Development
-                  </h3>
-                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                    <li>
-                      <a
-                        href="https://react.dev"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
-                      >
-                        React Documentation
-                      </a>{' '}
-                      - Official React documentation and tutorials
-                    </li>
-                    <li>
-                      <a
-                        href="https://nextjs.org/docs"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
-                      >
-                        Next.js Guide
-                      </a>{' '}
-                      - Complete guide to Next.js framework
-                    </li>
-                    <li>
-                      <a
-                        href="https://tailwindcss.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
-                      >
-                        Tailwind CSS
-                      </a>{' '}
-                      - Utility-first CSS framework
-                    </li>
-                  </ul>
+      {/* Technologies & Resources */}
+      <div className="py-16 bg-muted/30">
+        <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+          <div className="flex items-center gap-3 mb-8">
+            <Smartphone className="h-8 w-8 text-primary" />
+            <h2 className="text-3xl font-bold tracking-tight">
+              Technologies & Resources
+            </h2>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>Frontend Development</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary">React</Badge>
+                  <Badge variant="secondary">Next.js</Badge>
+                  <Badge variant="secondary">Tailwind CSS</Badge>
+                  <Badge variant="secondary">TypeScript</Badge>
                 </div>
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
-                    Backend & Mobile
-                  </h3>
-                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                    <li>
-                      <a
-                        href="https://www.python.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
-                      >
-                        Python Official Site
-                      </a>{' '}
-                      - Python programming language resources
-                    </li>
-                    <li>
-                      <a
-                        href="https://developer.android.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
-                      >
-                        Android Developers
-                      </a>{' '}
-                      - Official Android development documentation
-                    </li>
-                    <li>
-                      <a
-                        href="https://firebase.google.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-600 dark:text-purple-400 hover:underline font-medium"
-                      >
-                        Firebase
-                      </a>{' '}
-                      - Backend-as-a-Service platform by Google
-                    </li>
-                  </ul>
+                <p className="text-sm text-muted-foreground">
+                  Building responsive, accessible, and performant user
+                  interfaces using the latest React ecosystem tools.
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Backend & Mobile</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary">Python</Badge>
+                  <Badge variant="secondary">Node.js</Badge>
+                  <Badge variant="secondary">Android (Java/Kotlin)</Badge>
+                  <Badge variant="secondary">Firebase</Badge>
                 </div>
-              </div>
-            </div>
-          </SectionBlock>
+                <p className="text-sm text-muted-foreground">
+                  Developing robust backend services and native mobile
+                  applications with a focus on scalability.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-const SectionBlock = React.memo(({
-  title,
-  children,
-  icon,
-}: {
-  title: string;
-  children: React.ReactNode;
-  icon?: string;
-}) => {
-  return (
-    <motion.section initial={false}>
-      <div className="flex items-center gap-3 mb-8">
-        {icon && <span className="text-3xl">{icon}</span>}
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white transition-colors duration-500">
-          {title}
-        </h2>
-      </div>
-      {children}
-    </motion.section>
-  );
-});
-
-SectionBlock.displayName = 'SectionBlock';
-
-const EducationCard = React.memo(({
-  degree,
-  school,
-  duration,
-}: {
-  degree: string;
-  school: string;
-  duration: string;
-}) => {
-  return (
-    <motion.div
-      initial={false}
-      whileHover={{ scale: 1.02 }}
-      className="
-        relative
-        bg-white/95
-        dark:bg-gray-800/95
-        border
-        border-gray-200
-        dark:border-gray-700
-        rounded-2xl
-        p-6
-        shadow-lg
-        transition-all
-        duration-300
-        hover:shadow-xl
-      "
-    >
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2 transition-colors duration-500">
-            {degree}
-          </h3>
-          <p className="text-purple-600 dark:text-purple-400 font-medium mb-1 transition-colors duration-500">
-            {school}
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-500">
-            {duration}
-          </p>
-        </div>
-        <div className="text-2xl">🎓</div>
-      </div>
-    </motion.div>
-  );
-});
-
-EducationCard.displayName = 'EducationCard';
-
-const ExperienceCard = React.memo(({
-  title,
-  company,
-  duration,
-  description,
-}: {
-  title: string;
-  company: string;
-  duration: string;
-  description: string[];
-}) => {
-  return (
-    <motion.div
-      initial={false}
-      whileHover={{ scale: 1.02 }}
-      className="
-        relative
-        bg-white/95
-        dark:bg-gray-800/95
-        border
-        border-gray-200
-        dark:border-gray-700
-        rounded-2xl
-        p-6
-        shadow-lg
-        transition-all
-        duration-300
-        hover:shadow-xl
-      "
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2 transition-colors duration-500">
-            {title}
-          </h3>
-          <p className="text-purple-600 dark:text-purple-400 font-medium mb-1 transition-colors duration-500">
-            {company}
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-500">
-            {duration}
-          </p>
-        </div>
-        <div className="text-2xl">💼</div>
-      </div>
-
-      <ul className="space-y-2">
-        {description.map((item, i) => (
-          <motion.li
-            key={i}
-            initial={false}
-            className="flex items-start gap-3 text-gray-700 dark:text-gray-300 text-sm transition-colors duration-500"
-          >
-            <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
-            {item}
-          </motion.li>
-        ))}
-      </ul>
-    </motion.div>
-  );
-});
-
-ExperienceCard.displayName = 'ExperienceCard';
-
-const HighlightCard = React.memo(({
-  title,
-  description,
-  icon,
-}: {
-  title: string;
-  description: string;
-  icon: string;
-}) => {
-  return (
-    <motion.div
-      initial={false}
-      whileHover={{ scale: 1.05, y: -5 }}
-      className="
-        bg-gradient-to-br
-        from-purple-50
-        to-blue-50
-        dark:from-purple-900/20
-        dark:to-blue-900/20
-        border
-        border-purple-200
-        dark:border-purple-800
-        rounded-2xl
-        p-6
-        text-center
-        transition-all
-        duration-300
-        hover:shadow-lg
-      "
-    >
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3 transition-colors duration-500">
-        {title}
-      </h3>
-      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed transition-colors duration-500">
-        {description}
-      </p>
-    </motion.div>
-  );
-});
-
-HighlightCard.displayName = 'HighlightCard';

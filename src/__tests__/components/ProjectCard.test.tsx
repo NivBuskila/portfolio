@@ -4,7 +4,15 @@ import ProjectCard from '@/components/projects/ProjectCard';
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: { src: string; alt: string }) => {
+  default: ({
+    src,
+    alt,
+    ...props
+  }: {
+    src: string;
+    alt: string;
+    fill?: boolean;
+  }) => {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt={alt} {...props} />;
   },
@@ -15,7 +23,7 @@ describe('ProjectCard', () => {
     title: 'Test Project',
     description: 'This is a test project description',
     tech: ['React', 'TypeScript', 'Jest'],
-    thumbnail: '/images/test.jpg',
+    image: '/images/test.jpg',
     github: 'https://github.com/test/project',
   };
 
@@ -26,7 +34,9 @@ describe('ProjectCard', () => {
 
   it('renders project description', () => {
     render(<ProjectCard {...mockProject} />);
-    expect(screen.getByText('This is a test project description')).toBeInTheDocument();
+    expect(
+      screen.getByText('This is a test project description')
+    ).toBeInTheDocument();
   });
 
   it('renders all technology tags', () => {
@@ -50,7 +60,10 @@ describe('ProjectCard', () => {
 
     const githubLink = screen.getByRole('link', { name: /github/i });
     expect(githubLink).toBeInTheDocument();
-    expect(githubLink).toHaveAttribute('href', 'https://github.com/test/project');
+    expect(githubLink).toHaveAttribute(
+      'href',
+      'https://github.com/test/project'
+    );
     expect(githubLink).toHaveAttribute('target', '_blank');
     expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
@@ -81,14 +94,27 @@ describe('ProjectCard', () => {
     const { container } = render(<ProjectCard {...mockProject} />);
 
     const card = container.firstChild;
-    expect(card).toHaveClass('flex', 'flex-col', 'rounded-lg', 'shadow-lg', 'overflow-hidden', 'bg-white');
+    expect(card).toHaveClass(
+      'flex',
+      'flex-col',
+      'overflow-hidden',
+      'hover:shadow-lg'
+    );
   });
 
   it('renders technology tags with correct styling', () => {
     render(<ProjectCard {...mockProject} />);
 
     const techTag = screen.getByText('React');
-    expect(techTag).toHaveClass('inline-flex', 'items-center', 'px-2.5', 'py-0.5', 'rounded-md', 'text-sm', 'font-medium', 'bg-blue-100', 'text-blue-800');
+    expect(techTag).toHaveClass(
+      'inline-flex',
+      'items-center',
+      'rounded-full',
+      'px-2.5',
+      'py-0.5',
+      'text-xs',
+      'font-semibold'
+    );
   });
 
   it('handles multiple technology tags correctly', () => {
@@ -99,7 +125,7 @@ describe('ProjectCard', () => {
 
     render(<ProjectCard {...projectWithManyTech} />);
 
-    projectWithManyTech.tech.forEach(tech => {
+    projectWithManyTech.tech.forEach((tech) => {
       expect(screen.getByText(tech)).toBeInTheDocument();
     });
   });
@@ -132,18 +158,23 @@ describe('ProjectCard', () => {
     render(<ProjectCard {...projectWithNoTech} />);
 
     expect(screen.getByText('Test Project')).toBeInTheDocument();
-    expect(screen.getByText('This is a test project description')).toBeInTheDocument();
+    expect(
+      screen.getByText('This is a test project description')
+    ).toBeInTheDocument();
   });
 
   it('handles long project descriptions', () => {
     const projectWithLongDescription = {
       ...mockProject,
-      description: 'This is a very long project description that contains a lot of information about the project, including its features, technologies used, and the problems it solves. It should be displayed properly in the card without breaking the layout.',
+      description:
+        'This is a very long project description that contains a lot of information about the project, including its features, technologies used, and the problems it solves. It should be displayed properly in the card without breaking the layout.',
     };
 
     render(<ProjectCard {...projectWithLongDescription} />);
 
-    expect(screen.getByText(projectWithLongDescription.description)).toBeInTheDocument();
+    expect(
+      screen.getByText(projectWithLongDescription.description)
+    ).toBeInTheDocument();
   });
 
   it('handles long project titles', () => {
@@ -154,7 +185,9 @@ describe('ProjectCard', () => {
 
     render(<ProjectCard {...projectWithLongTitle} />);
 
-    expect(screen.getByText('Very Long Project Title That Might Overflow')).toBeInTheDocument();
+    expect(
+      screen.getByText('Very Long Project Title That Might Overflow')
+    ).toBeInTheDocument();
   });
 
   it('handles special characters in project information', () => {
@@ -166,7 +199,11 @@ describe('ProjectCard', () => {
 
     render(<ProjectCard {...projectWithSpecialChars} />);
 
-    expect(screen.getByText('Project with "Quotes" & Special <Characters>')).toBeInTheDocument();
-    expect(screen.getByText('Description with special chars: @#$%^&*()')).toBeInTheDocument();
+    expect(
+      screen.getByText('Project with "Quotes" & Special <Characters>')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Description with special chars: @#$%^&*()')
+    ).toBeInTheDocument();
   });
 });

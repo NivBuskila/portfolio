@@ -1,29 +1,30 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { cn } from '@/lib/utils';
 import './globals.css';
 import ClientLayout from './client-layout';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import JsonLd from '@/components/seo/JsonLd';
 
-// Using system fonts for reliability - Poppins loaded via CDN in head
-const fontFamily = 'Poppins, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif';
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nivbuskila.tech'),
-  title: 'Niv Buskila - Full Stack Developer | Software Engineer',
+  title: 'Niv Buskila - AI & Full Stack Developer',
   description:
-    'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
+    'Computer Science graduate and full stack developer specializing in AI agents, RAG systems, React, Next.js, and Python. View my projects and connect for collaboration.',
   keywords: [
     'Niv Buskila',
     'Full Stack Developer',
+    'AI Engineer',
+    'RAG Systems',
+    'AI Agents',
     'React Developer',
     'Python Developer',
     'Java Developer',
     'Computer Science Graduate',
     'Web Development',
-    'Mobile Development',
-    'Portfolio',
     'Software Engineer',
-    'Frontend Developer',
-    'Backend Developer',
   ],
   authors: [{ name: 'Niv Buskila' }],
   creator: 'Niv Buskila',
@@ -31,9 +32,9 @@ export const metadata: Metadata = {
     canonical: 'https://nivbuskila.tech',
   },
   openGraph: {
-    title: 'Niv Buskila - Full Stack Developer | Software Engineer',
+    title: 'Niv Buskila - AI & Full Stack Developer',
     description:
-      'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects and connect for collaboration.',
+      'Computer Science graduate and full stack developer specializing in AI agents, RAG systems, React, Next.js, and Python. View my projects and connect for collaboration.',
     url: 'https://nivbuskila.tech',
     siteName: 'Niv Buskila Portfolio',
     images: [
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
         url: 'https://nivbuskila.tech/images/portfolio.png',
         width: 1200,
         height: 630,
-        alt: 'Niv Buskila - Full Stack Developer Portfolio',
+        alt: 'Niv Buskila - AI & Full Stack Developer Portfolio',
       },
     ],
     locale: 'en_US',
@@ -49,9 +50,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Niv Buskila - Full Stack Developer Portfolio',
+    title: 'Niv Buskila - AI & Full Stack Developer',
     description:
-      'Computer Science graduate and full stack developer specializing in React, Next.js, Python and Java. View my projects.',
+      'Computer Science graduate and full stack developer specializing in AI agents, RAG systems, React, Next.js, and Python. View my projects.',
     images: ['https://nivbuskila.tech/images/portfolio.png'],
   },
   robots: {
@@ -75,41 +76,6 @@ export const metadata: Metadata = {
   },
 };
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Niv Buskila',
-  jobTitle: 'Full Stack Developer',
-  description:
-    'Computer Science graduate and full stack developer specializing in React, Next.js, Python, Java, and mobile development',
-  url: 'https://nivbuskila.tech',
-  email: 'nivbuskila@icloud.com',
-  sameAs: [
-    'https://github.com/NivBuskila',
-    'https://linkedin.com/in/nivbuskila',
-  ],
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Amazon',
-  },
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'Afeka College of Engineering',
-  },
-  knowsAbout: [
-    'React',
-    'Next.js',
-    'TypeScript',
-    'Python',
-    'Java',
-    'JavaScript',
-    'Node.js',
-    'Web Development',
-    'Mobile Development',
-    'Software Engineering',
-  ],
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -118,12 +84,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#9333ea" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,12 +96,14 @@ export default function RootLayout({
             __html: `(function(){try{var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;var d=s ? s === 'dark' : p; if(d){document.documentElement.classList.add('dark');}}catch(e){}})();`,
           }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
       </head>
-      <body className="bg-background text-foreground" style={{ fontFamily }}>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased text-foreground',
+          inter.variable
+        )}
+      >
+        <JsonLd />
         <ClientLayout>{children}</ClientLayout>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />

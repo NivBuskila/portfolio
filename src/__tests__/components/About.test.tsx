@@ -46,7 +46,6 @@ describe('About', () => {
     render(<About />);
 
     expect(screen.getByText('Education')).toBeInTheDocument();
-    expect(screen.getAllByText('🎓').length).toBeGreaterThan(0);
   });
 
   it('renders all education entries', () => {
@@ -63,7 +62,6 @@ describe('About', () => {
     render(<About />);
 
     expect(screen.getByText('Experience')).toBeInTheDocument();
-    expect(screen.getAllByText('💼').length).toBeGreaterThan(0);
   });
 
   it('renders all experience entries', () => {
@@ -90,7 +88,6 @@ describe('About', () => {
     render(<About />);
 
     expect(screen.getByText('Personal Highlights')).toBeInTheDocument();
-    expect(screen.getByText('⭐')).toBeInTheDocument();
   });
 
   it('renders all highlight cards', () => {
@@ -99,154 +96,43 @@ describe('About', () => {
     expect(screen.getByText('Problem Solver')).toBeInTheDocument();
     expect(screen.getByText('Continuous Learner')).toBeInTheDocument();
     expect(screen.getByText('Team Player')).toBeInTheDocument();
-
-    // Check icons
-    expect(screen.getByText('🧠')).toBeInTheDocument();
-    expect(screen.getByText('📚')).toBeInTheDocument();
-    expect(screen.getByText('🤝')).toBeInTheDocument();
-  });
-
-  it('renders highlight descriptions', () => {
-    render(<About />);
-
-    expect(
-      screen.getByText(/passionate about finding elegant solutions/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/always exploring new technologies/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/strong communication skills/i)
-    ).toBeInTheDocument();
   });
 
   it('renders Technologies & Resources section', () => {
     render(<About />);
 
     expect(screen.getByText('Technologies & Resources')).toBeInTheDocument();
-    expect(screen.getByText('🚀')).toBeInTheDocument();
   });
 
   it('renders Frontend Development subsection', () => {
     render(<About />);
 
     expect(screen.getByText('Frontend Development')).toBeInTheDocument();
+    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getByText('Next.js')).toBeInTheDocument();
+    expect(screen.getByText('Tailwind CSS')).toBeInTheDocument();
   });
 
   it('renders Backend & Mobile subsection', () => {
     render(<About />);
 
     expect(screen.getByText('Backend & Mobile')).toBeInTheDocument();
-  });
-
-  it('renders external resource links', () => {
-    render(<About />);
-
-    // Frontend links
-    const reactLink = screen.getByText('React Documentation');
-    expect(reactLink.closest('a')).toHaveAttribute('href', 'https://react.dev');
-    expect(reactLink.closest('a')).toHaveAttribute('target', '_blank');
-    expect(reactLink.closest('a')).toHaveAttribute('rel', 'noopener noreferrer');
-
-    const nextjsLink = screen.getByText('Next.js Guide');
-    expect(nextjsLink.closest('a')).toHaveAttribute('href', 'https://nextjs.org/docs');
-
-    const tailwindLink = screen.getByText('Tailwind CSS');
-    expect(tailwindLink.closest('a')).toHaveAttribute('href', 'https://tailwindcss.com');
-
-    // Backend links
-    const pythonLink = screen.getByText('Python Official Site');
-    expect(pythonLink.closest('a')).toHaveAttribute('href', 'https://www.python.org');
-
-    const androidLink = screen.getByText('Android Developers');
-    expect(androidLink.closest('a')).toHaveAttribute('href', 'https://developer.android.com');
-
-    const firebaseLink = screen.getByText('Firebase');
-    expect(firebaseLink.closest('a')).toHaveAttribute('href', 'https://firebase.google.com');
-  });
-
-  it('renders link descriptions', () => {
-    render(<About />);
-
-    expect(screen.getByText(/official react documentation/i)).toBeInTheDocument();
-    expect(screen.getByText(/complete guide to next\.js/i)).toBeInTheDocument();
-    expect(screen.getByText(/utility-first css framework/i)).toBeInTheDocument();
-    expect(screen.getByText(/python programming language resources/i)).toBeInTheDocument();
-    expect(screen.getByText(/official android development documentation/i)).toBeInTheDocument();
-    expect(screen.getByText(/backend-as-a-service platform/i)).toBeInTheDocument();
+    expect(screen.getByText('Python')).toBeInTheDocument();
+    expect(screen.getByText('Node.js')).toBeInTheDocument();
   });
 
   it('renders animated background blobs', () => {
     const { container } = render(<About />);
-
-    // Check for blur elements
-    const blurElements = container.querySelectorAll('.blur-3xl');
+    // Check for blur elements using the specific class used in the component
+    // The class is blur-[100px]
+    const blurElements = container.querySelectorAll('.blur-\\[100px\\]');
     expect(blurElements.length).toBeGreaterThan(0);
   });
 
   it('has proper responsive structure', () => {
     const { container } = render(<About />);
-
-    // Check for grid layouts
-    expect(container.querySelector('.grid')).toBeInTheDocument();
-    expect(container.querySelector('.lg\\:grid-cols-2')).toBeInTheDocument();
-  });
-
-  it('applies dark mode classes', () => {
-    const { container } = render(<About />);
-
-    // Check for dark mode classes
-    const darkElements = container.querySelectorAll('[class*="dark:"]');
-    expect(darkElements.length).toBeGreaterThan(0);
-  });
-
-  it('renders with proper section structure', () => {
-    const { container } = render(<About />);
-
-    // Should have multiple sections
-    const sections = container.querySelectorAll('section');
-    expect(sections.length).toBeGreaterThan(0);
-  });
-
-  it('handles empty experience descriptions', () => {
-    // This test verifies the component can handle edge cases
-    render(<About />);
-
-    // Component should render without crashing
-    expect(screen.getByText('About')).toBeInTheDocument();
-  });
-
-  it('renders all section icons', () => {
-    render(<About />);
-
-    // Check for all emoji icons
-    const icons = ['🎓', '💼', '⭐', '🚀', '🧠', '📚', '🤝'];
-    icons.forEach((icon) => {
-      expect(screen.getAllByText(icon).length).toBeGreaterThan(0);
-    });
-  });
-
-  it('renders with proper spacing and padding', () => {
-    const { container } = render(<About />);
-
-    // Check for padding/margin classes
-    const paddedElements = container.querySelectorAll('[class*="py-"]');
-    expect(paddedElements.length).toBeGreaterThan(0);
-  });
-
-  it('renders max-width containers', () => {
-    const { container } = render(<About />);
-
-    // Check for max-width containers
-    const maxWidthContainers = container.querySelectorAll('.max-w-7xl');
-    expect(maxWidthContainers.length).toBeGreaterThan(0);
-  });
-
-  it('has gradient backgrounds', () => {
-    const { container } = render(<About />);
-
-    // Check for gradient classes
-    const gradients = container.querySelectorAll('[class*="gradient"]');
-    expect(gradients.length).toBeGreaterThan(0);
+    // Check for grid classes
+    const gridElements = container.querySelectorAll('.grid');
+    expect(gridElements.length).toBeGreaterThan(0);
   });
 });

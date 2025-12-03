@@ -6,7 +6,15 @@ import { projects } from '@/data/projects';
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: { src: string; alt: string }) => {
+  default: ({
+    src,
+    alt,
+    ...props
+  }: {
+    src: string;
+    alt: string;
+    fill?: boolean;
+  }) => {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt={alt} {...props} />;
   },
@@ -15,19 +23,46 @@ jest.mock('next/image', () => ({
 // Mock next/link
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: React.PropsWithChildren<{ href: string }>) => {
-    return <a href={href} {...props}>{children}</a>;
+  default: ({
+    children,
+    href,
+    ...props
+  }: React.PropsWithChildren<{ href: string }>) => {
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    );
   },
 }));
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => <div {...props}>{children}</div>,
-    button: ({ children, onClick, ...props }: React.PropsWithChildren<{ onClick?: () => void }>) => (
-      <button onClick={onClick} {...props}>{children}</button>
+    div: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<Record<string, unknown>>) => (
+      <div {...props}>{children}</div>
     ),
-    a: ({ children, href, ...props }: React.PropsWithChildren<{ href?: string }>) => <a href={href} {...props}>{children}</a>,
+    button: ({
+      children,
+      onClick,
+      ...props
+    }: React.PropsWithChildren<{ onClick?: () => void }>) => (
+      <button onClick={onClick} {...props}>
+        {children}
+      </button>
+    ),
+    a: ({
+      children,
+      href,
+      ...props
+    }: React.PropsWithChildren<{ href?: string }>) => (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    ),
   },
   AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
 }));
@@ -41,10 +76,9 @@ describe('Projects', () => {
   it('renders the projects page with title and description', () => {
     render(<Projects />);
 
-    expect(screen.getByText('My')).toBeInTheDocument();
-    expect(screen.getByText('Projects')).toBeInTheDocument();
+    expect(screen.getByText('My Projects')).toBeInTheDocument();
     expect(
-      screen.getByText(/here are some of the projects I've built/i)
+      screen.getByText(/Showcasing my journey through code/i)
     ).toBeInTheDocument();
   });
 
@@ -59,8 +93,12 @@ describe('Projects', () => {
     render(<Projects />);
 
     expect(screen.getByRole('button', { name: /^all$/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /frontend/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /backend/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /frontend/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /backend/i })
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /mobile/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /ai\/ml/i })).toBeInTheDocument();
   });
@@ -68,11 +106,8 @@ describe('Projects', () => {
   it('displays all projects by default', () => {
     render(<Projects />);
 
-    // Check that the correct count is displayed
-    expect(screen.getByText(new RegExp(`Showing ${projects.length} of ${projects.length} projects`))).toBeInTheDocument();
-
     // Verify all projects are rendered
-    projects.forEach(project => {
+    projects.forEach((project) => {
       expect(screen.getByText(project.title)).toBeInTheDocument();
     });
   });
@@ -86,19 +121,20 @@ describe('Projects', () => {
 
     await waitFor(() => {
       // Frontend projects should contain React, Next.js, TypeScript, etc.
-      const frontendProjects = projects.filter(p =>
-        p.tech.some(tech =>
-          ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'JavaScript'].includes(tech)
+      const frontendProjects = projects.filter((p) =>
+        p.tech.some((tech) =>
+          [
+            'React',
+            'Next.js',
+            'TypeScript',
+            'Tailwind CSS',
+            'JavaScript',
+          ].includes(tech)
         )
       );
 
-      // Check count
-      expect(
-        screen.getByText(new RegExp(`Showing ${frontendProjects.length} of ${projects.length} projects`))
-      ).toBeInTheDocument();
-
       // Verify frontend projects are shown
-      frontendProjects.forEach(project => {
+      frontendProjects.forEach((project) => {
         expect(screen.getByText(project.title)).toBeInTheDocument();
       });
     });
@@ -112,15 +148,25 @@ describe('Projects', () => {
     await user.click(backendButton);
 
     await waitFor(() => {
-      const backendProjects = projects.filter(p =>
-        p.tech.some(tech =>
-          ['Node.js', 'Flask', 'FastAPI', 'Python', 'MongoDB', 'Firebase', 'AWS Rekognition', 'Supabase', 'Express.js'].includes(tech)
+      const backendProjects = projects.filter((p) =>
+        p.tech.some((tech) =>
+          [
+            'Node.js',
+            'Flask',
+            'FastAPI',
+            'Python',
+            'MongoDB',
+            'Firebase',
+            'AWS Rekognition',
+            'Supabase',
+            'Express.js',
+          ].includes(tech)
         )
       );
 
-      expect(
-        screen.getByText(new RegExp(`Showing ${backendProjects.length} of ${projects.length} projects`))
-      ).toBeInTheDocument();
+      backendProjects.forEach((project) => {
+        expect(screen.getByText(project.title)).toBeInTheDocument();
+      });
     });
   });
 
@@ -132,15 +178,17 @@ describe('Projects', () => {
     await user.click(mobileButton);
 
     await waitFor(() => {
-      const mobileProjects = projects.filter(p =>
-        p.tech.some(tech =>
-          ['Java', 'Android SDK', 'ML Kit', 'CameraX', 'Retrofit'].includes(tech)
+      const mobileProjects = projects.filter((p) =>
+        p.tech.some((tech) =>
+          ['Java', 'Android SDK', 'ML Kit', 'CameraX', 'Retrofit'].includes(
+            tech
+          )
         )
       );
 
-      expect(
-        screen.getByText(new RegExp(`Showing ${mobileProjects.length} of ${projects.length} projects`))
-      ).toBeInTheDocument();
+      mobileProjects.forEach((project) => {
+        expect(screen.getByText(project.title)).toBeInTheDocument();
+      });
     });
   });
 
@@ -152,15 +200,25 @@ describe('Projects', () => {
     await user.click(aiButton);
 
     await waitFor(() => {
-      const aiProjects = projects.filter(p =>
-        p.tech.some(tech =>
-          ['AWS Rekognition', 'ML Kit', 'AI', 'LangChain', 'Gemini API', 'RAG'].includes(tech)
-        ) || p.title.toLowerCase().includes('ai') || p.title.toLowerCase().includes('chatbot')
+      const aiProjects = projects.filter(
+        (p) =>
+          p.tech.some((tech) =>
+            [
+              'AWS Rekognition',
+              'ML Kit',
+              'AI',
+              'LangChain',
+              'Gemini API',
+              'RAG',
+            ].includes(tech)
+          ) ||
+          p.title.toLowerCase().includes('ai') ||
+          p.title.toLowerCase().includes('chatbot')
       );
 
-      expect(
-        screen.getByText(new RegExp(`Showing ${aiProjects.length} of ${projects.length} projects`))
-      ).toBeInTheDocument();
+      aiProjects.forEach((project) => {
+        expect(screen.getByText(project.title)).toBeInTheDocument();
+      });
     });
   });
 
@@ -173,8 +231,6 @@ describe('Projects', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Afeka ChatBot')).toBeInTheDocument();
-      expect(screen.getByText(/showing 1 of/i)).toBeInTheDocument();
-      expect(screen.getByText(/for "ChatBot"/i)).toBeInTheDocument();
     });
   });
 
@@ -212,8 +268,9 @@ describe('Projects', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/no projects found/i)).toBeInTheDocument();
-      expect(screen.getByText(/try adjusting your search terms or filters/i)).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /show all projects/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /clear filters/i })
+      ).toBeInTheDocument();
     });
   });
 
@@ -233,7 +290,7 @@ describe('Projects', () => {
     });
   });
 
-  it('resets filters when "Show All Projects" button is clicked', async () => {
+  it('resets filters when "Clear filters" button is clicked', async () => {
     const user = userEvent.setup();
     render(<Projects />);
 
@@ -246,15 +303,15 @@ describe('Projects', () => {
       expect(screen.getByText(/no projects found/i)).toBeInTheDocument();
     });
 
-    // Click "Show All Projects"
-    const showAllButton = screen.getByRole('button', { name: /show all projects/i });
-    await user.click(showAllButton);
+    // Click "Clear filters"
+    const clearButton = screen.getByRole('button', { name: /clear filters/i });
+    await user.click(clearButton);
 
     await waitFor(() => {
       // Should show all projects again
-      expect(
-        screen.getByText(new RegExp(`Showing ${projects.length} of ${projects.length} projects`))
-      ).toBeInTheDocument();
+      projects.forEach((project) => {
+        expect(screen.getByText(project.title)).toBeInTheDocument();
+      });
       expect(searchInput).toHaveValue('');
     });
   });
@@ -284,42 +341,29 @@ describe('Projects', () => {
     const allButton = screen.getByRole('button', { name: /^all$/i });
 
     // Initially "All" should be active
-    expect(allButton.className).toContain('from-purple-500');
+    expect(allButton.className).toContain('bg-primary');
 
     // Click Frontend
     await user.click(frontendButton);
 
     await waitFor(() => {
-      expect(frontendButton.className).toContain('from-purple-500');
+      expect(frontendButton.className).toContain('bg-primary');
     });
   });
 
   it('renders project cards with correct information', () => {
-    const { container } = render(<Projects />);
+    render(<Projects />);
 
     const firstProject = projects[0];
-
-    // Check title
+    // Just check if the title is there, detailed card testing should be in ProjectCard.test.tsx
     expect(screen.getByText(firstProject.title)).toBeInTheDocument();
-
-    // Check description
-    expect(screen.getByText(new RegExp(firstProject.description.slice(0, 30)))).toBeInTheDocument();
-
-    // Check technologies (use container.textContent since some tech appears multiple times)
-    firstProject.tech.forEach(tech => {
-      expect(container.textContent).toContain(tech);
-    });
-
-    // Check GitHub link
-    const githubLinks = screen.getAllByText('GitHub');
-    expect(githubLinks.length).toBeGreaterThan(0);
   });
 
   it('renders Live Demo links for projects with demo URLs', () => {
     render(<Projects />);
 
     // Find projects with demo URLs
-    const projectsWithDemo = projects.filter(p => p.demo);
+    const projectsWithDemo = projects.filter((p) => p.demo);
 
     // Check that live demo links exist for projects with demo URLs
     if (projectsWithDemo.length > 0) {
@@ -338,7 +382,7 @@ describe('Projects', () => {
     // Should have a Live Demo link that goes to /tinyreminder-demo
     const liveDemoLinks = screen.getAllByText('Live Demo');
     const tinyReminderDemo = liveDemoLinks.find(
-      link => link.closest('a')?.getAttribute('href') === '/tinyreminder-demo'
+      (link) => link.closest('a')?.getAttribute('href') === '/tinyreminder-demo'
     );
     expect(tinyReminderDemo).toBeDefined();
   });

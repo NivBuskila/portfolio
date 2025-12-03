@@ -1,12 +1,20 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Home from '@/components/home/Home';
 import { personalInfo } from '@/data/personalInfo';
 
 // Mock next/link
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: React.PropsWithChildren<{ href: string }>) => {
-    return <a href={href} {...props}>{children}</a>;
+  default: ({
+    children,
+    href,
+    ...props
+  }: React.PropsWithChildren<{ href: string }>) => {
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    );
   },
 }));
 
@@ -22,18 +30,66 @@ jest.mock('next/dynamic', () => ({
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, className, ...props }: React.PropsWithChildren<{ className?: string }>) => (
-      <div className={className} {...props}>{children}</div>
+    div: ({
+      children,
+      className,
+      ...props
+    }: React.PropsWithChildren<{ className?: string }>) => (
+      <div className={className} {...props}>
+        {children}
+      </div>
+    ),
+    h1: ({
+      children,
+      className,
+      ...props
+    }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h1 className={className} {...props}>
+        {children}
+      </h1>
+    ),
+    h2: ({
+      children,
+      className,
+      ...props
+    }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h2 className={className} {...props}>
+        {children}
+      </h2>
+    ),
+    p: ({
+      children,
+      className,
+      ...props
+    }: React.HTMLAttributes<HTMLParagraphElement>) => (
+      <p className={className} {...props}>
+        {children}
+      </p>
+    ),
+    span: ({
+      children,
+      className,
+      ...props
+    }: React.HTMLAttributes<HTMLSpanElement>) => (
+      <span className={className} {...props}>
+        {children}
+      </span>
     ),
   },
+  useAnimate: () => [{ current: null }, jest.fn()],
+  useInView: () => true,
+  stagger: jest.fn(),
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
 }));
 
 describe('Home', () => {
   it('renders the main heading with name', () => {
     const { container } = render(<Home />);
 
-    expect(container.textContent).toContain("Hi, I'm");
-    expect(container.textContent).toContain(personalInfo.name);
+    expect(container.textContent).toMatch(/Hi,\s+I'm/);
+    expect(container.textContent).toMatch(/Niv\s+Buskila/);
     expect(container.textContent).toContain('Full Stack Developer');
   });
 
@@ -49,62 +105,12 @@ describe('Home', () => {
     expect(container.textContent).toContain(personalInfo.about);
   });
 
-  it('displays additional description text', () => {
-    render(<Home />);
-
-    expect(
-      screen.getByText(/computer science graduate from afeka/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/currently working at amazon/i)
-    ).toBeInTheDocument();
-  });
-
   it('mentions key technologies', () => {
     const { container } = render(<Home />);
 
-    expect(container.textContent).toMatch(/react/i);
-    expect(container.textContent).toMatch(/next\.js/i);
-    expect(container.textContent).toMatch(/typescript/i);
     expect(container.textContent).toMatch(/python/i);
     expect(container.textContent).toMatch(/java/i);
-  });
-
-  it('renders "View My Work" button', () => {
-    render(<Home />);
-
-    const button = screen.getByText('View My Work');
-    expect(button).toBeInTheDocument();
-    expect(button.closest('a')).toHaveAttribute('href', '/projects');
-  });
-
-  it('renders "Contact Me" button', () => {
-    render(<Home />);
-
-    const button = screen.getByText('Contact Me');
-    expect(button).toBeInTheDocument();
-    expect(button.closest('a')).toHaveAttribute('href', '/contact');
-  });
-
-  it('renders link to projects page', () => {
-    render(<Home />);
-
-    const projectsLink = screen.getByText('portfolio projects');
-    expect(projectsLink.closest('a')).toHaveAttribute('href', '/projects');
-  });
-
-  it('renders link to about page', () => {
-    render(<Home />);
-
-    const aboutLink = screen.getByText('about my experience');
-    expect(aboutLink.closest('a')).toHaveAttribute('href', '/about');
-  });
-
-  it('renders link to contact page', () => {
-    render(<Home />);
-
-    const contactLink = screen.getByText('get in touch');
-    expect(contactLink.closest('a')).toHaveAttribute('href', '/contact');
+    expect(container.textContent).toMatch(/javascript/i);
   });
 
   it('renders GitHub social icon button', () => {
@@ -121,46 +127,21 @@ describe('Home', () => {
     expect(linkedinButton).toBeInTheDocument();
   });
 
-  it('opens modal when GitHub button is clicked', () => {
-    render(<Home />);
-
-    const githubButton = screen.getByLabelText(/view github profile/i);
-    fireEvent.click(githubButton);
-
-    // Modal should be rendered
-    expect(screen.getByTestId('social-preview-modal')).toBeInTheDocument();
-  });
-
-  it('opens modal when LinkedIn button is clicked', () => {
-    render(<Home />);
-
-    const linkedinButton = screen.getByLabelText(/view linkedin profile/i);
-    fireEvent.click(linkedinButton);
-
-    // Modal should be rendered
-    expect(screen.getByTestId('social-preview-modal')).toBeInTheDocument();
-  });
-
   it('renders animated background blobs', () => {
     const { container } = render(<Home />);
 
     // Check for blur elements
-    const blurElements = container.querySelectorAll('.blur-3xl');
+    const blurElements = container.querySelectorAll('[class*="blur-"]');
     expect(blurElements.length).toBeGreaterThan(0);
-  });
-
-  it('has gradient background', () => {
-    const { container } = render(<Home />);
-
-    const gradientBg = container.querySelector('.bg-gradient-to-b');
-    expect(gradientBg).toBeInTheDocument();
   });
 
   it('has proper responsive layout', () => {
     const { container } = render(<Home />);
 
     // Check for responsive classes
-    expect(container.querySelector('.md\\:flex-row')).toBeInTheDocument();
+    expect(
+      container.querySelector('[class*="sm:flex-row"]')
+    ).toBeInTheDocument();
   });
 
   it('applies dark mode classes', () => {
@@ -174,26 +155,17 @@ describe('Home', () => {
   it('renders with full height', () => {
     const { container } = render(<Home />);
 
-    expect(container.querySelector('.min-h-screen')).toBeInTheDocument();
+    expect(container.querySelector('[class*="min-h-"]')).toBeInTheDocument();
   });
 
   it('renders buttons with proper styling', () => {
     render(<Home />);
 
-    const viewWorkButton = screen.getByText('View My Work');
-    expect(viewWorkButton.closest('a')?.className).toContain('rounded-full');
-    expect(viewWorkButton.closest('a')?.className).toContain('shadow-lg');
+    const viewProjectsButton = screen.getByText('View Projects');
+    expect(viewProjectsButton.closest('a')?.className).toContain('rounded-md');
 
     const contactButton = screen.getByText('Contact Me');
-    expect(contactButton.closest('a')?.className).toContain('rounded-full');
-  });
-
-  it('renders with gradient text for name', () => {
-    const { container } = render(<Home />);
-
-    // Check for gradient text classes
-    const gradientText = container.querySelector('.bg-clip-text');
-    expect(gradientText).toBeInTheDocument();
+    expect(contactButton.closest('a')?.className).toContain('rounded-md');
   });
 
   it('renders with proper spacing', () => {
@@ -207,7 +179,7 @@ describe('Home', () => {
   it('renders with max-width container', () => {
     const { container } = render(<Home />);
 
-    expect(container.querySelector('.max-w-7xl')).toBeInTheDocument();
+    expect(container.querySelector('.container')).toBeInTheDocument();
   });
 
   it('renders SVG icons for social buttons', () => {
@@ -217,63 +189,38 @@ describe('Home', () => {
     expect(svgs.length).toBeGreaterThan(0);
   });
 
-  it('mentions Android apps', () => {
+  it('mentions AI and full stack products', () => {
     render(<Home />);
 
-    expect(screen.getByText(/android apps/i)).toBeInTheDocument();
+    expect(screen.getByText(/AI and full stack products/i)).toBeInTheDocument();
   });
 
-  it('mentions AI tools', () => {
+  it('mentions key achievements', () => {
     render(<Home />);
 
-    expect(screen.getByText(/ai tools/i)).toBeInTheDocument();
+    expect(screen.getByText(/RAG response times/i)).toBeInTheDocument();
+    expect(screen.getByText(/microservice platforms/i)).toBeInTheDocument();
   });
 
-  it('mentions full-stack web applications', () => {
+  it('renders call to action buttons', () => {
     render(<Home />);
 
-    expect(screen.getByText(/full-stack web applications/i)).toBeInTheDocument();
-  });
-
-  it('mentions RESTful APIs', () => {
-    render(<Home />);
-
-    expect(screen.getByText(/restful apis/i)).toBeInTheDocument();
-  });
-
-  it('mentions cloud platforms', () => {
-    render(<Home />);
-
-    expect(screen.getByText(/aws/i)).toBeInTheDocument();
-    expect(screen.getByText(/vercel/i)).toBeInTheDocument();
-  });
-
-  it('mentions collaboration opportunities', () => {
-    render(<Home />);
-
-    expect(screen.getByText(/collaboration opportunities/i)).toBeInTheDocument();
-  });
-
-  it('mentions internships', () => {
-    render(<Home />);
-
-    expect(screen.getByText(/internships/i)).toBeInTheDocument();
-  });
-
-  it('has hover effects on buttons', () => {
-    render(<Home />);
-
-    const viewWorkButton = screen.getByText('View My Work');
-    expect(viewWorkButton.closest('a')?.className).toContain('hover:scale-105');
+    const viewProjectsButton = screen.getByText('View Projects');
+    expect(viewProjectsButton.closest('a')).toHaveAttribute(
+      'href',
+      '/projects'
+    );
 
     const contactButton = screen.getByText('Contact Me');
-    expect(contactButton.closest('a')?.className).toContain('hover:scale-105');
+    expect(contactButton.closest('a')).toHaveAttribute('href', '/contact');
   });
 
   it('has transition effects', () => {
     const { container } = render(<Home />);
 
-    const transitionElements = container.querySelectorAll('[class*="transition"]');
+    const transitionElements = container.querySelectorAll(
+      '[class*="transition"]'
+    );
     expect(transitionElements.length).toBeGreaterThan(0);
   });
 

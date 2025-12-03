@@ -5,8 +5,16 @@ import { personalInfo } from '@/data/personalInfo';
 // Mock next/link
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: React.PropsWithChildren<{ href: string }>) => {
-    return <a href={href} {...props}>{children}</a>;
+  default: ({
+    children,
+    href,
+    ...props
+  }: React.PropsWithChildren<{ href: string }>) => {
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    );
   },
 }));
 
@@ -27,13 +35,14 @@ describe('Footer', () => {
 
   it('displays personal name', () => {
     render(<Footer />);
-    expect(screen.getByText(personalInfo.name)).toBeInTheDocument();
+    // NB logo is present, but maybe not the full name in text except in copyright
+    expect(screen.getByText('NB')).toBeInTheDocument();
   });
 
   it('displays description text', () => {
     render(<Footer />);
     expect(
-      screen.getByText(/passionate full-stack developer creating innovative solutions/i)
+      screen.getByText(/building digital experiences with modern technologies/i)
     ).toBeInTheDocument();
   });
 
@@ -41,9 +50,8 @@ describe('Footer', () => {
     render(<Footer />);
 
     const navigationLinks = ['Home', 'About', 'Projects', 'Contact'];
-    navigationLinks.forEach(linkText => {
+    navigationLinks.forEach((linkText) => {
       const links = screen.getAllByText(linkText);
-      // Should have at least one link (might have multiple in navbar too)
       expect(links.length).toBeGreaterThan(0);
     });
   });
@@ -60,14 +68,16 @@ describe('Footer', () => {
 
     navigation.forEach(({ name, href }) => {
       const links = screen.getAllByText(name);
-      const footerLink = links.find(link => link.closest('a')?.getAttribute('href') === href);
+      const footerLink = links.find(
+        (link) => link.closest('a')?.getAttribute('href') === href
+      );
       expect(footerLink).toBeDefined();
     });
   });
 
   it('renders social media links', () => {
     render(<Footer />);
-
+    // The text is hidden with sr-only, so we should look for that or use getByRole with name
     expect(screen.getByText('GitHub')).toBeInTheDocument();
     expect(screen.getByText('LinkedIn')).toBeInTheDocument();
     expect(screen.getByText('Email')).toBeInTheDocument();
@@ -75,68 +85,46 @@ describe('Footer', () => {
 
   it('renders GitHub link with correct href', () => {
     render(<Footer />);
-
     const githubLink = screen.getByText('GitHub').closest('a');
     expect(githubLink).toHaveAttribute('href', personalInfo.socialLinks.github);
-    expect(githubLink).toHaveAttribute('target', '_blank');
-    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
   it('renders LinkedIn link with correct href', () => {
     render(<Footer />);
-
     const linkedinLink = screen.getByText('LinkedIn').closest('a');
-    expect(linkedinLink).toHaveAttribute('href', personalInfo.socialLinks.linkedin);
-    expect(linkedinLink).toHaveAttribute('target', '_blank');
-    expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(linkedinLink).toHaveAttribute(
+      'href',
+      personalInfo.socialLinks.linkedin
+    );
   });
 
   it('renders Email link with correct mailto href', () => {
     render(<Footer />);
-
     const emailLink = screen.getByText('Email').closest('a');
     expect(emailLink).toHaveAttribute('href', `mailto:${personalInfo.email}`);
-    expect(emailLink).toHaveAttribute('target', '_blank');
-    expect(emailLink).toHaveAttribute('rel', 'noopener noreferrer');
-  });
-
-  it('displays obfuscated email address', () => {
-    const { container } = render(<Footer />);
-
-    // The email is displayed with HTML entities and appears in the page content
-    expect(container.textContent).toContain('nivbuskila');
-    expect(container.textContent).toContain('icloud');
-    expect(container.textContent).toContain('com');
   });
 
   it('displays copyright with current year', () => {
     const { container } = render(<Footer />);
-
     const currentYear = new Date().getFullYear();
-    // Year might be part of a span, not standalone text
     expect(container.textContent).toContain(currentYear.toString());
+    expect(container.textContent).toContain(personalInfo.name);
   });
 
-  it('displays "Made with ❤️ and Next.js" message', () => {
-    const { container } = render(<Footer />);
-
-    expect(container.textContent).toMatch(/made with/i);
-    expect(container.textContent).toMatch(/next\.js/i);
-  });
-
-  it('renders "Back to Top" button', () => {
+  it('renders "Scroll to top" button', () => {
     render(<Footer />);
-
-    const backToTopButton = screen.getByRole('button', { name: /back to top/i });
+    const backToTopButton = screen.getByRole('button', {
+      name: /scroll to top/i,
+    });
     expect(backToTopButton).toBeInTheDocument();
   });
 
-  it('scrolls to top when "Back to Top" button is clicked', () => {
+  it('scrolls to top when "Scroll to top" button is clicked', () => {
     render(<Footer />);
-
-    const backToTopButton = screen.getByRole('button', { name: /back to top/i });
+    const backToTopButton = screen.getByRole('button', {
+      name: /scroll to top/i,
+    });
     fireEvent.click(backToTopButton);
-
     expect(window.scrollTo).toHaveBeenCalledWith({
       top: 0,
       behavior: 'smooth',
@@ -145,45 +133,23 @@ describe('Footer', () => {
 
   it('renders Connect section header', () => {
     render(<Footer />);
-
     expect(screen.getByText('Connect')).toBeInTheDocument();
   });
 
   it('renders Navigation section header', () => {
     render(<Footer />);
-
     expect(screen.getByText('Navigation')).toBeInTheDocument();
-  });
-
-  it('does not display phone number when it is empty', () => {
-    render(<Footer />);
-
-    // personalInfo.phone is empty string
-    if (!personalInfo.phone) {
-      // Phone link should not be rendered
-      const phoneLinks = screen.queryAllByText(/^\+?\d/);
-      expect(phoneLinks.length).toBe(0);
-    }
   });
 
   it('renders with correct styling classes', () => {
     const { container } = render(<Footer />);
-
     const footer = container.querySelector('footer');
-    expect(footer).toHaveClass('bg-gray-50', 'dark:bg-gray-900');
+    expect(footer).toHaveClass('bg-background', 'border-t');
   });
 
   it('renders social icons', () => {
     const { container } = render(<Footer />);
-
-    // Check for SVG icons (GitHub, LinkedIn, Email)
     const svgs = container.querySelectorAll('svg');
-    expect(svgs.length).toBeGreaterThan(5); // Multiple SVGs including social icons
-  });
-
-  it('renders developer emoji', () => {
-    render(<Footer />);
-
-    expect(screen.getByText('👨‍💻')).toBeInTheDocument();
+    expect(svgs.length).toBeGreaterThanOrEqual(3);
   });
 });

@@ -33,7 +33,7 @@ describe('Navbar', () => {
       </ThemeProvider>
     );
 
-    expect(screen.getByText('NB')).toBeInTheDocument();
+    expect(screen.getAllByText('NB').length).toBeGreaterThan(0);
   });
 
   it('highlights active navigation item based on current path', () => {
@@ -49,8 +49,8 @@ describe('Navbar', () => {
     const aboutLinks = screen.getAllByText('About');
     const desktopAboutLink = aboutLinks[0].closest('a');
 
-    expect(desktopAboutLink?.className).toContain('border-purple-500');
-    expect(desktopAboutLink?.className).toContain('text-purple-600');
+    expect(desktopAboutLink?.className).toContain('text-foreground');
+    expect(desktopAboutLink?.className).not.toContain('text-foreground/60');
   });
 
   it('opens and closes mobile menu', () => {
@@ -61,7 +61,10 @@ describe('Navbar', () => {
     );
 
     // Mobile menu should not be visible initially
-    const mobileMenu = screen.queryByRole('navigation')?.querySelector('#mobile-menu');
+    const mainNav = screen.getByRole('navigation', {
+      name: /main navigation/i,
+    });
+    const mobileMenu = mainNav.querySelector('#mobile-menu');
     expect(mobileMenu).not.toBeInTheDocument();
 
     // Click the menu button to open
@@ -69,13 +72,21 @@ describe('Navbar', () => {
     fireEvent.click(menuButton);
 
     // Mobile menu should now be visible
-    expect(screen.getByRole('navigation').querySelector('#mobile-menu')).toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('navigation', { name: /main navigation/i })
+        .querySelector('#mobile-menu')
+    ).toBeInTheDocument();
 
     // Click again to close
     fireEvent.click(menuButton);
 
     // Mobile menu should be hidden again
-    expect(screen.queryByRole('navigation')?.querySelector('#mobile-menu')).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('navigation', { name: /main navigation/i })
+        .querySelector('#mobile-menu')
+    ).not.toBeInTheDocument();
   });
 
   it('closes mobile menu when a link is clicked', () => {
@@ -90,10 +101,16 @@ describe('Navbar', () => {
     fireEvent.click(menuButton);
 
     // Verify menu is open
-    expect(screen.getByRole('navigation').querySelector('#mobile-menu')).toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('navigation', { name: /main navigation/i })
+        .querySelector('#mobile-menu')
+    ).toBeInTheDocument();
 
     // Click a mobile menu link
-    const mobileMenu = screen.getByRole('navigation').querySelector('#mobile-menu');
+    const mobileMenu = screen
+      .getByRole('navigation', { name: /main navigation/i })
+      .querySelector('#mobile-menu');
     const aboutLink = mobileMenu?.querySelector('a[href="/about"]');
 
     if (aboutLink) {
@@ -101,7 +118,11 @@ describe('Navbar', () => {
     }
 
     // Mobile menu should be closed
-    expect(screen.queryByRole('navigation')?.querySelector('#mobile-menu')).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('navigation', { name: /main navigation/i })
+        .querySelector('#mobile-menu')
+    ).not.toBeInTheDocument();
   });
 
   it('does not render theme toggle button until mounted', () => {

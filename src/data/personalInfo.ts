@@ -42,7 +42,7 @@ export interface PersonalInfo {
 
 export const personalInfo: PersonalInfo = {
   name: 'Niv Buskila',
-  title: 'Computer Science Graduate & Full Stack Developer',
+  title: 'AI & Full Stack Developer',
   email: 'nivbuskila@icloud.com',
   phone: '',
   about: `Computer Science graduate who turns ideas into production ready AI and full stack products. Delivered 3.67s RAG response times, over 90% accuracy, and built cloud scale microservice platforms. Comfortable with the entire development lifecycle: architecture, coding, CI/CD, observability and metrics. Skilled in Java, Python, JavaScript, and C with experience across web, mobile and cloud. Seeking Full Stack Developer, Backend Developer and AI Engineer positions.`,

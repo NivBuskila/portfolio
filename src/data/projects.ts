@@ -40,6 +40,7 @@ export const projects: Project[] = [
     tech: ['Java', 'Firebase', 'Google Maps API', 'Android SDK'],
     image: '/images/TinyReminder.png',
     github: 'https://github.com/NivBuskila/TinyReminder_LifeSavingApp',
+    demo: '/tinyreminder-demo',
   },
   {
     title: 'Personal Portfolio',
