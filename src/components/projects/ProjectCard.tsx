@@ -39,7 +39,7 @@ const ProjectCard = React.memo<ProjectCardProps>(
         </div>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
-          <CardDescription className="line-clamp-2">
+          <CardDescription>
             {description}
           </CardDescription>
         </CardHeader>
