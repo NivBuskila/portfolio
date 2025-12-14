@@ -39,9 +39,7 @@ const ProjectCard = React.memo<ProjectCardProps>(
         </div>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
-          <CardDescription>
-            {description}
-          </CardDescription>
+          <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent className="flex-1">
           <div className="flex flex-wrap gap-2">
