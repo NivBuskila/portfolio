@@ -9,6 +9,14 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'European Roulette Engine',
+    description:
+      'A full-stack European roulette game built with TypeScript, featuring a Phaser 3 frontend and Express backend with provably fair random number generation. Includes comprehensive testing, clean architecture, and accurate payout calculations.',
+    tech: ['TypeScript', 'Phaser 3', 'Express', 'Node.js', 'Vite', 'Vitest', 'Jest'],
+    image: '/images/roulette.png',
+    github: 'https://github.com/NivBuskila/ts-roulette-engine',
+  },
+  {
     title: 'Afeka ChatBot',
     description:
       'Multilingual RAG platform that answers academic regulation questions for Afeka students, achieving 3.67s average RAG analysis time and 6s overall user response time. Microservice architecture with React + TypeScript frontend, FastAPI gateway, Gemini API + LangChain AI service, Supabase authentication and SQL migrations, document management, and analytics dashboard.',
