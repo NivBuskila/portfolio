@@ -3,11 +3,20 @@ export interface Project {
   description: string;
   tech: string[];
   image: string;
-  github: string;
+  github?: string;
   demo?: string;
+  live?: string;
 }
 
 export const projects: Project[] = [
+  {
+    title: 'The Ultimatum',
+    description:
+      'A viral web app that went from 0 to 1,000+ users in 10 days. Built and marketed solo, it lets users share their dream engagement ring and set a clear deadline for a proposal. Features full-stack architecture with React 18 + Vite frontend, Supabase backend with PostgreSQL and Edge Functions, RLS security policies, rate limiting, multi-language support (Hebrew/English), and comprehensive audit logging.',
+    tech: ['React', 'TypeScript', 'Vite', 'Supabase', 'PostgreSQL', 'Edge Functions', 'Sentry', 'Vercel'],
+    image: '/images/the-ultimatum.png',
+    live: 'https://theultimatum.me/',
+  },
   {
     title: 'European Roulette Engine',
     description:

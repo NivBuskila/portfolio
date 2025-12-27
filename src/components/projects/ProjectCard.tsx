@@ -20,12 +20,13 @@ interface ProjectCardProps {
   description: string;
   tech: string[];
   image: string;
-  github: string;
+  github?: string;
   demo?: string;
+  live?: string;
 }
 
 const ProjectCard = React.memo<ProjectCardProps>(
-  ({ title, description, tech, image, github, demo }) => {
+  ({ title, description, tech, image, github, demo, live }) => {
     return (
       <Card className="overflow-hidden flex flex-col h-full hover:shadow-lg transition-shadow duration-300">
         <div className="relative h-48 w-full">
@@ -51,15 +52,24 @@ const ProjectCard = React.memo<ProjectCardProps>(
           </div>
         </CardContent>
         <CardFooter className="gap-2">
-          <Button asChild variant="outline" size="sm" className="flex-1">
-            <Link href={github} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" /> GitHub
-            </Link>
-          </Button>
+          {github && (
+            <Button asChild variant="outline" size="sm" className="flex-1">
+              <Link href={github} target="_blank" rel="noopener noreferrer">
+                <Github className="mr-2 h-4 w-4" /> GitHub
+              </Link>
+            </Button>
+          )}
           {demo && (
             <Button asChild size="sm" className="flex-1">
               <Link href={demo} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
+              </Link>
+            </Button>
+          )}
+          {live && (
+            <Button asChild size="sm" className="flex-1">
+              <Link href={live} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="mr-2 h-4 w-4" /> Live
               </Link>
             </Button>
           )}
